@@ -3,10 +3,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Playfair Display', serif;
 }
 
 body {
-  font-family: sans-serif;
   background-color: #F6F5F3;
   color: #333;
   line-height: 1.6;
@@ -24,7 +24,6 @@ body {
 }
 
 .logo {
-  font-family: 'Playfair Display', serif;
   font-size: 2.2rem;
   font-weight: 600;
   color: #5C5247;
@@ -40,7 +39,6 @@ body {
 .main-nav a {
   text-decoration: none;
   color: #3e3e3e;
-  font-family: 'Quattrocento', serif;
   font-size: 1.05rem;
   font-weight: 600;
   transition: color 0.2s ease;
@@ -88,7 +86,6 @@ body {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
-  font-family: 'Inter', sans-serif;
 }
 
 /* NAV extra */
@@ -114,6 +111,7 @@ nav a {
 .hero h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  font-family: 'Cormorant', serif;
 }
 
 .btn {
@@ -215,7 +213,6 @@ footer {
 
 .featured-products h2 {
   font-size: 2.5rem;
-  font-family: 'Cormorant', serif;
   color: #5C5247;
   margin-bottom: 2rem;
 }
@@ -253,12 +250,31 @@ footer {
   font-weight: 600;
   margin: 1rem 0 0.5rem;
   color: #5C5247;
-  font-family: 'Cormorant', serif;
 }
 
 .product-card p {
   font-size: 1rem;
   color: #6D8B6F;
   margin-bottom: 1rem;
-  font-family: 'Inter', sans-serif;
+}
+
+.brand-philosophy {
+  background-color: #FBFAF9;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.brand-philosophy h2 {
+  font-size: 2.4rem;
+  color: #504943;
+  font-family: 'DM Sans', sans-serif;
+  margin-bottom: 1rem;
+}
+
+.brand-philosophy p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  font-family: 'DM Sans', sans-serif;
+  color: #666;
 }
