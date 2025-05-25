@@ -1,0 +1,87 @@
+/* Reset simple */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #fdfdfb;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background-color: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Hero Section */
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffffff, #f1eee9);
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  background-color: #8c7b5f;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f1eee9;
+}
+
+/*  UTILIDADES  */
+.container {max-width: 1280px; margin: 0 auto; padding: 0 2rem;}
+.flex-between {display: flex; justify-content: space-between; align-items: center;}
+
+/*  HEADER  */
+.site-header {background: #fff; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 6px rgba(0,0,0,.05);}
+.logo {font-family: 'Cormorant', serif; font-size: 1.8rem; color: #3e3e3e; text-decoration: none;}
+.main-nav .nav-list {display: flex; gap: 1.5rem; list-style: none;}
+.main-nav a {text-decoration: none; color: #333; font-family: 'Quattrocento', serif; font-weight: 600;}
+
+.header-icons {display: flex; gap: 1rem;}
+.header-icons i {font-size: 1.1rem; color: #3e3e3e;}
+.header-icons button {background: none; border: none; cursor: pointer;}
+
+.search-bar {display: none; padding: .75rem 2rem; background: #f1eee9;}
+.search-bar input {width: 100%; max-width: 400px; padding: .6rem 1rem; border: 1px solid #ccc; border-radius: 6px;}
+
+/*  HEADER – RESPONSIVE  */
+@media (max-width: 768px){
+  .main-nav {display:none;}
+}

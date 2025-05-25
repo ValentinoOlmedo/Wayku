@@ -1,0 +1,15 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Dependencias de Node (si luego usás)
+node_modules/
+
+# Build
+dist/
+
+# Logs
+*.log
+
+# Archivos de configuración del editor
+.vscode/
