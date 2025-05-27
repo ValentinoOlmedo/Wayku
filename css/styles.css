@@ -3,18 +3,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background-color: #F6F5F3;
+  background-color: #FFFFFF;
   color: #333;
   line-height: 1.6;
 }
 
 /* HEADER */
 .site-header {
-  background: #fff;
+  background: #E9E9E9;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -25,7 +25,7 @@ body {
 
 .logo {
   font-size: 2.2rem;
-  font-weight: 600;
+  font-weight: 60;
   color: #5C5247;
   text-decoration: none;
 }
@@ -38,14 +38,14 @@ body {
 
 .main-nav a {
   text-decoration: none;
-  color: #3e3e3e;
+  color: #504943;
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 60;
   transition: color 0.2s ease;
 }
 
 .main-nav a:hover {
-  color: #6D8B6F;
+  color: #11100f;
 }
 
 .header-icons {
@@ -98,7 +98,7 @@ nav ul {
 nav a {
   text-decoration: none;
   color: #333;
-  font-weight: 500;
+  font-weight: 60;
 }
 
 /* Hero Section */
@@ -111,16 +111,15 @@ nav a {
 .hero h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  font-family: 'Cormorant', serif;
 }
 
 .btn {
-  background-color: #5C5247;
+  background-color: #5c4747;
   color: white;
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 60;
   display: inline-block;
   margin-top: 1.5rem;
 }
@@ -154,49 +153,44 @@ footer {
 
 /* HERO WAYKU CON IMAGEN DE FONDO */
 .hero-wayku {
-  background: url('img/portada.jpg') no-repeat center center/cover;
+  background: url('../img/portada.png') no-repeat right center;
   height: 90vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  color: #ffffff;
+  color: #504943;
   padding: 2rem;
   position: relative;
 }
 
-.hero-wayku::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-}
 
 .hero-content {
-  position: relative;
+  position: relative; 
   z-index: 1;
   max-width: 700px;
+  font-weight: 60;
 }
 
 .hero-content h1 {
   font-size: 3rem;
-  font-family: 'Cormorant', serif;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
+  font-weight: 60;
 }
 
 .hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 5rem;
 }
 
 .btn-hero {
-  background: #6D8B6F;
+  background: #547154;
   color: white;
+  font-size: 1rem;
   padding: 0.8rem 1.5rem;
-  border-radius: 30px;
+  border-radius: 10px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 60;
   transition: background 0.3s ease;
 }
 
@@ -209,12 +203,14 @@ footer {
   background-color: #F6F5F3;
   padding: 4rem 2rem;
   text-align: center;
+  
 }
 
 .featured-products h2 {
   font-size: 2.5rem;
   color: #5C5247;
   margin-bottom: 2rem;
+  font-weight: 60;
 }
 
 .product-grid {
@@ -247,7 +243,7 @@ footer {
 
 .product-card h3 {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 60;
   margin: 1rem 0 0.5rem;
   color: #5C5247;
 }
@@ -262,19 +258,19 @@ footer {
   background-color: #FBFAF9;
   padding: 4rem 2rem;
   text-align: center;
+  font-weight: 60;
 }
 
 .brand-philosophy h2 {
   font-size: 2.4rem;
   color: #504943;
-  font-family: 'DM Sans', sans-serif;
   margin-bottom: 1rem;
+  font-weight: 60;
 }
 
 .brand-philosophy p {
   max-width: 700px;
   margin: 0 auto;
   font-size: 1.1rem;
-  font-family: 'DM Sans', sans-serif;
   color: #666;
 }
