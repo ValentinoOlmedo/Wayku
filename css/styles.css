@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #FFFFFF;
+  background-color: #FBFAF9;
   color: #333;
   line-height: 1.6;
 }
@@ -19,7 +19,7 @@ body {
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   transition: all 0.3s ease;
 }
 
@@ -52,6 +52,7 @@ body {
   display: flex;
   gap: 1rem;
   align-items: center;
+  
 }
 
 .header-icons i {
@@ -153,7 +154,6 @@ footer {
 
 /* HERO WAYKU CON IMAGEN DE FONDO */
 .hero-wayku {
-  background: url('../img/portada.png') no-repeat right center;
   height: 90vh;
   display: flex;
   align-items: center;
@@ -166,10 +166,12 @@ footer {
 
 
 .hero-content {
+  width: 50%;
   position: relative; 
   z-index: 1;
   max-width: 700px;
   font-weight: 60;
+  padding-right: 3rem; 
 }
 
 .hero-content h1 {
@@ -181,6 +183,13 @@ footer {
 .hero-content p {
   font-size: 1rem;
   margin-bottom: 5rem;
+}
+
+.hero-img {
+  width: 50%;
+  height: 100%;                          
+  background: url('../img/portada.png') no-repeat center center;
+  background-size: cover;
 }
 
 .btn-hero {
@@ -255,7 +264,7 @@ footer {
 }
 
 .brand-philosophy {
-  background-color: #FBFAF9;
+  background-color: #FFFFFF;
   padding: 4rem 2rem;
   text-align: center;
   font-weight: 60;
