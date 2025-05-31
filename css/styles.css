@@ -50,6 +50,7 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
+  background: #E9E9E9;
 }
 
 /* EFECTO SUBRAYADO Y COLOR EN HOVER Y ACTIVO */
@@ -580,4 +581,71 @@ nav a {
   text-decoration: none;
   color: #333;
   font-weight: bold;
+}
+
+/* === ESTILOS GENERALES DE LA SECCIÓN CATÁLOGO === */
+#catalogo {
+  padding: 4rem 2rem;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #f9f9f9;
+}
+
+.catalogo-wrapper {
+  display: flex;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* === SIDEBAR === */
+.filtros {
+  width: 250px;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.filtros h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.filtros strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+}
+
+.filtros ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 1rem;
+}
+
+.filtros li {
+  margin: 0.3rem 0;
+}
+
+.filtros input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* Espaciado adicional entre productos */
+.grid-productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; 
+  justify-content: flex-start;
+}
+
+/* === INPUT RANGO PRECIO === */
+.filtros input[type="number"] {
+  width: 60px;
+  padding: 0.2rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  margin: 0.2rem;
 }
