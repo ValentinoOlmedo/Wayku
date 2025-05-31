@@ -5,34 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wayku - Lámparas de Madera</title>
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.google.com/share?selection.family=Playfair+Display:ital,wght@0,400..900;1,400..900" rel="stylesheet">
 </head>
-<body>
 
+<body>
+    <!-- HEADER ====================================== -->
     <header class="site-header">
     <div class="container flex-between">
 
         <!-- LOGO  -->
-        <a href="index.html" class="logo">WAYKU</a>
+        <a href="index.html" class="logo">WAYKÚ</a>
 
         <!-- MENÚ  -->
         <nav class="main-nav">
         <ul class="nav-list">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Catálogo</a></li>
-            <li><a href="#">Sobre nosotros</a></li>
-            <li><a href="#">Contacto</a></li>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#catalogo">Catálogo</a></li>
+            <li><a href="#sobre-nosotros">Sobre nosotros</a></li>
+            <li><a href="#diseñadores">Diseñadores</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            
         </ul>
         </nav>
 
-        <!-- ICONOS  -->
+        <!-- ICONOS -->
         <div class="header-icons">
-        <button id="searchToggle"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <a href="#"><i class="fa-regular fa-heart"></i></a>
-        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-        <a href="#"><i class="fa-regular fa-user"></i></a>
+          <button id="searchToggle"><i class="ph-bold ph-magnifying-glass"></i></button>
+          <a href="#"><i class="ph-bold ph-heart"></i></a>
+          <a href="#"><i class="ph-bold ph-shopping-cart"></i></a>
+          <a href="#"><i class="ph-bold ph-user"></i></a>
         </div>
 
     </div>
@@ -46,7 +50,7 @@
 
   <main>
         <!-- SECCIÓN DE HERO -->
-    <section class="hero-wayku">
+    <section class="hero-wayku" id="inicio">
         <div class="hero-content">
             <h1>Donde la naturaleza encuentra el diseño</h1>
             <p>En Waykú creemos que cada espacio merece una luz con historia. Nuestras lámparas están diseñadas para conectar lo natural con lo contemporáneo: hechas a mano con maderas nobles del norte argentino, cada pieza refleja la calidez de lo artesanal y la elegancia de un diseño minimalista.</p>
@@ -56,8 +60,8 @@
     </section>
 
     
-<!-- BESTSELLERS REORDENADO ============================== -->
-<section class="bestsellers-section" id="productos">
+<!-- SECCION BESTSELLERS REORDENADO ============================== -->
+<section class="bestsellers-section" >
   <div class="bestsellers-container">
 
     <div class="bestsellers-grid">
@@ -67,8 +71,8 @@
           <div class="info-header"> <!-- NUEVO -->
             <h3>Amaí</h3>
             <div class="card-icons"> <!-- MOVIDO AQUÍ -->
-              <a href="#"><i class="fa-regular fa-heart"></i></a>
-              <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+              <a href="#"><i class="ph-bold ph-heart"></i></a>
+              <a href="#"><i class="ph-bold ph-shopping-cart"></i></a>
             </div>
           </div>
           <p>$200.000</p>
@@ -81,8 +85,8 @@
           <div class="info-header">
             <h3>Kirú</h3>
             <div class="card-icons">
-              <a href="#"><i class="fa-regular fa-heart"></i></a>
-              <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+              <a href="#"><i class="ph-bold ph-heart"></i></a>
+              <a href="#"><i class="ph-bold ph-shopping-cart"></i></a>
             </div>
           </div>
           <p>$350.000</p>
@@ -95,8 +99,8 @@
           <div class="info-header">
             <h3>Tani</h3>
             <div class="card-icons">
-              <a href="#"><i class="fa-regular fa-heart"></i></a>
-              <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+              <a href="#"><i class="ph-bold ph-heart"></i></a>
+              <a href="#"><i class="ph-bold ph-shopping-cart"></i></a>
             </div>
           </div>
           <p>$150.000</p>
@@ -118,28 +122,39 @@
 </section>
 
 
+<!-- SECCIÓN DE OFERTA ====================================== -->
+<section class="offer-section">
+  <div class="offer-background">
+    <div class="offer-overlay">
+      <div class="offer-content">
+        <h2>Oferta Especial</h2>
+        <p>Obtén 5% de descuento en tu primera compra</p>
+        <a href="#catalogo" class="offer-button">Ir al carrito</a>
+      </div>
+    </div>  
+  </div>
+</section>
 
+  <!-- SECCIÓN DE CATALOGO ====================================== -->
+  <section id="catalogo" class="view">
+  <div class="catalogo-container">
+    <h2>Catálogo de lámparas</h2>
+    <!-- Acá irán los productos -->
+    <div class="productos-grid">
+      <!-- Producto ejemplo -->
+      <div class="producto">
+        <img src="portada.jpg" alt="Lámpara ejemplo">
+        <h3>Lámpara Árbol</h3>
+        <p>$25.000</p>
+      </div>
+      <!-- Repetir más productos -->
+    </div>
+  </div>
+</section>
 
-
-        <!-- SOBRE NOSOTROS ========================================== -->
-    <section id="sobre-nosotros" class="seccion-sobre-nosotros">
-        <div class="contenido-sobre-nosotros">
-            <h2>Nuestra historia</h2>
-            <p>Waykú nació en el corazón de Villa Allende con la misión de iluminar espacios con calidez, diseño y madera del norte argentino.</p>
-            <p>Cada lámpara cuenta una historia: desde Tartagal, donde seleccionamos la madera cuidadosamente, hasta tu hogar.</p>
-        </div>
-    </section>
-
-    <section id="inicio">...</section>
-    <section id="catalogo">...</section>
-    <section id="sobre-nosotros">...</section>
-    <section id="contacto">...</section>
-    <section id="envios">...</section>
-    <section id="devoluciones">...</section>
-    <section id="politica">...</section>
 
   </main>
-
+  <!-- FOOTER ====================================== -->
   <footer class="footer">
     <div class="footer-container">
 
@@ -155,7 +170,7 @@
         <p>info@wayku.com</p>
         <p>+54 911 5555 5555</p>
         <p>123 Calle Ficticia</p>
-        <p>Villa Allende, Córdoba, A    rgentina</p>
+        <p>Villa Allende, Córdoba, Argentina</p>
         </div>
 
         <div class="footer-column">
@@ -189,14 +204,18 @@
         </div>
     </div>
   </footer>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
-        });
+    const links = document.querySelectorAll('.main-nav a');
+
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+
+
     </script>
+    
 </body>
 </html>

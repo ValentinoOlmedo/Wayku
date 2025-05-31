@@ -1,6 +1,7 @@
 const searchToggle = document.getElementById('searchToggle');
 const searchBar = document.getElementById('searchBar');
 
+
 searchToggle.addEventListener('click', () => {
   if (searchBar.style.display === 'block') {
     searchBar.style.opacity = 0;
@@ -15,3 +16,4 @@ searchToggle.addEventListener('click', () => {
     }, 10);
   }
 });
+

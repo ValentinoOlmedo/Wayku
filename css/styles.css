@@ -15,46 +15,88 @@ body {
 /* HEADER */
 .site-header {
   background: #E9E9E9;
-  position: static;
+  position: fixed;
   top: 0;
+  width: 100%;
   z-index: 100;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   padding: 1rem 0;
   transition: all 0.3s ease;
 }
 
+/* ✅ Corrección: aseguramos distribución del header */
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
 .logo {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2.2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
   font-weight: 60;
   color: #5C5247;
   text-decoration: none;
+  letter-spacing: 2px;
+  margin: 0;
+  padding: 0;
 }
 
+/* MENÚ DE NAVEGACIÓN */
 .main-nav .nav-list {
   display: flex;
   gap: 1.5rem;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+/* EFECTO SUBRAYADO Y COLOR EN HOVER Y ACTIVO */
 .main-nav a {
-  text-decoration: none;
+  position: relative;
   color: #504943;
-  font-size: 1.05rem;
-  font-weight: 60;
-  transition: color 0.2s ease;
-  
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
-.main-nav a:hover {
-  color: #11100f;
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: #587154;
+  transition: width 0.3s ease;
 }
 
+.main-nav a:hover,
+.main-nav a.active {
+  color: #587154;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  width: 100%;
+}
 .header-icons {
   display: flex;
   gap: 1rem;
   align-items: center;
-  
+}
+
+.header-icons a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.header-icons a:hover i,
+.header-icons button:hover i {
+  transform: scale(1.1);
 }
 
 .header-icons i {
@@ -63,17 +105,16 @@ body {
   transition: transform 0.2s ease;
 }
 
-.header-icons i:hover {
-  transform: scale(1.1);
-}
-
 .header-icons button {
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+  display: flex;
+  align-items: center;
 }
 
+/* BARRA DE BÚSQUEDA */
 .search-bar {
   display: none;
   background: #EEECE7;
@@ -91,18 +132,8 @@ body {
   font-size: 1rem;
 }
 
-/* NAV extra */
-nav ul {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-}
 
-nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 60;
-}
+
 
 /* Hero Section */
 .hero {
@@ -147,61 +178,69 @@ nav a {
   }
 }
 
-/* HERO WAYKU CON IMAGEN DE FONDO */
+/* Sección hero principal de Wayku */
 .hero-wayku {
-  height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
-  color: #504943;
-  position: relative;
-  padding: 2rem;
+  display: flex; 
+  width: 100%; 
+  height: 100vh; 
+  overflow: hidden; 
 }
 
 
 .hero-content {
-  width: 50%;
-  position: relative; 
-  z-index: 1;
-  max-width: 700px;
-  font-weight: 60;
-  padding-right: 3rem; 
+  width: 50%; 
+  padding: 4rem; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #FBFAF9; 
+  align-items: center; 
+  text-align: center;  
 }
+
 
 .hero-content h1 {
   font-size: 3rem;
-  margin-bottom: 3rem;
+  color: #4e4e4e;
+  margin-bottom: 5rem;
   font-weight: 60;
+  max-width: 70%;
 }
+
 
 .hero-content p {
   font-size: 1rem;
+  color: #6f6f6f;
   margin-bottom: 5rem;
+  line-height: 1.6;
+  font-weight: 60;
+}
+
+
+.btn-hero {
+  background-color: #5d725b;
+  color: #fff;
+  padding: 0.75rem 2rem; 
+  border-radius: 4px;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 60;
+  transition: background-color 0.3s ease;
+}
+
+
+.btn-hero:hover {
+  background-color: #475943;
 }
 
 .hero-img {
-  width: 50%;
-  height: 100%;                          
-  background: url('../img/portada.png') no-repeat center center;
+  width: 50%; 
+  background-image: url('../img/portadaa.png'); 
   background-size: cover;
+  background-position: center;
 }
 
-.btn-hero {
-  background: #547154;
-  color: white;
-  font-size: 1rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 60;
-  transition: background 0.3s ease;
-}
-
-.btn-hero:hover {
-  background: #5B7961;
-}
-
+/* Sección Más vendidos */
 .bestsellers-section {
   background-color: #ffffff;
   padding: 100px 40px;
@@ -266,9 +305,9 @@ nav a {
 }
 
 .bestsellers-right .section-title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: #3e3e3e;
-  margin-bottom: 20px;
+  margin-bottom: 160px;
   font-weight: 60;
 }
 
@@ -276,12 +315,15 @@ nav a {
   font-size: 1rem;
   color: #5a5a5a;
   line-height: 1.6;
-  margin-bottom: 30px;
+  margin-bottom: 80px;
   font-weight: 60;
 }
 
 .see-more-button {
+  font-size: 1rem;
   display: inline-block;
+  width: 270px;
+  text-align: left;
   border: 1.5px solid #3e3e3e;
   padding: 10px 20px;
   text-decoration: none;
@@ -297,7 +339,8 @@ nav a {
 }
 
 .arrow {
-  margin-left: 10px;
+  margin-left: 140px;
+  
 }
 .info-header {
   display: flex;
@@ -311,16 +354,94 @@ nav a {
   transform: translateY(-2px);
 }
 
+.card-icons a {
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease; 
+}
+
+.card-icons a:hover {
+  transform: scale(1.1); 
+}
+
 .card-icons i {
   font-size: 18px;
   color: #777;
-  cursor: pointer;
   transition: color 0.3s;
 }
 
-.card-icons i:hover {
-  transform: scale(1.1);
+.card-icons a:hover i {
+  color: #3e3e3e; 
 }
+
+
+/* Sección Oferta Especial */
+.offer-section {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.offer-background {
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/offer.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.offer-overlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.85), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 3rem;
+}
+
+.offer-content {
+  color: white;
+  max-width: 300px;
+  text-align: left;
+}
+
+.offer-content h2 {
+  font-size: 2rem;
+  font-weight: 60;
+  margin-bottom: 1rem;
+}
+
+.offer-content p {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  font-weight: 60;
+  line-height: 1.5;
+}
+
+.offer-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #4b7354;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 60;
+  transition: background 0.3s ease;
+}
+
+.offer-button:hover {
+  background-color: #3f6148;
+}
+
 
 
 /* Sección Sobre Footer */
@@ -424,23 +545,39 @@ nav a {
 }
 
 /* Sección Sobre Nosotros */
-.seccion-sobre-nosotros {
+.about-us-section {
   padding: 80px 20px;
   background-color: #fdfbf7;
   color: #3e3e3e;
   text-align: center;
 }
 
-.seccion-sobre-nosotros h2 {
+.about-us-section h2 {
   font-size: 2.2rem;
   margin-bottom: 20px;
   font-family: 'Cormorant', serif;
 }
 
-.seccion-sobre-nosotros p {
+.about-us-content {
   max-width: 700px;
   margin: 0 auto 20px;
   font-size: 1.1rem;
   line-height: 1.6;
   font-family: 'Quattrocento', serif;
+}
+
+
+
+nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  padding: 1rem;
+  background-color: #eee;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
 }
