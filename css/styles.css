@@ -173,12 +173,14 @@ body {
 }
 
 /* HEADER RESPONSIVE */
-@media (max-width: 768px){
-  .main-nav {
-    display: none;
+@media (max-width: 768px) {
+  .dropdown-menu {
+    width: 100%;
+    max-width: none;
+    left: 0;
+    transform: none;
   }
 }
-
 /* Sección hero principal de Wayku */
 .hero-wayku {
   display: flex; 
@@ -308,7 +310,7 @@ body {
 .bestsellers-right .section-title {
   font-size: 1.8rem;
   color: #3e3e3e;
-  margin-bottom: 160px;
+  margin-bottom: 130px;
   font-weight: 60;
 }
 
@@ -316,7 +318,7 @@ body {
   font-size: 1rem;
   color: #5a5a5a;
   line-height: 1.6;
-  margin-bottom: 80px;
+  margin-bottom: 70px;
   font-weight: 60;
 }
 
@@ -545,29 +547,6 @@ body {
   cursor: pointer;
 }
 
-/* Sección Sobre Nosotros */
-.about-us-section {
-  padding: 80px 20px;
-  background-color: #fdfbf7;
-  color: #3e3e3e;
-  text-align: center;
-}
-
-.about-us-section h2 {
-  font-size: 2.2rem;
-  margin-bottom: 20px;
-  font-family: 'Cormorant', serif;
-}
-
-.about-us-content {
-  max-width: 700px;
-  margin: 0 auto 20px;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  font-family: 'Quattrocento', serif;
-}
-
-
 
 nav ul {
   display: flex;
@@ -602,22 +581,24 @@ nav a {
   width: 250px;
   background-color: #f9f9f9;
   padding: 1.5rem;
-  font-size: 0.95rem;
-  color: #333;
+  font-size: 0.9rem;
+  color: gray;
+  font-weight: 400;
+  margin-top: 10.3rem;
+  font-family: 'Poppins' sans-serif;
+}
+.filtros-section {
+  margin-bottom: 2rem;
 }
 
 .filtros h3 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 1.5rem;
+  font-weight: 60;
+  color: #4e4e4e;
+  font-family: 'Poppins', sans-serif; 
 }
-
-.filtros strong {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-weight: 600;
-  margin-top: 1.2rem;
-}
-
+ 
 .filtros ul {
   list-style: none;
   padding-left: 0;
@@ -628,17 +609,6 @@ nav a {
   margin: 0.3rem 0;
 }
 
-.filtros input[type="checkbox"] {
-  margin-right: 0.5rem;
-}
-
-/* Espaciado adicional entre productos */
-.grid-productos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px; 
-  justify-content: flex-start;
-}
 
 /* === INPUT RANGO PRECIO === */
 .filtros input[type="number"] {
@@ -649,6 +619,114 @@ nav a {
   border-radius: 0.4rem;
   margin: 0.2rem;
 }
+
+
+.filtros-precio {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.precio-linea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.precio-linea label {
+  width: 60px; 
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: gray;
+  font-weight: 400;
+}
+
+.precio-linea input[type="number"] {
+  width: 80px;
+  padding: 0.3rem;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 2px;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  appearance: textfield;
+}
+
+.precio-linea input::-webkit-inner-spin-button,
+.precio-linea input::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  border: 1px solid #587154; /* Verde suave de tu paleta */
+  box-shadow: 0 0 4px rgba(88, 113, 84, 0.3);
+  outline: none;
+}
+
+/* Espaciado adicional entre productos */
+.grid-productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; 
+  justify-content: flex-start;
+}
+
+
+/* === CHECKBOX PERSONALIZADO === */
+
+
+.checkbox-custom {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.9rem;
+  color: gray;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1; /* clave para centrar texto */
+}
+
+.checkbox-custom .checkmark {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  margin-right: 0.6rem;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-custom input[type="checkbox"] {
+  display: none;
+}
+.checkbox-custom input[type="checkbox"]:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 3px;
+  height: 6px;
+  border: solid gray;
+  border-width: 0 1.5px 1.5px 0;
+}
+/* Hover suave */
+.checkbox-custom:hover .checkmark {
+  border-color: #666;
+}
+
 
 /* Ordenar por..*/
 .dropdown {
