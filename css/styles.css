@@ -236,7 +236,7 @@ body {
 
 .hero-img {
   width: 50%; 
-  background-image: url('../img/portadaa.png'); 
+  background-image: url('../img/portada.png'); 
   background-size: cover;
   background-position: center;
 }
@@ -649,3 +649,96 @@ nav a {
   border-radius: 0.4rem;
   margin: 0.2rem;
 }
+
+/* Ordenar por..*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Botón principal */
+.dropdown-toggle {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  min-width: 250px; /* Evita que se achique con distintas opciones */
+  justify-content: flex-start;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+
+}
+
+.dropdown-toggle:focus {
+  outline: none;
+  
+}
+
+/* Ícono no clickeable */
+.dropdown-icon {
+  pointer-events: none;
+}
+
+/* Menú */
+.dropdown-menu {
+  left: 74%;
+  transform: translateX(-74%);
+  position: absolute;
+  top: 100%;
+  right: auto;
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: none;
+  z-index: 100;
+  width: max-content;
+  max-width: 160px;
+  font-family: 'Poppins', sans-serif;
+  
+}
+
+/* Opciones */
+.dropdown-menu li {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #444;
+  transition: background 0.2s;
+  white-space: nowrap;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f2f2f2;
+}
+
+.dropdown.show .dropdown-menu {
+  display: block;
+}
+
+.ordenar-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  padding-right: 60px; 
+}
+
+.ordenar-completo {
+  font-size: 14px;
+  font-weight: 400;
+  color: #444;
+  font-family: 'Poppins', sans-serif;
+
+}
+
