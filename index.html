@@ -54,7 +54,7 @@
         <div class="hero-content">
             <h1>Donde la naturaleza encuentra el diseño</h1>
             <p>En Waykú creemos que cada espacio merece una luz con historia. Nuestras lámparas están diseñadas para conectar lo natural con lo contemporáneo: hechas a mano con maderas nobles del norte argentino, cada pieza refleja la calidez de lo artesanal y la elegancia de un diseño minimalista.</p>
-            <a href="#productos" class="btn-hero">Ver catálogo</a>
+            <a href="#catalogo" class="btn-hero">Ver catálogo</a>
         </div>
         <div class ="hero-img"></div>  
     </section>
@@ -65,7 +65,7 @@
   <div class="bestsellers-container">
 
     <div class="bestsellers-grid">
-      <div class="product-card">
+      <div class="product-cardd">
         <img src="img/amai.png" alt="Lámpara Amaí">
         <div class="product-info">
           <div class="info-header"> <!-- NUEVO -->
@@ -79,7 +79,7 @@
         </div>
       </div>
 
-      <div class="product-card">
+      <div class="product-cardd" >
         <img src="img/kiru.png" alt="Lámpara Kirú">
         <div class="product-info">
           <div class="info-header">
@@ -93,7 +93,7 @@
         </div>
       </div>
 
-      <div class="product-card">
+      <div class="product-cardd" >
         <img src="img/tani.png" alt="Lámpara Tani">
         <div class="product-info">
           <div class="info-header">
@@ -141,76 +141,81 @@
   <div class="catalogo-wrapper" style="display: flex; padding: 4rem 2rem; gap: 2rem; max-width: 1400px; margin: auto;">
     
     <!-- SIDEBAR DE FILTROS -->
-    <aside class="filtros">
-      <h3>FILTROS</h3>
-      <div class="filtros-section">
-        <h3>CATEGORIAS</h3>
-        <ul>
-           <li>
-            <label class="checkbox-custom">
-              <input type="checkbox" />
-              <span class="checkmark"></span>
-              Apliques de pared
-            </label>
-          </li>
-          <li>
-           <label class="checkbox-custom">
-              <input type="checkbox" />
-              <span class="checkmark"></span>
-              Lamparas de mesa
-            </label>
-          </li>
-          <li>
-           <label class="checkbox-custom">
-              <input type="checkbox" />
-              <span class="checkmark"></span>
-              Lamparas colgantes
-            </label>
-          </li>
-          <li>
-           <label class="checkbox-custom">
-              <input type="checkbox" />
-              <span class="checkmark"></span>
-              Lamparas de techo
-            </label>
-          </li>
-          <li>
-           <label class="checkbox-custom">
-              <input type="checkbox" />
-              <span class="checkmark"></span>
-              Lamparas de pie
-            </label>
-          </li>
-        </ul>
-      </div>
-  
-      <div class="filtros-section">
-        <h3>MATERIAL</h3>
-        <ul>
-            <li>
-              <label class="checkbox-custom">
-                <input type="checkbox" />
-                <span class="checkmark"></span>
-                Petíribi
-              </label>
-            </li>
-            <li>
-              <label class="checkbox-custom">
-                <input type="checkbox" />
-                <span class="checkmark"></span>
-                Guayubira
-              </label>
-            </li>
-            <li>
-              <label class="checkbox-custom">
-                <input type="checkbox" />
-                <span class="checkmark"></span>
-                Palo blanco
-              </label>
-            </li>
-        </ul>
-      </div>
-     <div class="filtros-section">
+<aside class="filtros">
+  <h3>FILTROS</h3>
+
+  <!-- CATEGORIAS -->
+  <div class="filtros-section">
+    <h3>CATEGORIAS</h3>
+    <ul>
+      <li>
+        <label class="checkbox-custom">
+          <input type="checkbox" class="filter-checkbox" data-type="category" value="apliques de pared" />
+          <span class="checkmark"></span>
+          Apliques de pared
+        </label>
+      </li>
+      <li>
+        <label class="checkbox-custom">
+          <input type="checkbox" class="filter-checkbox" data-type="category" value="lamparas de mesa" />
+          <span class="checkmark"></span>
+          Lámparas de mesa
+        </label>
+      </li>
+      <li>
+        <label class="checkbox-custom">
+          <input type="checkbox" class="filter-checkbox" data-type="category" value="lamparas colgantes" />
+          <span class="checkmark"></span>
+          Lámparas colgantes
+        </label>
+      </li>
+      <li>
+        <label class="checkbox-custom">
+          <input type="checkbox" class="filter-checkbox" data-type="category" value="lamparas de techo" />
+          <span class="checkmark"></span>
+          Lámparas de techo
+        </label>
+      </li>
+      <li>
+        <label class="checkbox-custom">
+          <input type="checkbox" class="filter-checkbox" data-type="category" value="lamparas de pie" />
+          <span class="checkmark"></span>
+          Lámparas de pie
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- MATERIAL -->
+  <div class="filtros-section">
+    <h3>MATERIAL</h3>
+    <ul>
+      <li>
+        <label class="checkbox-custom">
+          <input type="checkbox" class="filter-checkbox" data-type="material" value="petiribi" />
+          <span class="checkmark"></span>
+          Petíribi
+        </label>
+      </li>
+      <li>
+        <label class="checkbox-custom">
+          <input type="checkbox" class="filter-checkbox" data-type="material" value="guayubira" />
+          <span class="checkmark"></span>
+          Guayubira
+        </label>
+      </li>
+      <li>
+        <label class="checkbox-custom">
+          <input type="checkbox" class="filter-checkbox" data-type="material" value="palo blanco" />
+          <span class="checkmark"></span>
+          Palo blanco
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PRECIO -->
+  <div class="filtros-section">
     <h3>PRECIO</h3>
     <div class="filtros-precio">
       <div class="precio-linea">
@@ -223,9 +228,7 @@
       </div>
     </div>
   </div>
-
-
-    </aside>
+</aside>
 
       <!-- CONTENIDO PRINCIPAL -->
       <div class="productos" style="flex: 1;">
@@ -255,7 +258,7 @@
 
         <div class="grid-productos">
     <!-- Producto -->
-    <div class="product-card">
+    <div class="product-card" data-categoria="lamparas de mesa" data-material="petiribi" data-precio="200000">
       <img src="img/amai.png" alt="Lámpara Amaí">
       <div class="product-info">
         <div class="info-header">
@@ -269,7 +272,7 @@
       </div>
     </div>
 
-    <div class="product-card">
+    <div class="product-card" data-categoria="lamparas colgantes" data-material="guayubira" data-precio="350000">
       <img src="img/kiru.png" alt="Lámpara Kirú">
       <div class="product-info">
         <div class="info-header">
@@ -283,7 +286,7 @@
       </div>
     </div>
 
-    <div class="product-card">
+    <div class="product-card" data-categoria="apliques de pared" data-material="palo blanco" data-precio="150000">
       <img src="img/tani.png" alt="Lámpara CLT0020">
       <div class="product-info">
         <div class="info-header">
@@ -297,7 +300,7 @@
       </div>
     </div>
 
-    <div class="product-card">
+    <div class="product-card" data-categoria="lamparas de pared" data-material="palo blanco" data-precio="150000">
       <img src="img/tani.png" alt="Lámpara Prueba">
       <div class="product-info">
         <div class="info-header">
@@ -307,7 +310,7 @@
             <a href="#"><i class="ph-bold ph-shopping-cart"></i></a>
           </div>
         </div>
-        <p>$200.000</p>
+        <p>$150.000</p>
       </div>
     </div>
   </div>
