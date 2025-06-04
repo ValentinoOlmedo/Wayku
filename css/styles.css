@@ -274,6 +274,7 @@ body {
   flex-direction: column;
   width: 300px;
   box-shadow: none;
+  
 }
 .product-card img {
   width: 100%;
@@ -528,13 +529,26 @@ body {
   overflow: hidden;
   max-width: 250px;
   margin-bottom: 10px;
+  border-radius: 0.4rem;
 }
 
 .newsletter-input input {
-  border: none;
+  border: 1px solid #ccc; /* ← este es el borde base, como en el form */
   padding: 8px;
   flex: 1;
   outline: none;
+  box-shadow: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: gray;
+  background-color: #fff;
+  border-radius: 0.4rem; /* por consistencia */
+}
+
+.newsletter-input input:focus {
+  border: 1px solid #587154;
+  
 }
 
 .newsletter-input button {
@@ -550,6 +564,7 @@ body {
   color: #555;
   max-width: 240px;
 }
+
 
 .footer-socials {
   margin-top: 10px;
@@ -835,84 +850,96 @@ input:focus {
 }
 
 
-
-.contacto {
-  background-color: #FBFAF9;
-  padding: 80px 20px;
+/* CONTENEDOR GRID GENERAL */
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr; /* Imagen un poco más angosta */
+  height: 100%;
+  min-height: 100vh;
   font-family: 'Poppins', sans-serif;
 }
 
-.contacto-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
+/* IMAGEN IZQUIERDA */
+.contacto-img-wrapper {
+  width: 100%;
+  height: 100%;
 }
 
+.contacto-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CONTENIDO DERECHA */
+.contacto-contenido {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 60px;
+  background-color: #FBFAF9;
+}
+
+/* TITULOS Y PARRAFOS */
 .contacto h2 {
-  font-size: 2.8rem;
-  color: #504943;
+  text-align: center;
+  font-size: 36px;
+  color: #503101;
   margin-bottom: 10px;
   font-weight: 400;
 }
 
 .contacto p {
-  font-size: 0.9rem;
-  color: gray;
+  text-align: center;
+  font-size: 18px;
   margin-bottom: 40px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
   font-weight: 400;
+  color: gray;
 }
 
-.contacto-contenido {
+/* CONTENEDOR INFO + FORM */
+.contacto-info-form {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   gap: 40px;
   margin-top: 40px;
-  text-align: left;
-  font-size: 0.9rem;
-  color: gray;
-  font-weight: 400;
+  flex-wrap: wrap;
 }
 
+/* INFORMACIÓN DE CONTACTO */
 .contacto-info {
   flex: 1 1 45%;
 }
 
 .contacto-info h3 {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  color: #504943;
+  color: #503101;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
   font-weight: 400;
 }
 
 .contacto-info ul {
   list-style: none;
   padding: 0;
-  line-height: 1.8;
+  margin: 0;
 }
 
 .contacto-info li {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: gray;
+  font-weight: 400;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .contacto-info .icon {
   margin-right: 10px;
   font-size: 1.2rem;
-  color: #504943;
-  min-width: 20px;
+  color: #D1A954;
+  flex-shrink: 0;
 }
 
-.contacto-img {
-  width: 100%;
-  margin-top: 20px;
-  border-radius: 0;
-}
-
+/* FORMULARIO */
 .contacto-form {
   flex: 1 1 45%;
   display: flex;
@@ -920,11 +947,13 @@ input:focus {
   gap: 20px;
 }
 
+/* CAMPOS DEL FORM */
 .form-group label {
   display: block;
   margin-bottom: 6px;
   font-weight: 400;
   color: gray;
+  font-size: 0.9rem;
 }
 
 .form-group input,
@@ -945,9 +974,9 @@ input:focus {
 .form-group textarea:focus {
   outline: none;
   border-color: #587154;
-  box-shadow: 0 0 0 2px rgba(88, 113, 84, 0.2);
 }
 
+/* BOTÓN ENVIAR */
 .btn-enviar {
   background-color: #587154;
   color: #fff;
@@ -965,3 +994,23 @@ input:focus {
 .btn-enviar:hover {
   background-color: #4d634a;
 }
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .contacto-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contacto-img {
+    height: 300px;
+  }
+
+  .contacto-contenido {
+    padding: 40px 20px;
+  }
+
+  .contacto-info-form {
+    flex-direction: column;
+  }
+}
+
