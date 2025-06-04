@@ -635,33 +635,25 @@ nav a {
   margin: 0.2rem;
 }
 
+input:focus {
+  border: 1px solid #bbb; /* Gris claro */
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.05); /* sombra sutil */
+  outline: none;
+}
 
-.filtros-precio {
+/* === Input de precio horizontal con botón === */
+.filtros-precio-horizontal {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
 
-.precio-linea {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.precio-linea label {
-  width: 60px; 
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.9rem;
-  color: gray;
-  font-weight: 400;
-}
-
-.precio-linea input[type="number"] {
+.filtros-precio-horizontal input[type="number"] {
   width: 80px;
   padding: 0.3rem;
   border: 1px solid rgb(185, 185, 185);
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 0.9rem;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
@@ -669,24 +661,29 @@ nav a {
   appearance: textfield;
 }
 
-.precio-linea input::-webkit-inner-spin-button,
-.precio-linea input::-webkit-outer-spin-button {
--webkit-appearance: none;
-margin: 0;
+.filtros-precio-horizontal input::-webkit-inner-spin-button,
+.filtros-precio-horizontal input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-input {
-  border: 1px solid #ccc;
+/* === Botón aplicar filtros === */
+.btn-aplicar-filtros {
+  background-color: #587154; /* Verde suave */
+  border: none;
   border-radius: 4px;
-  padding: 0.5rem;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+  color: white;
+  font-size: 1.1rem;
+  transition: background-color 0.2s ease;
+  margin-left: 0.2rem;
 }
 
-input:focus {
-  border: 1px solid #587154; /* Verde suave de tu paleta */
-  box-shadow: 0 0 4px rgba(88, 113, 84, 0.3);
-  outline: none;
+.btn-aplicar-filtros:hover {
+  background-color: #405b3f; /* Verde más oscuro al pasar el mouse */
 }
+
 
 /* Espaciado adicional entre productos */
 .grid-productos {
@@ -837,3 +834,134 @@ input:focus {
 
 }
 
+
+
+.contacto {
+  background-color: #FBFAF9;
+  padding: 80px 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contacto-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contacto h2 {
+  font-size: 2.8rem;
+  color: #504943;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.contacto p {
+  font-size: 0.9rem;
+  color: gray;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 400;
+}
+
+.contacto-contenido {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 40px;
+  text-align: left;
+  font-size: 0.9rem;
+  color: gray;
+  font-weight: 400;
+}
+
+.contacto-info {
+  flex: 1 1 45%;
+}
+
+.contacto-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: #504943;
+  font-weight: 400;
+}
+
+.contacto-info ul {
+  list-style: none;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.contacto-info li {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.contacto-info .icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  color: #504943;
+  min-width: 20px;
+}
+
+.contacto-img {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 0;
+}
+
+.contacto-form {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 400;
+  color: gray;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  background-color: #fff;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  resize: vertical;
+  color: gray;
+  font-weight: 400;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #587154;
+  box-shadow: 0 0 0 2px rgba(88, 113, 84, 0.2);
+}
+
+.btn-enviar {
+  background-color: #587154;
+  color: #fff;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+  align-self: flex-start;
+  font-weight: 400;
+}
+
+.btn-enviar:hover {
+  background-color: #4d634a;
+}

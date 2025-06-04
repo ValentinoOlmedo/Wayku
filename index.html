@@ -54,7 +54,7 @@
         <div class="hero-content">
             <h1>Donde la naturaleza encuentra el diseño</h1>
             <p>En Waykú creemos que cada espacio merece una luz con historia. Nuestras lámparas están diseñadas para conectar lo natural con lo contemporáneo: hechas a mano con maderas nobles del norte argentino, cada pieza refleja la calidez de lo artesanal y la elegancia de un diseño minimalista.</p>
-            <a href="#catalogo" class="btn-hero">Ver catálogo</a>
+            <a href="#origen" class="btn-hero">Conocénos</a>
         </div>
         <div class ="hero-img"></div>  
     </section>
@@ -188,7 +188,7 @@
 
   <!-- MATERIAL -->
   <div class="filtros-section">
-    <h3>MATERIAL</h3>
+    <h3>MADERAS</h3>
     <ul>
       <li>
         <label class="checkbox-custom">
@@ -215,19 +215,17 @@
   </div>
 
   <!-- PRECIO -->
-  <div class="filtros-section">
-    <h3>PRECIO</h3>
-    <div class="filtros-precio">
-      <div class="precio-linea">
-        <label for="desde">Desde:</label>
-        <input type="number" id="desde" />
-      </div>
-      <div class="precio-linea">
-        <label for="hasta">Hasta:</label>
-        <input type="number" id="hasta" />
-      </div>
-    </div>
+<div class="filtros-section">
+  <h3>PRECIO</h3>
+  <div class="filtros-precio-horizontal">
+    <input type="number" id="desde" placeholder="Desde" />
+    <input type="number" id="hasta" placeholder="Hasta" />
+    <button class="btn-aplicar-filtros" onclick="aplicarFiltros()">
+      &#10148;
+    </button>
   </div>
+</div>
+
 </aside>
 
       <!-- CONTENIDO PRINCIPAL -->
@@ -300,7 +298,7 @@
       </div>
     </div>
 
-    <div class="product-card" data-categoria="lamparas de pared" data-material="palo blanco" data-precio="150000">
+    <div class="product-card" data-categoria="apliques de pared" data-material="palo blanco" data-precio="150000">
       <img src="img/tani.png" alt="Lámpara Prueba">
       <div class="product-info">
         <div class="info-header">
@@ -315,6 +313,46 @@
     </div>
   </div>
 
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="contacto" data-section>
+  <div class="contacto-container">
+    <h2>Contacto</h2>
+    <p>Estamos para ayudarte. Envíanos tu consulta, proyecto o coordiná una visita a nuestro taller.</p>
+    
+    <div class="contacto-contenido">
+      <div class="contacto-info">
+        <h3>Información de Contacto</h3>
+        <ul>
+          <li><span class="icon">📍</span> Av. del Pilar 1234, Villa Allende, Córdoba, Argentina</li>
+          <li><span class="icon">📞</span> +54 351 222 4567</li>
+          <li><span class="icon">✉️</span> info@wayku.com</li>
+          <li><span class="icon">🕒</span> Lunes a Viernes: 9hs - 17hs / Sábados: 10hs - 14hs</li>
+        </ul>
+        <img src="img/carpintero.jpg" alt="Taller Wayku" class="contacto-img">
+      </div>
+
+      <form class="contacto-form">
+        <div class="form-group">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="asunto">Asunto</label>
+          <input type="text" id="asunto" name="asunto" required>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn-enviar">Enviar Mensaje</button>
+      </form>
     </div>
   </div>
 </section>

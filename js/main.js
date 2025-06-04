@@ -4,6 +4,7 @@ const searchBar = document.getElementById('searchBar');
 const links = document.querySelectorAll('.main-nav a');
 const sections = document.querySelectorAll('section[data-section]');
 const catalogoSection = document.getElementById('catalogo'); 
+const contactoSection = document.getElementById('contacto'); 
 const dropdown = document.querySelector('.dropdown');
 const toggle = document.getElementById('dropdownText');
 const menu = document.getElementById('dropdownMenu');
@@ -34,14 +35,12 @@ links.forEach(link => {
     const target = link.getAttribute('href'); 
     const id = target.replace('#', '');
 
-        
     links.forEach(l => l.classList.remove('active'));
     link.classList.add('active');
 
-        
     if (id === 'inicio') {
       sections.forEach(section => {
-        if (section.id === 'catalogo') {
+        if (section.id === 'catalogo' || section.id === 'contacto') {
           section.style.display = 'none'; 
         } else {
           section.style.display = ''; 
@@ -49,11 +48,11 @@ links.forEach(link => {
       });
     } else if (id === 'catalogo') {
       sections.forEach(section => {
-        if (section.id === 'catalogo') {
-          section.style.display = ''; 
-        } else {
-          section.style.display = 'none'; 
-        }
+        section.style.display = section.id === 'catalogo' ? '' : 'none';
+      });
+    } else if (id === 'contacto') {
+      sections.forEach(section => {
+        section.style.display = section.id === 'contacto' ? '' : 'none';
       });
     }
   });
@@ -63,6 +62,7 @@ links.forEach(link => {
 window.addEventListener('DOMContentLoaded', () => {
   if (catalogoSection) {
     catalogoSection.style.display = 'none';
+    contactoSection.style.display = 'none';
   }
 });
 
@@ -132,18 +132,4 @@ function aplicarFiltros() {
 }
 
 
-document.querySelector('.btn-hero').addEventListener('click', (e) => {
-  e.preventDefault();
 
-  
-  sections.forEach(section => {
-    section.style.display = (section.id === 'catalogo') ? 'block' : 'none';
-  });
-
-  
-  links.forEach(link => link.classList.remove('active'));
-  document.querySelector('.main-nav a[href="#catalogo"]').classList.add('active');
-
-
-  document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
-});
