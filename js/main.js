@@ -5,6 +5,7 @@ const links = document.querySelectorAll('.main-nav a');
 const sections = document.querySelectorAll('section[data-section]');
 const catalogoSection = document.getElementById('catalogo'); 
 const contactoSection = document.getElementById('contacto'); 
+const preguntasfrecuentesSection = document.getElementById('preguntas-frecuentes'); 
 const dropdown = document.querySelector('.dropdown');
 const toggle = document.getElementById('dropdownText');
 const menu = document.getElementById('dropdownMenu');
@@ -40,7 +41,7 @@ links.forEach(link => {
 
     if (id === 'inicio') {
       sections.forEach(section => {
-        if (section.id === 'catalogo' || section.id === 'contacto') {
+        if (section.id === 'catalogo' || section.id === 'contacto' || section.id === 'preguntas-frecuentes') {
           section.style.display = 'none'; 
         } else {
           section.style.display = ''; 
@@ -52,7 +53,11 @@ links.forEach(link => {
       });
     } else if (id === 'contacto') {
       sections.forEach(section => {
-        section.style.display = section.id === 'contacto' ? '' : 'none';
+        if (section.id === 'contacto' || section.id === 'preguntas-frecuentes') {
+          section.style.display = '';
+        } else {
+          section.style.display = 'none';
+        }
       });
     }
   });
@@ -63,6 +68,8 @@ window.addEventListener('DOMContentLoaded', () => {
   if (catalogoSection) {
     catalogoSection.style.display = 'none';
     contactoSection.style.display = 'none';
+    preguntasfrecuentesSection.style.display = 'none';
+    
   }
 });
 
@@ -127,9 +134,20 @@ function aplicarFiltros() {
     const matchMaterial = !materialSeleccionados.length || materialSeleccionados.includes(material);
     const matchPrecio = precio >= desde && precio <= hasta;
 
-    card.style.display = (matchCategoria && matchMaterial && matchPrecio) ? 'block' : 'none';
+    card.style.display = (matchCategoria && matchMaterial && matchPrecio) ? '' : 'none';
   });
 }
 
 
+document.querySelector('.contacto-form').addEventListener('submit', function(e) {
+  e.preventDefault(); 
+  this.reset();
+});
 
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      item.classList.toggle('open');
+    });
+  });
