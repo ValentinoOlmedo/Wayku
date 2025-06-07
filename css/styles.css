@@ -1028,7 +1028,7 @@ input:focus {
   padding: 1rem 1.5rem;
   text-align: left;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
   background: transparent;
   border: none;
   color: #504943;
@@ -1061,3 +1061,75 @@ input:focus {
   color: #4b6f63;
   transition: transform 0.3s ease;
 }
+
+
+.sobre-nosotros {
+  background-color: #fdfdfb;
+  padding: 60px 0px;
+}
+
+.mision-wayku {
+  background-image: url('../img/fondo-mision.jpg');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 260px 20px;
+  
+}
+.mision-wayku h2{
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 60;
+  font-family: 'Poppins', sans-serif;
+
+}
+.bloque-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 80px auto;
+  gap: 260px;
+  max-width: 1200px;
+  padding: 0 20px;
+  margin-bottom: 100px;
+}
+
+.bloque-info.invertido .imagen {
+  order: 1;
+}
+
+.bloque-info.invertido .texto {
+  order: 2;
+}
+.bloque-info .texto,
+.bloque-info .imagen {
+  flex: 1;
+  max-width: 50%;
+}
+
+.bloque-info .texto h3 {
+  font-size: 2rem;
+  color: #4e4e4e;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 60;
+  margin-bottom: 40px;
+}
+   
+.bloque-info .texto p {
+  line-height: 1.6;
+  font-size: 1rem;
+  color: #6f6f6f;
+  font-weight: 60;
+}
+
+.bloque-info .imagen img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* 🔥 Eliminado: sombra y borde redondeado */
+  box-shadow: none;
+  border-radius: 0;
+}
+

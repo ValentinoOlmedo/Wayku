@@ -6,6 +6,7 @@ const sections = document.querySelectorAll('section[data-section]');
 const catalogoSection = document.getElementById('catalogo'); 
 const contactoSection = document.getElementById('contacto'); 
 const preguntasfrecuentesSection = document.getElementById('preguntas-frecuentes'); 
+const sobrenosotrosSection = document.getElementById('sobre-nosotros')
 const dropdown = document.querySelector('.dropdown');
 const toggle = document.getElementById('dropdownText');
 const menu = document.getElementById('dropdownMenu');
@@ -41,7 +42,7 @@ links.forEach(link => {
 
     if (id === 'inicio') {
       sections.forEach(section => {
-        if (section.id === 'catalogo' || section.id === 'contacto' || section.id === 'preguntas-frecuentes') {
+        if (section.id === 'catalogo' || section.id === 'contacto' || section.id === 'preguntas-frecuentes' || section.id === 'sobre-nosotros') {
           section.style.display = 'none'; 
         } else {
           section.style.display = ''; 
@@ -59,6 +60,10 @@ links.forEach(link => {
           section.style.display = 'none';
         }
       });
+    } else if (id === 'sobre-nosotros') {
+      sections.forEach(section => {
+        section.style.display = section.id === 'sobre-nosotros' ? '' : 'none';
+      });
     }
   });
 });
@@ -69,7 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
     catalogoSection.style.display = 'none';
     contactoSection.style.display = 'none';
     preguntasfrecuentesSection.style.display = 'none';
-    
+    sobrenosotrosSection.style.display = 'none';
   }
 });
 
