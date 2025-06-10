@@ -1132,4 +1132,159 @@ input:focus {
   box-shadow: none;
   border-radius: 0;
 }
+.carrito-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  padding-top: 8rem;
+  
+}
+
+/* Contenedor de productos */
+#lista-carrito {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezados de tabla */
+.carrito-header {
+  display: grid;
+  grid-template-columns: 10px 1.28fr 1fr 1fr 1fr 35px;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #ddd;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: 60;
+  color: #4e4e4e;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Fila de producto */
+.carrito-item {
+  display: grid;
+  grid-template-columns: 80px 0.2fr 2.2fr 0.4fr 1.8fr 40px;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+ 
+
+/* Imagen del producto */
+.carrito-item img {
+  width: 80px;
+  height: auto;
+}
+
+/* Nombre del producto */
+.info-producto {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-producto h3 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Precio unitario */
+.precio-unitario {
+  text-align: center;
+  color: #333;
+}
+
+/* Cantidad (input) */
+.input-cantidad {
+  width: 60px;
+  padding: 6px;
+  font-size: 1rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.input-cantidad::-webkit-inner-spin-button,
+.input-cantidad::-webkit-outer-spin-button {
+  opacity: 1;
+  cursor: pointer;
+}
+
+/* Subtotal */
+.subtotal {
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+/* Botón eliminar producto */
+.eliminar-producto {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #999;
+  transition: color 0.2s ease;
+}
+
+.eliminar-producto:hover {
+  color: red;
+}
+
+/* Panel derecho: resumen */
+.carrito-resumen {
+  background-color: #fafafa;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+}
+
+#cupon {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.acciones-cupon {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.acciones-cupon button {
+  background-color: #a6ce39;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.total {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.boton-catalogo {
+  margin-top: 1.5rem;
+  background-color: #a6ce39;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 100%;
+}
+
 

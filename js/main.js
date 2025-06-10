@@ -1,12 +1,14 @@
 // --------------------- Navegación ---------------------
 const searchToggle = document.getElementById('searchToggle');
 const searchBar = document.getElementById('searchBar');
-const links = document.querySelectorAll('.main-nav a');
+const links = document.querySelectorAll('a[href^="#"]');
+
 const sections = document.querySelectorAll('section[data-section]');
 const catalogoSection = document.getElementById('catalogo'); 
 const contactoSection = document.getElementById('contacto'); 
 const preguntasfrecuentesSection = document.getElementById('preguntas-frecuentes'); 
-const sobrenosotrosSection = document.getElementById('sobre-nosotros')
+const sobrenosotrosSection = document.getElementById('sobre-nosotros');
+const carritoSection = document.getElementById('carrito');
 const dropdown = document.querySelector('.dropdown');
 const toggle = document.getElementById('dropdownText');
 const menu = document.getElementById('dropdownMenu');
@@ -14,7 +16,7 @@ const selectedOption = document.querySelector('.selected-option');
 const options = menu.querySelectorAll('li');
 const gridProductos = document.querySelector('.grid-productos');
 
-
+// Mostrar/ocultar barra de búsqueda
 searchToggle.addEventListener('click', () => {
   if (searchBar.style.display === 'block') {
     searchBar.style.opacity = 0;
@@ -30,19 +32,29 @@ searchToggle.addEventListener('click', () => {
   }
 });
 
-  
-
+// Manejo de navegación por secciones
 links.forEach(link => {
   link.addEventListener('click', (e) => {
     const target = link.getAttribute('href'); 
     const id = target.replace('#', '');
 
-    links.forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
+    // Subrayar solo el enlace del menú correspondiente
+    const menuLink = document.querySelector('.nav-list a[href="' + target + '"]');
+    if (menuLink) {
+      links.forEach(l => l.classList.remove('active'));
+      menuLink.classList.add('active');
+    }
 
+    // Mostrar/ocultar secciones
     if (id === 'inicio') {
       sections.forEach(section => {
-        if (section.id === 'catalogo' || section.id === 'contacto' || section.id === 'preguntas-frecuentes' || section.id === 'sobre-nosotros') {
+        if (
+          section.id === 'catalogo' ||
+          section.id === 'contacto' ||
+          section.id === 'preguntas-frecuentes' ||
+          section.id === 'sobre-nosotros' ||
+          section.id === 'carrito'
+        ) {
           section.style.display = 'none'; 
         } else {
           section.style.display = ''; 
@@ -54,34 +66,35 @@ links.forEach(link => {
       });
     } else if (id === 'contacto') {
       sections.forEach(section => {
-        if (section.id === 'contacto' || section.id === 'preguntas-frecuentes') {
-          section.style.display = '';
-        } else {
-          section.style.display = 'none';
-        }
+        section.style.display = (section.id === 'contacto' || section.id === 'preguntas-frecuentes') ? '' : 'none';
       });
     } else if (id === 'sobre-nosotros') {
       sections.forEach(section => {
         section.style.display = section.id === 'sobre-nosotros' ? '' : 'none';
       });
+    } else if (id === 'carrito') {
+      sections.forEach(section => {
+        section.style.display = section.id === 'carrito' ? '' : 'none';
+      });
     }
   });
 });
 
-    
+// Ocultar todas las secciones especiales al cargar la página
 window.addEventListener('DOMContentLoaded', () => {
   if (catalogoSection) {
     catalogoSection.style.display = 'none';
     contactoSection.style.display = 'none';
     preguntasfrecuentesSection.style.display = 'none';
     sobrenosotrosSection.style.display = 'none';
+    carritoSection.style.display = 'none';
   }
 });
 
-
+// Dropdown de ordenamiento
 toggle.addEventListener('click', () => {
-      dropdown.classList.toggle('show');
-    });
+  dropdown.classList.toggle('show');
+});
 
 options.forEach(option => {
   option.addEventListener('click', () => {
@@ -98,6 +111,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Ordenamiento de productos
 function ordenarProductos(criterio) {
   const productosArray = Array.from(gridProductos.children);
 
@@ -118,15 +132,15 @@ function ordenarProductos(criterio) {
   productosArray.forEach(producto => gridProductos.appendChild(producto));
 }
 
+// Filtros de productos
 document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
   checkbox.addEventListener('change', aplicarFiltros);
 });
 
-
 function aplicarFiltros() {
   const categoriaSeleccionadas = Array.from(document.querySelectorAll('[data-type="category"]:checked')).map(cb => cb.value.toLowerCase());
   const materialSeleccionados = Array.from(document.querySelectorAll('[data-type="material"]:checked')).map(cb => cb.value.toLowerCase());
-  
+
   const desde = parseInt(document.getElementById('desde').value) || 0;
   const hasta = parseInt(document.getElementById('hasta').value) || Infinity;
 
@@ -143,16 +157,110 @@ function aplicarFiltros() {
   });
 }
 
-
+// Formulario de contacto
 document.querySelector('.contacto-form').addEventListener('submit', function(e) {
   e.preventDefault(); 
   this.reset();
 });
 
-
+// Preguntas frecuentes
 document.querySelectorAll('.faq-question').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.parentElement;
-      item.classList.toggle('open');
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    item.classList.toggle('open');
+  });
+});
+
+const carrito = {};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const botonesCarrito = document.querySelectorAll(".ph-shopping-cart");
+
+  botonesCarrito.forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const productCard = boton.closest(".product-card");
+      const nombre = productCard.querySelector("h3").textContent;
+      const imagen = productCard.querySelector("img").src;
+      const precioData = productCard.getAttribute("data-precio");
+
+      let precio = parseFloat(precioData);
+      if (isNaN(precio)) {
+        // Fallback si data-precio falla
+        const textoVisible = pElemento.textContent;
+        precio = parseFloat(textoVisible.replace(/[^\d.]/g, ""));
+      }
+
+      if (carrito[nombre]) return;
+
+      carrito[nombre] = { nombre, precio, imagen, cantidad: 1 };
+
+      agregarProductoAlCarrito(carrito[nombre]);
+      actualizarTotales();
     });
   });
+});
+
+function agregarProductoAlCarrito(producto) {
+  const lista = document.getElementById("lista-carrito");
+
+  const item = document.createElement("div");
+  item.classList.add("carrito-item");
+  item.dataset.nombre = producto.nombre;
+
+  item.innerHTML = `
+    <div>
+      <img src="${producto.imagen}" alt="${producto.nombre}">
+    </div>
+    <div class="info-producto">
+      <h3>${producto.nombre}</h3>
+    </div>
+    <div class="precio-unitario">
+      $${producto.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+    </div>
+    <div>
+      <input type="number" class="input-cantidad" value="1" min="1">
+    </div>
+    <div class="subtotal">
+      $${producto.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+    </div>
+    <div>
+      <button class="eliminar-producto" data-nombre="${producto.nombre}">&#10005;</button>
+    </div>
+  `;
+
+  const inputCantidad = item.querySelector(".input-cantidad");
+  inputCantidad.addEventListener("input", () => {
+    const nuevaCantidad = Math.max(1, parseInt(inputCantidad.value) || 1);
+    carrito[producto.nombre].cantidad = nuevaCantidad;
+    actualizarSubtotal(producto.nombre, item);
+    actualizarTotales();
+  });
+
+  item.querySelector(".eliminar-producto").addEventListener("click", () => {
+    delete carrito[producto.nombre];
+    item.remove();
+    actualizarTotales();
+  });
+
+  lista.appendChild(item);
+}
+
+function actualizarSubtotal(nombre, item) {
+  const producto = carrito[nombre];
+  const subtotal = producto.precio * producto.cantidad;
+  item.querySelector(".subtotal").textContent = `$${subtotal.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+function actualizarTotales() {
+  let total = 0;
+  for (const nombre in carrito) {
+    total += carrito[nombre].cantidad * carrito[nombre].precio;
+  }
+
+  const totalFormateado = total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  document.getElementById("total-productos").textContent = `$ ${totalFormateado}`;
+  document.getElementById("total-final").textContent = `$ ${totalFormateado}`;
+} 

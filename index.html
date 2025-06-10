@@ -33,9 +33,9 @@
         <!-- ICONOS -->
         <div class="header-icons">
           <button id="searchToggle"><i class="ph-bold ph-magnifying-glass"></i></button>
-          <a href="#"><i class="ph-bold ph-heart"></i></a>
-          <a href="#"><i class="ph-bold ph-shopping-cart"></i></a>
-          <a href="#"><i class="ph-bold ph-user"></i></a>
+          <a href="#likes"><i class="ph-bold ph-heart"></i></a>
+          <a href="#carrito"><i class="ph-bold ph-shopping-cart"></i></a>
+          <a href="#cuenta"><i class="ph-bold ph-user"></i></a>
         </div>
 
     </div>
@@ -53,7 +53,7 @@
         <div class="hero-content">
             <h1>Donde la naturaleza encuentra el diseño</h1>
             <p>En Waykú creemos que cada espacio merece una luz con historia. Nuestras lámparas están diseñadas para conectar lo natural con lo contemporáneo: hechas a mano con maderas nobles del norte argentino, cada pieza refleja la calidez de lo artesanal y la elegancia de un diseño minimalista.</p>
-            <a href="#origen" class="btn-hero">Conocénos</a>
+            <a href="#sobre-nosotros" class="btn-hero">Conocénos</a>
         </div>
         <div class ="hero-img"></div>  
     </section>
@@ -128,7 +128,7 @@
       <div class="offer-content">
         <h2>Oferta Especial</h2>
         <p>Obtén 5% de descuento en tu primera compra</p>
-        <a href="#catalogo" class="offer-button">Ir al carrito</a>
+        <a href="#carrito" class="offer-button">Ir al carrito</a>
       </div>
     </div>  
   </div>
@@ -298,17 +298,17 @@
       </div>
     </div>
 
-    <div class="product-card" data-categoria="apliques de pared" data-material="palo blanco" data-precio="150000">
-      <img src="img/tani.png" alt="Lámpara Prueba">
+    <div class="product-card" data-categoria="lamparas colgantes" data-material="guayubira" data-precio="450000">
+      <img src="img/unui.jpg" alt="Lámpara Unui">
       <div class="product-info">
         <div class="info-header">
-          <h3>Prueba</h3>
+          <h3>Unui</h3>
           <div class="card-icons">
             <a href="#"><i class="ph-bold ph-heart"></i></a>
             <a href="#"><i class="ph-bold ph-shopping-cart"></i></a>
           </div>
         </div>
-        <p>$150.000</p>
+        <p>$450.000</p>
       </div>
     </div>
   </div>
@@ -484,6 +484,56 @@
         En Waykú, cada veta cuenta una historia. Elegimos maderas nobles del norte argentino que no solo destacan por su belleza, sino también por su origen sostenible y cultural. Cada tabla es única, como cada lámpara que creamos.
       </p>
     </div>
+  </div>
+</section>
+
+<section id="carrito" class="carrito" data-section>
+  <div class="carrito-grid">
+
+    <!-- Columna izquierda: Productos -->
+    <div class="carrito-productos">
+
+      <nav style="font-size: 0.9rem; margin-bottom: 2rem; color: gray; font-weight: 400; font-family: 'Poppins', sans-serif; padding-left: 10rem;">
+        Inicio / Carrito
+      </nav>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-left: 10rem;">
+        <h2 style="font-size: 2rem; color: #4e4e4e; font-family: 'Poppins', sans-serif; font-weight: 60;">
+          Tu pedido /
+        </h2>
+      </div>
+
+      <div class="carrito-header">
+        <div></div>
+        <div>PRODUCTO</div>
+        <div>PRECIO</div>
+        <div>CANTIDAD</div>
+        <div>SUBTOTAL</div>
+        <div></div>
+      </div>
+
+      <div id="lista-carrito"></div>
+    </div>
+
+    <!-- Columna derecha: Resumen -->
+    <div class="carrito-resumen">
+      <div class="descuento">
+        <label for="cupon">¿Tenés un cupón de descuento?</label>
+        <input type="text" id="cupon" placeholder="Código del cupón">
+        <div class="acciones-cupon">
+          <button class="btn-aplicar">Aplicar</button>
+          <button class="btn-quitar">Quitar</button>
+        </div>
+      </div>
+
+      <div class="total">
+        <p>Productos: <span id="total-productos">$ 0</span></p>
+        <h3>Total: <span id="total-final">$ 0</span></h3>
+      </div>
+
+      <button class="boton-catalogo">Finalizar la compra</button>
+    </div>
+
   </div>
 </section>
 
