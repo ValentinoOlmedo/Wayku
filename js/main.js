@@ -2,13 +2,13 @@
 const searchToggle = document.getElementById('searchToggle');
 const searchBar = document.getElementById('searchBar');
 const links = document.querySelectorAll('a[href^="#"]');
-
 const sections = document.querySelectorAll('section[data-section]');
 const catalogoSection = document.getElementById('catalogo'); 
 const contactoSection = document.getElementById('contacto'); 
 const preguntasfrecuentesSection = document.getElementById('preguntas-frecuentes'); 
 const sobrenosotrosSection = document.getElementById('sobre-nosotros');
 const carritoSection = document.getElementById('carrito');
+const favoritosSection = document.getElementById('favoritos');
 const dropdown = document.querySelector('.dropdown');
 const toggle = document.getElementById('dropdownText');
 const menu = document.getElementById('dropdownMenu');
@@ -18,20 +18,8 @@ const gridProductos = document.querySelector('.grid-productos');
 
 // Mostrar/ocultar barra de búsqueda
 searchToggle.addEventListener('click', () => {
-  if (searchBar.style.display === 'block') {
-    searchBar.style.opacity = 0;
-    setTimeout(() => {
-      searchBar.style.display = 'none';
-    }, 200);
-  } else {
-    searchBar.style.display = 'block';
-    searchBar.style.opacity = 0;
-    setTimeout(() => {
-      searchBar.style.opacity = 1;
-    }, 10);
-  }
+  searchBar.classList.toggle('visible');
 });
-
 // Manejo de navegación por secciones
 links.forEach(link => {
   link.addEventListener('click', (e) => {
@@ -76,6 +64,10 @@ links.forEach(link => {
       sections.forEach(section => {
         section.style.display = section.id === 'carrito' ? '' : 'none';
       });
+    } else if (id === 'favoritos') {
+      sections.forEach(section => {
+        section.style.display = section.id === 'favoritos' ? '' : 'none';
+      });
     }
   });
 });
@@ -88,6 +80,7 @@ window.addEventListener('DOMContentLoaded', () => {
     preguntasfrecuentesSection.style.display = 'none';
     sobrenosotrosSection.style.display = 'none';
     carritoSection.style.display = 'none';
+    favoritosSection.style.display = 'none';
   }
 });
 
@@ -174,6 +167,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 const carrito = {};
 
 document.addEventListener("DOMContentLoaded", () => {
+  actualizarTotales();
   const botonesCarrito = document.querySelectorAll(".ph-shopping-cart");
 
   botonesCarrito.forEach((boton) => {
@@ -198,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       agregarProductoAlCarrito(carrito[nombre]);
       actualizarTotales();
+      
     });
   });
 });
@@ -247,20 +242,200 @@ function agregarProductoAlCarrito(producto) {
   lista.appendChild(item);
 }
 
-function actualizarSubtotal(nombre, item) {
-  const producto = carrito[nombre];
-  const subtotal = producto.precio * producto.cantidad;
-  item.querySelector(".subtotal").textContent = `$${subtotal.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-}
-
 function actualizarTotales() {
-  let total = 0;
+  let totalProductos = 0;
+  let cantidadItems = 0;
+
   for (const nombre in carrito) {
-    total += carrito[nombre].cantidad * carrito[nombre].precio;
+    const producto = carrito[nombre];
+    totalProductos += producto.cantidad * producto.precio;
+    cantidadItems += producto.cantidad;
   }
 
-  const totalFormateado = total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const envio = 4827.59;
+  const totalFinal = totalProductos + envio;
 
-  document.getElementById("total-productos").textContent = `$ ${totalFormateado}`;
-  document.getElementById("total-final").textContent = `$ ${totalFormateado}`;
-} 
+  const formatoPesos = (monto) =>
+    `$ ${monto.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+  const totalProductosEl = document.getElementById("total-productos");
+  const costoEnvioEl = document.getElementById("costo-envio");
+  const totalFinalEl = document.getElementById("total-final");
+  const tituloCarritoEl = document.getElementById("titulo-carrito");
+  const cabeceraEl = document.getElementById("cabecera-carrito");
+  const resumenEl = document.getElementById("resumen-carrito");
+
+  if (cantidadItems === 0) {
+    // Carrito vacío: ocultar columnas y resumen, cambiar título
+    if (tituloCarritoEl) tituloCarritoEl.textContent = "Tu carrito está vacío.";
+    if (cabeceraEl) cabeceraEl.style.display = "none";
+    if (resumenEl) resumenEl.style.display = "none";
+  } else {
+    // Carrito con productos: mostrar todo normalmente
+    if (tituloCarritoEl) tituloCarritoEl.textContent = "Tu pedido /";
+    if (cabeceraEl) cabeceraEl.style.display = "grid";
+    if (resumenEl) resumenEl.style.display = "block";
+
+    totalProductosEl.textContent = formatoPesos(totalProductos);
+    costoEnvioEl.textContent = formatoPesos(envio);
+    totalFinalEl.textContent = formatoPesos(totalFinal);
+
+    const lineaProducto = document.querySelector(".linea-resumen span");
+    if (lineaProducto) {
+      lineaProducto.textContent = cantidadItems === 1 ? "Producto" : `Productos (${cantidadItems})`;
+    }
+  }
+}
+
+
+function aplicarDescuento(porcentaje) {
+  let totalProductos = 0;
+
+  for (const nombre in carrito) {
+    const producto = carrito[nombre];
+    totalProductos += producto.cantidad * producto.precio;
+  }
+
+  const descuento = totalProductos * (porcentaje / 100);
+  const envio = 4827.59;
+  const totalFinal = totalProductos - descuento + envio;
+
+  const formatoPesos = (monto) =>
+    `$ ${monto.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+  // Mostrar valores sin modificar el total de productos
+  document.getElementById("total-productos").textContent = formatoPesos(totalProductos);
+  document.getElementById("costo-envio").textContent = formatoPesos(envio);
+  document.getElementById("total-final").textContent = formatoPesos(totalFinal);
+
+  // Mostrar línea de descuento
+  const lineaDescuento = document.getElementById("linea-descuento");
+  const valorDescuento = document.getElementById("valor-descuento");
+
+  if (lineaDescuento && valorDescuento) {
+    lineaDescuento.style.display = "flex";
+    valorDescuento.textContent = `- ${formatoPesos(descuento)}`;
+  }
+}
+
+
+// MOSTRAR y CERRAR el modal de cupón
+document.addEventListener("DOMContentLoaded", () => {
+  const botonCupon = document.querySelector(".codigo-cupon");
+  const modal = document.getElementById("modal-cupon");
+  const cerrarModal = document.getElementById("cerrar-modal");
+
+  if (botonCupon && modal && cerrarModal) {
+    botonCupon.addEventListener("click", () => {
+      modal.style.display = "flex";  // Mostrar el modal
+    });
+
+    cerrarModal.addEventListener("click", () => {
+      modal.style.display = "none";  // Ocultar modal al hacer click en ❌
+    });
+
+    // También cerrar si clickea fuera del modal
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  }
+});
+
+const botonAplicarCupon = document.querySelector(".formulario-cupon button");
+const inputCupon = document.getElementById("campo-cupon");
+const mensajeError = document.querySelector(".mensaje-error");
+
+let cuponAplicado = false;
+
+botonAplicarCupon.addEventListener("click", () => {
+  const codigo = inputCupon.value.trim().toUpperCase();
+
+  if (codigo === "FIRSTORDER5" && !cuponAplicado) {
+    cuponAplicado = true;
+    mensajeError.style.display = "none";
+    aplicarDescuento(5); // 5% de descuento
+    document.getElementById("modal-cupon").style.display = "none";
+  } else {
+    mensajeError.style.display = "block";
+  }
+});
+
+
+const listaFavoritos = {};
+
+function inicializarFavoritos() {
+  const botonesFavorito = document.querySelectorAll(".ph-heart");
+
+  botonesFavorito.forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const card = boton.closest(".product-card");
+      const nombre = card.querySelector("h3").textContent;
+      const imagen = card.querySelector("img").src;
+      const precio = parseFloat(card.getAttribute("data-precio")) || 0;
+
+      if (listaFavoritos[nombre]) return;
+
+      listaFavoritos[nombre] = { nombre, precio, imagen };
+
+      agregarAFavoritos(listaFavoritos[nombre]);
+      actualizarVistaFavoritos();
+    });
+  });
+
+  actualizarVistaFavoritos(); // Ejecutar al cargar también
+}
+
+function agregarAFavoritos(producto) {
+  const lista = document.getElementById("lista-favoritos");
+
+  const item = document.createElement("div");
+  item.classList.add("favorito-item");
+  item.dataset.nombre = producto.nombre;
+
+  item.innerHTML = `
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+      <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 50px; height: auto;">
+      <div>
+        <h3 style="margin: 0;">${producto.nombre}</h3>
+        <p style="margin: 0; color: gray;">$${producto.precio.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</p>
+      </div>
+      <button class="eliminar-favorito" data-nombre="${producto.nombre}" style="margin-left: auto; background: none; border: none; font-size: 1.2rem; color: red; cursor: pointer;">
+        &#10005;
+      </button>
+    </div>
+  `;
+
+  item.querySelector(".eliminar-favorito").addEventListener("click", () => {
+    delete listaFavoritos[producto.nombre];
+    item.remove();
+    actualizarVistaFavoritos();
+  });
+
+  lista.appendChild(item);
+}
+
+function actualizarVistaFavoritos() {
+  const lista = document.getElementById("lista-favoritos");
+  const mensajeVacio = document.getElementById("favoritos-vacio");
+  const titulo = document.getElementById("titulo-favoritos");
+
+  const cantidad = Object.keys(listaFavoritos).length;
+
+  if (cantidad === 0) {
+    mensajeVacio.style.display = "block";
+    titulo.textContent = "Todavía no agregaste favoritos.";
+    lista.innerHTML = "";
+  } else {
+    mensajeVacio.style.display = "none";
+    titulo.textContent = "Tus favoritos /";
+  }
+}
+
+// Ejecutar una sola vez todo después de que el DOM esté listo
+document.addEventListener("DOMContentLoaded", () => {
+  inicializarFavoritos();
+});

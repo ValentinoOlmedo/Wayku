@@ -115,15 +115,33 @@ body {
   align-items: center;
 }
 
-/* BARRA DE BÚSQUEDA */
+/* BARRA DE BÚSQUEDA OCULTA POR DEFECTO */
 .search-bar {
-  display: none;
-  background: #EEECE7;
-  padding: 1rem 2rem;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  background: #E9E9E9;
+  padding: 0 2rem;
   border-top: 1px solid #ddd;
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 99; /* debajo del header */
 }
 
+/* CUANDO SE MUESTRA */
+.search-bar.visible {
+  opacity: 1;
+  visibility: visible;
+  padding: 1rem 2rem;
+}
+
+/* INPUT DE BÚSQUEDA */
 .search-bar input {
   width: 100%;
   max-width: 450px;
@@ -131,11 +149,8 @@ body {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
+  background: #fff;
 }
-
-
-
-
 /* Hero Section */
 .hero {
   padding: 4rem 2rem;
@@ -441,16 +456,16 @@ body {
 .offer-button {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background-color: #4b7354;
+  background-color: #5d725b;
   color: white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 4px;
   font-weight: 60;
   transition: background 0.3s ease;
 }
 
 .offer-button:hover {
-  background-color: #3f6148;
+  background-color: #475943;
 }
 
 
@@ -983,7 +998,7 @@ input:focus {
   color: #fff;
   padding: 14px 24px;
   border: none;
-  border-radius: 0.4rem;
+  border-radius: 4px;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -1018,7 +1033,7 @@ input:focus {
   margin: 0 auto 1rem;
   max-width: 800px;
   border: 1px solid #eee;
-  border-radius: 6px;
+  border-radius: 4px;
   overflow: hidden;
   transition: all 0.3s ease;
 }
@@ -1132,6 +1147,8 @@ input:focus {
   box-shadow: none;
   border-radius: 0;
 }
+
+
 .carrito-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -1205,7 +1222,7 @@ input:focus {
   font-size: 1rem;
   text-align: center;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 .input-cantidad::-webkit-inner-spin-button,
@@ -1232,59 +1249,226 @@ input:focus {
 }
 
 .eliminar-producto:hover {
-  color: red;
+  color: black;
 }
-
-/* Panel derecho: resumen */
 .carrito-resumen {
   background-color: #fafafa;
   padding: 1.5rem;
-  border-radius: 1rem;
+  border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   height: fit-content;
+  margin-top: 12rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
 }
 
-#cupon {
-  width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.acciones-cupon {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.acciones-cupon button {
-  background-color: #a6ce39;
-  border: none;
-  color: white;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border-radius: 6px;
-  font-weight: 600;
-}
-
-.total {
-  margin-top: 1rem;
+.titulo-resumen {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.linea-resumen,
+.linea-total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.linea-total {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-top: 1.2rem;
+}
+
+.codigo-cupon {
+  background: none;
+  border: none;
+  color: #4e7ee2; /* Azul tipo ML */
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.codigo-cupon:hover {
+  text-decoration: underline;
 }
 
 .boton-catalogo {
-  margin-top: 1.5rem;
-  background-color: #a6ce39;
+  margin-top: 1rem;
+  background-color: #5d725b;
   color: white;
   border: none;
   padding: 0.8rem 2rem;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 4px;
+  font-weight: 400;
   width: 100%;
+  transition: background 0.3s ease;
+}
+
+.boton-catalogo:hover {
+  background-color: #475943;
 }
 
 
+
+.contenedor-centrado {
+  max-width: 1400px;  /* Puedes ajustar este ancho si querés más o menos espacio */
+  margin: 0 auto;
+  padding: 0 2rem;    /* Espacio lateral dentro del contenedor */
+}
+
+ 
+ 
+  
+.modal-cupon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-contenido {
+  background-color: white;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  height: 200px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-contenido h2{
+  font-weight: 400;
+}
+
+.cerrar-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.formulario-cupon {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.formulario-cupon input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.formulario-cupon input:focus {
+  outline: none;
+  border-color: #587154;
+}
+
+.formulario-cupon button {
+  background-color: #5d725b;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: 60;
+}
+
+.formulario-cupon button:hover {
+  background-color: #475943;
+}
+
+
+.mensaje-error {
+  margin-top: 1rem;
+  color: red;
+  font-size: 0.85rem;
+  display: none;
+}
+
+
+/* CONTENEDOR PRINCIPAL DE FAVORITOS */
+.favoritos-contenido {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  padding-top: 8rem; /* Mismo espacio superior que el carrito */
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* LISTADO DE FAVORITOS */
+.favoritos-listado nav {
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  color: gray;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
+#titulo-favoritos {
+  font-size: 2rem;
+  color: #4e4e4e;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 60;
+  margin-bottom: 4rem; /* Igual que el carrito */
+}
+
+/* PRODUCTO INDIVIDUAL EN FAVORITOS */
+.favorito-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.favorito-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.favorito-item .info-producto {
+  flex: 1;
+  margin-left: 10px;
+}
+
+/* MENSAJE DE FAVORITOS VACÍO */
+#favoritos-vacio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* Ajustable */
+  text-align: center;
+  font-size: 1.1rem;
+  color: #777;
+  font-family: 'Poppins', sans-serif;
+}
