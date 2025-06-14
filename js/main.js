@@ -16,75 +16,39 @@ const selectedOption = document.querySelector('.selected-option');
 const options = menu.querySelectorAll('li');
 const gridProductos = document.querySelector('.grid-productos');
 
-// Mostrar/ocultar barra de búsqueda
 searchToggle.addEventListener('click', () => {
   searchBar.classList.toggle('visible');
 });
-// Manejo de navegación por secciones
+
 links.forEach(link => {
   link.addEventListener('click', (e) => {
+    window.scrollTo(0, 0);
     const target = link.getAttribute('href'); 
     const id = target.replace('#', '');
 
-    // Subrayar solo el enlace del menú correspondiente
     const menuLink = document.querySelector('.nav-list a[href="' + target + '"]');
     if (menuLink) {
       links.forEach(l => l.classList.remove('active'));
       menuLink.classList.add('active');
     }
 
-    // Mostrar/ocultar secciones
+    sections.forEach(section => {
+      section.style.display = section.id === id || (id === 'contacto' && section.id === 'preguntas-frecuentes') ? '' : 'none';
+    });
+
     if (id === 'inicio') {
       sections.forEach(section => {
-        if (
-          section.id === 'catalogo' ||
-          section.id === 'contacto' ||
-          section.id === 'preguntas-frecuentes' ||
-          section.id === 'sobre-nosotros' ||
-          section.id === 'carrito'
-        ) {
+        if (['catalogo', 'contacto', 'preguntas-frecuentes', 'sobre-nosotros', 'carrito', 'favoritos'].includes(section.id)) {
           section.style.display = 'none'; 
         } else {
           section.style.display = ''; 
         }
       });
-    } else if (id === 'catalogo') {
-      sections.forEach(section => {
-        section.style.display = section.id === 'catalogo' ? '' : 'none';
-      });
-    } else if (id === 'contacto') {
-      sections.forEach(section => {
-        section.style.display = (section.id === 'contacto' || section.id === 'preguntas-frecuentes') ? '' : 'none';
-      });
-    } else if (id === 'sobre-nosotros') {
-      sections.forEach(section => {
-        section.style.display = section.id === 'sobre-nosotros' ? '' : 'none';
-      });
-    } else if (id === 'carrito') {
-      sections.forEach(section => {
-        section.style.display = section.id === 'carrito' ? '' : 'none';
-      });
-    } else if (id === 'favoritos') {
-      sections.forEach(section => {
-        section.style.display = section.id === 'favoritos' ? '' : 'none';
-      });
     }
   });
 });
 
-// Ocultar todas las secciones especiales al cargar la página
-window.addEventListener('DOMContentLoaded', () => {
-  if (catalogoSection) {
-    catalogoSection.style.display = 'none';
-    contactoSection.style.display = 'none';
-    preguntasfrecuentesSection.style.display = 'none';
-    sobrenosotrosSection.style.display = 'none';
-    carritoSection.style.display = 'none';
-    favoritosSection.style.display = 'none';
-  }
-});
-
-// Dropdown de ordenamiento
+// --------------------- Filtros y Ordenamiento ---------------------
 toggle.addEventListener('click', () => {
   dropdown.classList.toggle('show');
 });
@@ -104,7 +68,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Ordenamiento de productos
 function ordenarProductos(criterio) {
   const productosArray = Array.from(gridProductos.children);
 
@@ -112,20 +75,15 @@ function ordenarProductos(criterio) {
     const precioA = parseFloat(a.dataset.precio);
     const precioB = parseFloat(b.dataset.precio);
 
-    if (criterio === 'menor precio') {
-      return precioA - precioB;
-    } else if (criterio === 'mayor precio') {
-      return precioB - precioA;
-    } else {
-      return 0; // Relevancia o sin orden
-    }
+    if (criterio === 'menor precio') return precioA - precioB;
+    if (criterio === 'mayor precio') return precioB - precioA;
+    return 0;
   });
 
   gridProductos.innerHTML = '';
   productosArray.forEach(producto => gridProductos.appendChild(producto));
 }
 
-// Filtros de productos
 document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
   checkbox.addEventListener('change', aplicarFiltros);
 });
@@ -133,7 +91,6 @@ document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
 function aplicarFiltros() {
   const categoriaSeleccionadas = Array.from(document.querySelectorAll('[data-type="category"]:checked')).map(cb => cb.value.toLowerCase());
   const materialSeleccionados = Array.from(document.querySelectorAll('[data-type="material"]:checked')).map(cb => cb.value.toLowerCase());
-
   const desde = parseInt(document.getElementById('desde').value) || 0;
   const hasta = parseInt(document.getElementById('hasta').value) || Infinity;
 
@@ -150,52 +107,8 @@ function aplicarFiltros() {
   });
 }
 
-// Formulario de contacto
-document.querySelector('.contacto-form').addEventListener('submit', function(e) {
-  e.preventDefault(); 
-  this.reset();
-});
-
-// Preguntas frecuentes
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    item.classList.toggle('open');
-  });
-});
-
+// --------------------- Carrito ---------------------
 const carrito = {};
-
-document.addEventListener("DOMContentLoaded", () => {
-  actualizarTotales();
-  const botonesCarrito = document.querySelectorAll(".ph-shopping-cart");
-
-  botonesCarrito.forEach((boton) => {
-    boton.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      const productCard = boton.closest(".product-card");
-      const nombre = productCard.querySelector("h3").textContent;
-      const imagen = productCard.querySelector("img").src;
-      const precioData = productCard.getAttribute("data-precio");
-
-      let precio = parseFloat(precioData);
-      if (isNaN(precio)) {
-        // Fallback si data-precio falla
-        const textoVisible = pElemento.textContent;
-        precio = parseFloat(textoVisible.replace(/[^\d.]/g, ""));
-      }
-
-      if (carrito[nombre]) return;
-
-      carrito[nombre] = { nombre, precio, imagen, cantidad: 1 };
-
-      agregarProductoAlCarrito(carrito[nombre]);
-      actualizarTotales();
-      
-    });
-  });
-});
 
 function agregarProductoAlCarrito(producto) {
   const lista = document.getElementById("lista-carrito");
@@ -205,29 +118,16 @@ function agregarProductoAlCarrito(producto) {
   item.dataset.nombre = producto.nombre;
 
   item.innerHTML = `
-    <div>
-      <img src="${producto.imagen}" alt="${producto.nombre}">
-    </div>
-    <div class="info-producto">
-      <h3>${producto.nombre}</h3>
-    </div>
-    <div class="precio-unitario">
-      $${producto.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-    </div>
-    <div>
-      <input type="number" class="input-cantidad" value="1" min="1">
-    </div>
-    <div class="subtotal">
-      $${producto.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-    </div>
-    <div>
-      <button class="eliminar-producto" data-nombre="${producto.nombre}">&#10005;</button>
-    </div>
+    <div><img src="${producto.imagen}" alt="${producto.nombre}"></div>
+    <div class="info-producto"><h3>${producto.nombre}</h3></div>
+    <div class="precio-unitario">$${producto.precio.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</div>
+    <div><input type="number" class="input-cantidad" value="1" min="1"></div>
+    <div class="subtotal">$${producto.precio.toLocaleString('es-AR', { minimumFractionDigits: 2 })}</div>
+    <div><button class="eliminar-producto" data-nombre="${producto.nombre}">&#10005;</button></div>
   `;
 
-  const inputCantidad = item.querySelector(".input-cantidad");
-  inputCantidad.addEventListener("input", () => {
-    const nuevaCantidad = Math.max(1, parseInt(inputCantidad.value) || 1);
+  item.querySelector(".input-cantidad").addEventListener("input", () => {
+    const nuevaCantidad = Math.max(1, parseInt(item.querySelector(".input-cantidad").value) || 1);
     carrito[producto.nombre].cantidad = nuevaCantidad;
     actualizarSubtotal(producto.nombre, item);
     actualizarTotales();
@@ -237,9 +137,28 @@ function agregarProductoAlCarrito(producto) {
     delete carrito[producto.nombre];
     item.remove();
     actualizarTotales();
+
+    // Desmarcar ícono de carrito en el catálogo
+    const todasLasCards = document.querySelectorAll(".product-card");
+    todasLasCards.forEach((card) => {
+      const nombreCard = card.querySelector("h3").textContent;
+      if (nombreCard === producto.nombre) {
+        const icono = card.querySelector(".btn-agregar-carrito i");
+        if (icono) {
+          icono.classList.remove("ph-fill");
+          icono.classList.add("ph-bold");
+        }
+      }
+    });
   });
 
   lista.appendChild(item);
+}
+
+function actualizarSubtotal(nombre, item) {
+  const producto = carrito[nombre];
+  const subtotal = producto.precio * producto.cantidad;
+  item.querySelector(".subtotal").textContent = `$${subtotal.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`;
 }
 
 function actualizarTotales() {
@@ -255,8 +174,7 @@ function actualizarTotales() {
   const envio = 4827.59;
   const totalFinal = totalProductos + envio;
 
-  const formatoPesos = (monto) =>
-    `$ ${monto.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const formatoPesos = (monto) => `$ ${monto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`;
 
   const totalProductosEl = document.getElementById("total-productos");
   const costoEnvioEl = document.getElementById("costo-envio");
@@ -266,15 +184,13 @@ function actualizarTotales() {
   const resumenEl = document.getElementById("resumen-carrito");
 
   if (cantidadItems === 0) {
-    // Carrito vacío: ocultar columnas y resumen, cambiar título
-    if (tituloCarritoEl) tituloCarritoEl.textContent = "Tu carrito está vacío.";
-    if (cabeceraEl) cabeceraEl.style.display = "none";
-    if (resumenEl) resumenEl.style.display = "none";
+    tituloCarritoEl.textContent = "Tu carrito está vacío.";
+    cabeceraEl.style.display = "none";
+    resumenEl.style.display = "none";
   } else {
-    // Carrito con productos: mostrar todo normalmente
-    if (tituloCarritoEl) tituloCarritoEl.textContent = "Tu pedido /";
-    if (cabeceraEl) cabeceraEl.style.display = "grid";
-    if (resumenEl) resumenEl.style.display = "block";
+    tituloCarritoEl.textContent = "Tu pedido /";
+    cabeceraEl.style.display = "grid";
+    resumenEl.style.display = "block";
 
     totalProductosEl.textContent = formatoPesos(totalProductos);
     costoEnvioEl.textContent = formatoPesos(envio);
@@ -287,10 +203,8 @@ function actualizarTotales() {
   }
 }
 
-
 function aplicarDescuento(porcentaje) {
   let totalProductos = 0;
-
   for (const nombre in carrito) {
     const producto = carrito[nombre];
     totalProductos += producto.cantidad * producto.precio;
@@ -300,15 +214,12 @@ function aplicarDescuento(porcentaje) {
   const envio = 4827.59;
   const totalFinal = totalProductos - descuento + envio;
 
-  const formatoPesos = (monto) =>
-    `$ ${monto.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const formatoPesos = (monto) => `$ ${monto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`;
 
-  // Mostrar valores sin modificar el total de productos
   document.getElementById("total-productos").textContent = formatoPesos(totalProductos);
   document.getElementById("costo-envio").textContent = formatoPesos(envio);
   document.getElementById("total-final").textContent = formatoPesos(totalFinal);
 
-  // Mostrar línea de descuento
   const lineaDescuento = document.getElementById("linea-descuento");
   const valorDescuento = document.getElementById("valor-descuento");
 
@@ -318,51 +229,7 @@ function aplicarDescuento(porcentaje) {
   }
 }
 
-
-// MOSTRAR y CERRAR el modal de cupón
-document.addEventListener("DOMContentLoaded", () => {
-  const botonCupon = document.querySelector(".codigo-cupon");
-  const modal = document.getElementById("modal-cupon");
-  const cerrarModal = document.getElementById("cerrar-modal");
-
-  if (botonCupon && modal && cerrarModal) {
-    botonCupon.addEventListener("click", () => {
-      modal.style.display = "flex";  // Mostrar el modal
-    });
-
-    cerrarModal.addEventListener("click", () => {
-      modal.style.display = "none";  // Ocultar modal al hacer click en ❌
-    });
-
-    // También cerrar si clickea fuera del modal
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-  }
-});
-
-const botonAplicarCupon = document.querySelector(".formulario-cupon button");
-const inputCupon = document.getElementById("campo-cupon");
-const mensajeError = document.querySelector(".mensaje-error");
-
-let cuponAplicado = false;
-
-botonAplicarCupon.addEventListener("click", () => {
-  const codigo = inputCupon.value.trim().toUpperCase();
-
-  if (codigo === "FIRSTORDER5" && !cuponAplicado) {
-    cuponAplicado = true;
-    mensajeError.style.display = "none";
-    aplicarDescuento(5); // 5% de descuento
-    document.getElementById("modal-cupon").style.display = "none";
-  } else {
-    mensajeError.style.display = "block";
-  }
-});
-
-
+// --------------------- Favoritos ---------------------
 const listaFavoritos = {};
 
 function inicializarFavoritos() {
@@ -377,16 +244,24 @@ function inicializarFavoritos() {
       const imagen = card.querySelector("img").src;
       const precio = parseFloat(card.getAttribute("data-precio")) || 0;
 
-      if (listaFavoritos[nombre]) return;
+      if (listaFavoritos[nombre]) {
+        delete listaFavoritos[nombre];
+        boton.classList.remove("ph-fill");
+        boton.classList.add("ph-bold");
+        const item = document.querySelector(`.favorito-item[data-nombre="${nombre}"]`);
+        if (item) item.remove();
+      } else {
+        listaFavoritos[nombre] = { nombre, precio, imagen };
+        agregarAFavoritos(listaFavoritos[nombre]);
+        boton.classList.remove("ph-bold");
+        boton.classList.add("ph-fill");
+      }
 
-      listaFavoritos[nombre] = { nombre, precio, imagen };
-
-      agregarAFavoritos(listaFavoritos[nombre]);
       actualizarVistaFavoritos();
     });
   });
 
-  actualizarVistaFavoritos(); // Ejecutar al cargar también
+  actualizarVistaFavoritos();
 }
 
 function agregarAFavoritos(producto) {
@@ -413,8 +288,22 @@ function agregarAFavoritos(producto) {
     delete listaFavoritos[producto.nombre];
     item.remove();
     actualizarVistaFavoritos();
+
+    // Desmarcar el ícono de "me gusta" en el catálogo
+    const todasLasCards = document.querySelectorAll(".product-card");
+    todasLasCards.forEach((card) => {
+      const nombreCard = card.querySelector("h3").textContent;
+      if (nombreCard === producto.nombre) {
+        const icono = card.querySelector(".ph-heart");
+        if (icono) {
+          icono.classList.remove("ph-fill");
+          icono.classList.add("ph-bold");
+        }
+      }
+    });
   });
 
+  
   lista.appendChild(item);
 }
 
@@ -435,7 +324,107 @@ function actualizarVistaFavoritos() {
   }
 }
 
-// Ejecutar una sola vez todo después de que el DOM esté listo
+// --------------------- Código de Cupón ---------------------
+const botonAplicarCupon = document.querySelector(".formulario-cupon button");
+const inputCupon = document.getElementById("campo-cupon");
+const mensajeError = document.querySelector(".mensaje-error");
+let cuponAplicado = false;
+
+botonAplicarCupon.addEventListener("click", () => {
+  const codigo = inputCupon.value.trim().toUpperCase();
+  if (codigo === "FIRSTORDER5" && !cuponAplicado) {
+    cuponAplicado = true;
+    mensajeError.style.display = "none";
+    aplicarDescuento(5);
+    document.getElementById("modal-cupon").style.display = "none";
+  } else {
+    mensajeError.style.display = "block";
+  }
+});
+
+// --------------------- Inicialización al cargar ---------------------
 document.addEventListener("DOMContentLoaded", () => {
+  catalogoSection.style.display = 'none';
+  contactoSection.style.display = 'none';
+  preguntasfrecuentesSection.style.display = 'none';
+  sobrenosotrosSection.style.display = 'none';
+  carritoSection.style.display = 'none';
+  favoritosSection.style.display = 'none';
+  actualizarTotales();
+
+  // Carrito
+  document.querySelectorAll(".btn-agregar-carrito").forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const productCard = boton.closest(".product-card");
+      const nombre = productCard.querySelector("h3").textContent;
+      const imagen = productCard.querySelector("img").src;
+      const precioData = productCard.getAttribute("data-precio");
+      let precio = parseFloat(precioData);
+
+      if (isNaN(precio)) {
+        const textoVisible = productCard.querySelector("p").textContent;
+        precio = parseFloat(textoVisible.replace(/[^\d.]/g, ""));
+      }
+
+      const icono = boton.querySelector("i");
+
+      if (carrito[nombre]) {
+        // Quitar del carrito si ya existe
+        delete carrito[nombre];
+
+        // Quitar del DOM el item del carrito
+        const item = document.querySelector(`.carrito-item[data-nombre="${nombre}"]`);
+        if (item) item.remove();
+
+        // Cambiar ícono a no relleno
+        icono.classList.remove("ph-fill");
+        icono.classList.add("ph-bold");
+
+        actualizarTotales();
+      } else {
+        // Agregar al carrito
+        carrito[nombre] = { nombre, precio, imagen, cantidad: 1 };
+        agregarProductoAlCarrito(carrito[nombre]);
+        actualizarTotales();
+
+        // Cambiar ícono a relleno
+        icono.classList.remove("ph-bold");
+        icono.classList.add("ph-fill");
+      }
+    });
+  });
+
+  // Inicializar favoritos
   inicializarFavoritos();
+
+  // Modal cupón
+  const botonCupon = document.querySelector(".codigo-cupon");
+  const modal = document.getElementById("modal-cupon");
+  const cerrarModal = document.getElementById("cerrar-modal");
+
+  if (botonCupon && modal && cerrarModal) {
+    botonCupon.addEventListener("click", () => modal.style.display = "flex");
+    cerrarModal.addEventListener("click", () => modal.style.display = "none");
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+  }
+
+  // Contacto
+  const contactoForm = document.querySelector('.contacto-form');
+  if (contactoForm) {
+    contactoForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.reset();
+    });
+  }
+
+  // FAQ
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.parentElement.classList.toggle('open');
+    });
+  });
 });
