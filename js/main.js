@@ -109,6 +109,7 @@ function aplicarFiltros() {
 
 // --------------------- Carrito ---------------------
 const carrito = {};
+let porcentajeDescuento = 0;
 
 function agregarProductoAlCarrito(producto) {
   const lista = document.getElementById("lista-carrito");
@@ -172,7 +173,8 @@ function actualizarTotales() {
   }
 
   const envio = 4827.59;
-  const totalFinal = totalProductos + envio;
+  const descuento = totalProductos * (porcentajeDescuento / 100);
+  const totalFinal = totalProductos - descuento + envio;
 
   const formatoPesos = (monto) => `$ ${monto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`;
 
@@ -187,6 +189,10 @@ function actualizarTotales() {
     tituloCarritoEl.textContent = "Tu carrito está vacío.";
     cabeceraEl.style.display = "none";
     resumenEl.style.display = "none";
+
+    // Ocultar línea de descuento si estaba visible
+    const lineaDescuento = document.getElementById("linea-descuento");
+    if (lineaDescuento) lineaDescuento.style.display = "none";
   } else {
     tituloCarritoEl.textContent = "Tu pedido /";
     cabeceraEl.style.display = "grid";
@@ -200,10 +206,22 @@ function actualizarTotales() {
     if (lineaProducto) {
       lineaProducto.textContent = cantidadItems === 1 ? "Producto" : `Productos (${cantidadItems})`;
     }
+
+    const lineaDescuento = document.getElementById("linea-descuento");
+    const valorDescuento = document.getElementById("valor-descuento");
+    if (lineaDescuento && valorDescuento) {
+      if (porcentajeDescuento > 0) {
+        lineaDescuento.style.display = "flex";
+        valorDescuento.textContent = `- ${formatoPesos(descuento)}`;
+      } else {
+        lineaDescuento.style.display = "none";
+      }
+    }
   }
 }
 
 function aplicarDescuento(porcentaje) {
+  porcentajeDescuento = porcentaje;
   let totalProductos = 0;
   for (const nombre in carrito) {
     const producto = carrito[nombre];
@@ -227,7 +245,21 @@ function aplicarDescuento(porcentaje) {
     lineaDescuento.style.display = "flex";
     valorDescuento.textContent = `- ${formatoPesos(descuento)}`;
   }
+  actualizarTotales();
 }
+
+
+document.querySelector(".boton-catalogo").addEventListener("click", () => {
+  // Oculta la sección del carrito
+  document.getElementById("carrito").style.display = "none";
+  // Muestra la sección de pago
+  document.getElementById("pago").style.display = "block";
+
+  // (Opcional) Desplazar hacia arriba la nueva sección
+  document.getElementById("pago").scrollIntoView({ behavior: "smooth" });
+});
+
+
 
 // --------------------- Favoritos ---------------------
 const listaFavoritos = {};

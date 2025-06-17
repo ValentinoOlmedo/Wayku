@@ -533,6 +533,113 @@
   </div>
 </section>
 
+<section id="pago" class="pago" data-section style="display: none;">
+  <div class="contenedor-centrado">
+    <div class="pago-grid">
+
+      <!-- Columna izquierda: Formulario -->
+      <div class="pago-formulario">
+
+        <nav style="font-size: 0.9rem; margin-bottom: 2rem; color: gray; font-weight: 400; font-family: 'Poppins', sans-serif;">
+          Inicio / Carrito / Pago
+        </nav>
+
+        <h2 style="font-size: 2rem; color: #4e4e4e; font-family: 'Poppins', sans-serif; font-weight: 60; margin-bottom: 2rem;">
+          Datos de envío
+        </h2>
+
+        <!-- NUEVO: Contenedor de fondo blanco -->
+        <div class="contacto-wrapper">
+          <form class="contacto-form">
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" name="nombre" placeholder="Nombre" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="apellido" placeholder="Apellido" required>
+              </div>
+            </div>
+
+            <div class="form-row form-row-dni-telefono">
+              <div class="form-group col-6">
+                <input type="text" name="dni" placeholder="DNI" required>
+              </div>
+              <div class="form-group col-2">
+                <input type="text" name="codigoArea" placeholder="Código de área (Ej: 351)" required>
+              </div>
+              <div class="form-group col-4">
+                <input type="tel" name="telefono" placeholder="Teléfono (Ej: 3844333)" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" name="provincia" placeholder="Provincia" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="ciudad" placeholder="Ciudad" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" name="codigoPostal" placeholder="Código Postal" required>
+              </div>
+              <div class="form-group">
+                <input type="text" name="direccion" placeholder="Dirección (Ej: Mazarrón 264)" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" name="piso" placeholder="Piso">
+              </div>
+              <div class="form-group">
+                <input type="text" name="departamento" placeholder="Dpto.">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <textarea name="extra" placeholder="Indicaciones adicionales para entregar tu compra (opcional)"></textarea>
+            </div>
+
+            <button type="submit" class="boton-guardar">Guardar y continuar</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Columna derecha: Resumen -->
+      <div class="carrito-resumen">
+        <h3 class="titulo-resumen">Resumen de compra</h3>
+
+        <div class="linea-resumen">
+          <span>Producto</span>
+          <span id="resumen-productos">$ 0</span>
+        </div>
+
+        <div class="linea-resumen">
+          <span>Envío</span>
+          <span id="resumen-envio">$ 0</span>
+        </div>
+
+        <div class="linea-resumen" id="resumen-descuento" style="display: none;">
+          <span>Descuento</span>
+          <span id="resumen-descuento-valor">- $ 0</span>
+        </div>
+
+        <div class="linea-total">
+          <span>Total</span>
+          <span id="resumen-total-final">$ 0</span>
+        </div>
+
+        <button class="boton-catalogo">Finalizar compra</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 <section id="favoritos" data-section style="display: none;">
   <div class="contenedor-centrado">
     <div class="favoritos-contenido">
