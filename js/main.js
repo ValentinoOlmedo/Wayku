@@ -176,39 +176,39 @@ function actualizarTotales() {
   const descuento = totalProductos * (porcentajeDescuento / 100);
   const totalFinal = totalProductos - descuento + envio;
 
-  const formatoPesos = (monto) => `$ ${monto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`;
+  const formatoPesos = (monto) =>
+    `$ ${monto.toLocaleString('es-AR', { minimumFractionDigits: 2 })}`;
 
+  // --- Sección carrito ---
   const totalProductosEl = document.getElementById("total-productos");
   const costoEnvioEl = document.getElementById("costo-envio");
   const totalFinalEl = document.getElementById("total-final");
   const tituloCarritoEl = document.getElementById("titulo-carrito");
   const cabeceraEl = document.getElementById("cabecera-carrito");
   const resumenEl = document.getElementById("resumen-carrito");
+  const lineaDescuento = document.getElementById("linea-descuento");
+  const valorDescuento = document.getElementById("valor-descuento");
 
   if (cantidadItems === 0) {
-    tituloCarritoEl.textContent = "Tu carrito está vacío.";
-    cabeceraEl.style.display = "none";
-    resumenEl.style.display = "none";
-
-    // Ocultar línea de descuento si estaba visible
-    const lineaDescuento = document.getElementById("linea-descuento");
+    if (tituloCarritoEl) tituloCarritoEl.textContent = "Tu carrito está vacío.";
+    if (cabeceraEl) cabeceraEl.style.display = "none";
+    if (resumenEl) resumenEl.style.display = "none";
     if (lineaDescuento) lineaDescuento.style.display = "none";
   } else {
-    tituloCarritoEl.textContent = "Tu pedido /";
-    cabeceraEl.style.display = "grid";
-    resumenEl.style.display = "block";
+    if (tituloCarritoEl) tituloCarritoEl.textContent = "Tu pedido /";
+    if (cabeceraEl) cabeceraEl.style.display = "grid";
+    if (resumenEl) resumenEl.style.display = "block";
 
-    totalProductosEl.textContent = formatoPesos(totalProductos);
-    costoEnvioEl.textContent = formatoPesos(envio);
-    totalFinalEl.textContent = formatoPesos(totalFinal);
+    if (totalProductosEl) totalProductosEl.textContent = formatoPesos(totalProductos);
+    if (costoEnvioEl) costoEnvioEl.textContent = formatoPesos(envio);
+    if (totalFinalEl) totalFinalEl.textContent = formatoPesos(totalFinal);
 
-    const lineaProducto = document.querySelector(".linea-resumen span");
+    // Actualizar texto de productos/pluralidad en carrito
+    const lineaProducto = document.querySelector("#resumen-carrito .linea-resumen span:first-child");
     if (lineaProducto) {
       lineaProducto.textContent = cantidadItems === 1 ? "Producto" : `Productos (${cantidadItems})`;
     }
 
-    const lineaDescuento = document.getElementById("linea-descuento");
-    const valorDescuento = document.getElementById("valor-descuento");
     if (lineaDescuento && valorDescuento) {
       if (porcentajeDescuento > 0) {
         lineaDescuento.style.display = "flex";
@@ -216,6 +216,27 @@ function actualizarTotales() {
       } else {
         lineaDescuento.style.display = "none";
       }
+    }
+  }
+
+  // --- Sección pago ---
+  const totalProductosPagoEl = document.getElementById("total-productos-pago");
+  const costoEnvioPagoEl = document.getElementById("costo-envio-pago");
+  const totalFinalPagoEl = document.getElementById("total-final-pago");
+  const lineaDescuentoPago = document.getElementById("linea-descuento-pago");
+  const valorDescuentoPago = document.getElementById("valor-descuento-pago");
+
+  // Actualizamos siempre (aunque cantidadItems sea 0, para mantener coherencia)
+  if (totalProductosPagoEl) totalProductosPagoEl.textContent = formatoPesos(totalProductos);
+  if (costoEnvioPagoEl) costoEnvioPagoEl.textContent = formatoPesos(envio);
+  if (totalFinalPagoEl) totalFinalPagoEl.textContent = formatoPesos(totalFinal);
+
+  if (lineaDescuentoPago && valorDescuentoPago) {
+    if (porcentajeDescuento > 0) {
+      lineaDescuentoPago.style.display = "flex";
+      valorDescuentoPago.textContent = `- ${formatoPesos(descuento)}`;
+    } else {
+      lineaDescuentoPago.style.display = "none";
     }
   }
 }
@@ -458,5 +479,37 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener('click', () => {
       btn.parentElement.classList.toggle('open');
     });
+  });
+});
+
+
+
+
+document.getElementById("form-envio").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Ocultar la sección actual
+    document.getElementById("pago").style.display = "none";
+
+    // Mostrar la siguiente sección
+    document.getElementById("pago2").style.display = "block";
+
+    // Opcional: scroll al inicio
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+  });
+
+
+
+document.querySelectorAll('input[name="metodo"]').forEach((radio) => {
+  radio.addEventListener('change', function () {
+    const datosTarjeta = document.getElementById('datos-tarjeta');
+    if (this.value === 'tarjeta') {
+      datosTarjeta.style.display = 'block';
+      datosTarjeta.querySelectorAll('input, select').forEach(i => i.required = true);
+    } else {
+      datosTarjeta.style.display = 'none';
+      datosTarjeta.querySelectorAll('input, select').forEach(i => i.required = false);
+    }
   });
 });

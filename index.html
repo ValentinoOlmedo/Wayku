@@ -548,9 +548,9 @@
           Datos de envío
         </h2>
 
-        <!-- NUEVO: Contenedor de fondo blanco -->
+        <!-- Contenedor del formulario -->
         <div class="contacto-wrapper">
-          <form class="contacto-form">
+          <form class="contacto-form" id="form-envio">
             <div class="form-row">
               <div class="form-group">
                 <input type="text" name="nombre" placeholder="Nombre" required>
@@ -564,9 +564,7 @@
               <div class="form-group col-6">
                 <input type="text" name="dni" placeholder="DNI" required>
               </div>
-              <div class="form-group col-2">
-                <input type="text" name="codigoArea" placeholder="Código de área (Ej: 351)" required>
-              </div>
+
               <div class="form-group col-4">
                 <input type="tel" name="telefono" placeholder="Teléfono (Ej: 3844333)" required>
               </div>
@@ -602,8 +600,136 @@
             <div class="form-group">
               <textarea name="extra" placeholder="Indicaciones adicionales para entregar tu compra (opcional)"></textarea>
             </div>
+          </form>
+        </div>
+      </div>
 
-            <button type="submit" class="boton-guardar">Guardar y continuar</button>
+      <!-- Columna derecha: Resumen -->
+      <div class="carrito-resumen">
+        <h3 class="titulo-resumen">Resumen de compra</h3>
+
+        <div class="linea-resumen">
+          <span>Producto</span>
+          <span id="total-productos-pago">$ 0</span>
+        </div>
+
+        <div class="linea-resumen">
+          <span>Envío</span>
+          <span id="costo-envio-pago">$ 0</span>
+        </div>
+
+        <div class="linea-resumen" id="resumen-descuento" style="display: none;">
+          <span>Descuento</span>
+           <span id="valor-descuento-pago">- $ 0</span>
+        </div>
+
+        <div class="linea-total">
+          <span>Total</span>
+          <span id="total-final-pago">$ 0</span>
+        </div>
+
+        <!-- Botón que envía el formulario -->
+        <button type="submit" form="form-envio" class="boton-catalogo">Finalizar compra</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section id="pago2" class="pago" data-section style="display: none;">
+  <div class="contenedor-centrado">
+    <div class="pago-grid">
+
+      <!-- Columna izquierda: Formulario de pago -->
+      <div class="pago-formulario">
+
+        <nav style="font-size: 0.9rem; margin-bottom: 2rem; color: gray; font-weight: 400; font-family: 'Poppins', sans-serif;">
+          Inicio / Carrito / Pago / Confirmar
+        </nav>
+
+        <h2 style="font-size: 2rem; color: #4e4e4e; font-family: 'Poppins', sans-serif; font-weight: 60; margin-bottom: 2rem;">
+          Pago
+        </h2>
+
+        <div class="contacto-wrapper">
+          <form class="contacto-form" id="form-pago">
+            <!-- MÉTODO DE PAGO -->
+            <div class="metodo-pago-opciones">
+
+              <!-- OPCIÓN 1: Mercado Pago -->
+              <label class="opcion-metodo">
+                <input type="radio" name="metodo" value="mercado-pago" required>
+                <div class="contenido-metodo">
+                  <div class="titulo-metodo">
+                    <strong>Mercado Pago</strong>
+                    <!-- Logos dentro de .logos -->
+                    <div class="logos">
+                      <img src="img/logos/mercado-pago-logo.png" alt="Mercado Pago">
+                      <img src="img/logos/visa.png" alt="Visa">
+                      <img src="img/logos/mastercard.png" alt="Mastercard">
+                      <img src="img/logos/amex.svg" alt="Amex">
+                      <span>+2</span>
+                    </div>
+                  </div>
+                  <p class="texto-explicacion">
+                    Después de hacer clic en “Confirmar pago”, serás redirigido a Mercado Pago para completar tu compra de forma segura.
+                  </p>
+                </div>
+              </label>
+
+              <!-- OPCIÓN 2: Transferencia Bancaria -->
+              <label class="opcion-metodo simple">
+                <input type="radio" name="metodo" value="transferencia" required>
+                <span>Transferencia Bancaria</span>
+              </label>
+
+              <!-- OPCIÓN 3: Tarjeta -->
+              <label class="opcion-metodo simple">
+                <input type="radio" name="metodo" value="tarjeta" required>
+                <span>Tarjeta de crédito/débito</span>
+                  <div class="logos">
+                      <img src="img/logos/mercado-pago-logo.png" alt="Mercado Pago">
+                      <img src="img/logos/visa.png" alt="Visa">
+                      <img src="img/logos/mastercard.png" alt="Mastercard">
+                      <img src="img/logos/amex.svg" alt="Amex">
+                      <span>+2</span>
+                    </div>
+              </label>
+            </div>
+
+            <!-- DATOS DE TARJETA -->
+            <div id="datos-tarjeta" style="display:none; margin-top: 20px;">
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" name="nombreTarjeta" placeholder="Nombre en la tarjeta">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="numeroTarjeta" placeholder="Número de tarjeta">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-6">
+                  <input type="text" name="vencimiento" placeholder="Vencimiento (MM/AA)">
+                </div>
+                <div class="form-group col-6">
+                  <input type="text" name="cvv" placeholder="CVV">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="cuotas">Cantidad de cuotas</label>
+                <select name="cuotas">
+                  <option value="1">1 cuota</option>
+                  <option value="3">3 cuotas</option>
+                  <option value="6">6 cuotas</option>
+                  <option value="12">12 cuotas</option>
+                </select>
+              </div>
+            </div>
+
           </form>
         </div>
       </div>
@@ -632,13 +758,13 @@
           <span id="resumen-total-final">$ 0</span>
         </div>
 
-        <button class="boton-catalogo">Finalizar compra</button>
+        <!-- Botón para confirmar pago -->
+        <button type="submit" form="form-pago" class="boton-catalogo">Confirmar pago</button>
       </div>
 
     </div>
   </div>
 </section>
-
 
 <section id="favoritos" data-section style="display: none;">
   <div class="contenedor-centrado">

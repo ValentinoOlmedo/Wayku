@@ -1586,3 +1586,65 @@ textarea {
   color: #777;
   font-family: 'Poppins', sans-serif;
 }
+
+
+.metodo-pago-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.opcion-metodo {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.opcion-metodo:hover {
+  border-color: #bbb;
+}
+
+.opcion-metodo input[type="radio"] {
+  margin-top: 4px;
+  accent-color: #007bff;
+}
+
+.contenido-metodo {
+  flex: 1;
+}
+
+.titulo-metodo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+.logos img {
+  height: 20px;
+  margin-left: 5px;
+}
+
+.texto-explicacion {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.opcion-metodo.simple {
+  padding: 0.7rem 1rem;
+  background-color: #fafafa;
+}
+
+#datos-tarjeta .form-group input,
+#datos-tarjeta .form-group select {
+  width: 100%;
+}
