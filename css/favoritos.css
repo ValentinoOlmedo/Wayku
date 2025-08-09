@@ -1,0 +1,199 @@
+/* CONTENEDOR PRINCIPAL DE FAVORITOS */
+.favoritos-contenido {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  padding-top: 8rem;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* LISTADO DE FAVORITOS */
+.favoritos-listado nav {
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  color: gray;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
+#titulo-favoritos {
+  font-size: 2rem;
+  color: #4e4e4e;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 60;
+  margin-bottom: 4rem;
+}
+
+/* GRID DE FAVORITOS */
+#lista-favoritos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* CARD DE FAVORITO INDIVIDUAL */
+.favorito-item {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.favorito-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* IMAGEN DEL PRODUCTO */
+.favorito-item .imagen-producto {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.favorito-item .imagen-producto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.favorito-item:hover .imagen-producto img {
+  transform: scale(1.05);
+}
+
+/* BOTÓN ELIMINAR */
+.eliminar-favorito {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.eliminar-favorito:hover {
+  background: rgba(255, 255, 255, 1);
+  color: #e74c3c;
+  transform: scale(1.1);
+}
+
+/* INFORMACIÓN DEL PRODUCTO */
+.favorito-item .info-producto {
+  padding: 1rem;
+  background-color: #faf6f1;
+}
+
+.favorito-item .info-producto h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  color: #3e3e3e;
+  font-family: 'Poppins', sans-serif;
+}
+
+.favorito-item .info-producto .precio {
+  font-size: 1rem;
+  color: #7b7b7b;
+  margin: 0 0 1rem 0;
+  font-weight: 400;
+}
+
+/* BOTONES DE ACCIÓN */
+.favorito-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn-agregar-carrito-fav {
+  flex: 1;
+  background-color: #5d725b;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.btn-agregar-carrito-fav:hover {
+  background-color: #475943;
+}
+
+.btn-ver-producto {
+  background: none;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 40px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-ver-producto:hover {
+  border-color: #5d725b;
+  color: #5d725b;
+}
+
+/* MENSAJE DE FAVORITOS VACÍO */
+#favoritos-vacio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #777;
+  font-family: 'Poppins', sans-serif;
+}
+
+#favoritos-vacio i {
+  font-size: 3rem;
+  color: #ddd;
+  margin-bottom: 1rem;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .favoritos-contenido {
+    padding: 1rem;
+    padding-top: 6rem;
+  }
+  
+  #lista-favoritos {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .favorito-item .imagen-producto {
+    height: 180px;
+  }
+}

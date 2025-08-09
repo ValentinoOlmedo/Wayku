@@ -1,0 +1,137 @@
+/* HEADER */
+.site-header {
+  background: #E9E9E9;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 60;
+  color: #5C5247;
+  text-decoration: none;
+  letter-spacing: 2px;
+  margin: 0;
+  padding: 0;
+}
+
+/* MENÚ DE NAVEGACIÓN */
+.main-nav .nav-list {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #E9E9E9;
+}
+
+/* EFECTO SUBRAYADO Y COLOR EN HOVER Y ACTIVO */
+.main-nav a {
+  position: relative;
+  color: #504943;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: #587154;
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: #587154;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  width: 100%;
+}
+
+.header-icons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.header-icons a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.header-icons a:hover i,
+.header-icons button:hover i {
+  transform: scale(1.1);
+}
+
+.header-icons i {
+  font-size: 1.2rem;
+  color: #3e3e3e;
+  transition: transform 0.2s ease;
+}
+
+.header-icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* BARRA DE BÚSQUEDA OCULTA POR DEFECTO */
+.search-bar {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  background: #E9E9E9;
+  padding: 0 2rem;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 99;
+}
+
+.search-bar.visible {
+  opacity: 1;
+  visibility: visible;
+  padding: 1rem 2rem;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 450px;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+}

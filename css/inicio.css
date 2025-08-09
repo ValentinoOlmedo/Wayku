@@ -1,0 +1,186 @@
+/* Hero Section */
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffffff, #EEECE7);
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Sección hero principal de Wayku */
+.hero-wayku {
+  display: flex; 
+  width: 100%; 
+  height: 100vh; 
+  overflow: hidden; 
+}
+
+.hero-content {
+  width: 50%; 
+  padding: 4rem; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #FBFAF9; 
+  align-items: center; 
+  text-align: center;  
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  color: #4e4e4e;
+  margin-bottom: 5rem;
+  font-weight: 60;
+  max-width: 70%;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  color: #6f6f6f;
+  margin-bottom: 5rem;
+  line-height: 1.6;
+  font-weight: 60;
+}
+
+.hero-img {
+  width: 50%; 
+  background-image: url('../img/portada.png'); 
+  background-size: cover;
+  background-position: center;
+}
+
+/* Sección Más vendidos */
+.bestsellers-section {
+  background-color: #ffffff;
+  padding: 100px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.bestsellers-container {
+  max-width: 1400px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.bestsellers-grid {
+  display: flex;
+  flex: 2;
+  gap: 30px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.bestsellers-right {
+  flex: 1;
+  max-width: 360px;
+}
+
+.bestsellers-right .section-title {
+  font-size: 1.8rem;
+  color: #3e3e3e;
+  margin-bottom: 130px;
+  font-weight: 60;
+}
+
+.bestsellers-description {
+  font-size: 1rem;
+  color: #5a5a5a;
+  line-height: 1.6;
+  margin-bottom: 70px;
+  font-weight: 60;
+}
+
+.see-more-button {
+  font-size: 1rem;
+  display: inline-block;
+  width: 270px;
+  text-align: left;
+  border: 1.5px solid #3e3e3e;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #3e3e3e;
+  border-radius: 4px;
+  font-weight: 60;
+  transition: all 0.3s ease;
+}
+
+.see-more-button:hover {
+  background-color: #3e3e3e;
+  color: #ffffff;
+}
+
+.arrow {
+  margin-left: 140px;
+}
+
+/* Sección Oferta Especial */
+.offer-section {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.offer-background {
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/offer.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.offer-overlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.85), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 3rem;
+}
+
+.offer-content {
+  color: white;
+  max-width: 300px;
+  text-align: left;
+}
+
+.offer-content h2 {
+  font-size: 2rem;
+  font-weight: 60;
+  margin-bottom: 1rem;
+}
+
+.offer-content p {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  font-weight: 60;
+  line-height: 1.5;
+}
+
+.offer-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #5d725b;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 60;
+  transition: background 0.3s ease;
+}
+
+.offer-button:hover {
+  background-color: #475943;
+}

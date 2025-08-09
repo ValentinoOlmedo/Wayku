@@ -1,0 +1,321 @@
+/* === ESTILOS GENERALES DE LA SECCIÓN CATÁLOGO === */
+#catalogo {
+  padding: 4rem 2rem;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #f9f9f9;
+}
+
+.catalogo-wrapper {
+  display: flex;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* === SIDEBAR === */
+.filtros {
+  width: 250px;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  color: gray;
+  font-weight: 400;
+  margin-top: 10.3rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.filtros-section {
+  margin-bottom: 2rem;
+}
+
+.filtros h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  font-weight: 60;
+  color: #4e4e4e;
+  font-family: 'Poppins', sans-serif; 
+}
+ 
+.filtros ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 1rem;
+}
+
+.filtros li {
+  margin: 0.3rem 0;
+}
+
+/* === INPUT RANGO PRECIO === */
+.filtros input[type="number"] {
+  width: 60px;
+  padding: 0.2rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  margin: 0.2rem;
+}
+
+/* === Input de precio horizontal con botón === */
+.filtros-precio-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.filtros-precio-horizontal input[type="number"] {
+  width: 80px;
+  padding: 0.3rem;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: gray;
+  appearance: textfield;
+}
+
+.filtros-precio-horizontal input::-webkit-inner-spin-button,
+.filtros-precio-horizontal input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* === Botón aplicar filtros === */
+.btn-aplicar-filtros {
+  background-color: #587154;
+  border: none;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+  color: white;
+  font-size: 1.1rem;
+  transition: background-color 0.2s ease;
+  margin-left: 0.2rem;
+}
+
+.btn-aplicar-filtros:hover {
+  background-color: #405b3f;
+}
+
+/* === CHECKBOX PERSONALIZADO === */
+.checkbox-custom {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.9rem;
+  color: gray;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.checkbox-custom .checkmark {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  margin-right: 0.6rem;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-custom input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-custom input[type="checkbox"]:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 3px;
+  height: 6px;
+  border: solid gray;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+.checkbox-custom:hover .checkmark {
+  border-color: #666;
+}
+
+/* Ordenar por.. */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  min-width: 250px;
+  justify-content: flex-start;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.dropdown-toggle:focus {
+  outline: none;
+}
+
+.dropdown-icon {
+  pointer-events: none;
+}
+
+.dropdown-menu {
+  left: 74%;
+  transform: translateX(-74%);
+  position: absolute;
+  top: 100%;
+  right: auto;
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: none;
+  z-index: 100;
+  width: max-content;
+  max-width: 160px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dropdown-menu li {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #444;
+  transition: background 0.2s;
+  white-space: nowrap;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f2f2f2;
+}
+
+.dropdown.show .dropdown-menu {
+  display: block;
+}
+
+.ordenar-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  padding-right: 60px; 
+}
+
+.ordenar-completo {
+  font-size: 14px;
+  font-weight: 400;
+  color: #444;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* PRODUCTOS */
+.product-card {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  box-shadow: none;
+}
+
+.product-card img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.product-cardd {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  box-shadow: none;
+}
+
+.product-cardd img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.product-info {
+  background-color: #faf6f1;
+  padding: 15px 20px;
+  text-align: left;
+}
+
+.product-info h3 {
+  font-size: 1.2rem;
+  font-weight: 60;
+  margin: 0 0 5px;
+  color: #3e3e3e;
+}
+
+.product-info p {
+  font-size: 1rem;
+  color: #7b7b7b;
+  margin: 0;
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-icons {
+  display: flex;
+  gap: 12px;
+  transform: translateY(-2px);
+}
+
+.card-icons a {
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease; 
+}
+
+.card-icons a:hover {
+  transform: scale(1.1); 
+}
+
+.card-icons i {
+  font-size: 18px;
+  color: #777;
+  transition: color 0.3s;
+}
+
+.card-icons a:hover i {
+  color: #3e3e3e; 
+}
+
+.grid-productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; 
+  justify-content: flex-start;
+}
