@@ -23,7 +23,10 @@ function inicializarPago() {
         alert('Por favor, completa todos los campos requeridos.');
         return;
       }
-
+      // Usar navegación centralizada
+      if (window.navegacion) {
+        window.navegacion.mostrarSeccion('pago2');
+      }
       // Ocultar la sección actual y mostrar pago2
       const pagoSection = document.getElementById("pago");
       const pago2Section = document.getElementById("pago2");

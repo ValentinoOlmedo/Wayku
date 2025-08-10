@@ -143,14 +143,19 @@ function inicializarCarrito() {
   const botonCatalogo = document.querySelector(".boton-catalogo");
   if (botonCatalogo) {
     botonCatalogo.addEventListener("click", () => {
-      // Oculta la sección del carrito
-      const carritoSection = document.getElementById("carrito");
-      const pagoSection = document.getElementById("pago");
-      
-      if (carritoSection) carritoSection.style.display = "none";
-      if (pagoSection) {
-        pagoSection.style.display = "block";
-        pagoSection.scrollIntoView({ behavior: "smooth" });
+      // Usar la función de navegación centralizada
+      if (window.navegacion) {
+        window.navegacion.mostrarSeccion('pago');
+      } else {
+        // Fallback si no está disponible
+        const carritoSection = document.getElementById("carrito");
+        const pagoSection = document.getElementById("pago");
+        
+        if (carritoSection) carritoSection.style.display = "none";
+        if (pagoSection) {
+          pagoSection.style.display = "block";
+          pagoSection.scrollIntoView({ behavior: "smooth" });
+        }
       }
     });
   }

@@ -139,6 +139,10 @@ function agregarAFavoritos(producto) {
 
   // Ver producto (scroll al catálogo y resaltar)
   btnVerProducto.addEventListener("click", () => {
+    // Usar la función de navegación centralizada
+    if (window.navegacion) {
+      window.navegacion.mostrarSeccion('catalogo');
+    }
     // Ir al catálogo
     const catalogoEl = document.getElementById('catalogo');
     const favoritosEl = document.getElementById('favoritos');
