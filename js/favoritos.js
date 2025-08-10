@@ -187,15 +187,7 @@ function actualizarVistaFavoritos() {
   const cantidad = Object.keys(listaFavoritos).length;
 
   if (cantidad === 0) {
-    if (mensajeVacio) {
-      mensajeVacio.style.display = "flex";
-      mensajeVacio.innerHTML = `
-        <i class="ph ph-heart"></i>
-        <span>Todavía no agregaste favoritos</span>
-        <small style="margin-top: 0.5rem; color: #999;">Explorá nuestro catálogo y marcá los productos que más te gusten</small>
-      `;
-    }
-    if (titulo) titulo.textContent = "Tus favoritos";
+    if (titulo) titulo.textContent = "Todavía no agregaste favoritos.";
     if (lista) lista.innerHTML = "";
   } else {
     if (mensajeVacio) mensajeVacio.style.display = "none";

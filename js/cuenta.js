@@ -1,6 +1,6 @@
-// --------------------- Sistema de Cuenta ---------------------
+// js/cuenta.js - VERSIÓN COMPLETA CON BASE DE DATOS
 
-// Estado del usuario (simulado)
+// Estado del usuario
 let usuarioActual = null;
 
 // Cambiar entre formularios
@@ -23,7 +23,6 @@ function mostrarMensajeAuth(texto, tipo = 'success') {
     messageEl.className = `auth-message ${tipo}`;
     messageEl.style.display = 'block';
     
-    // Auto-ocultar después de 5 segundos
     setTimeout(() => {
       messageEl.style.display = 'none';
     }, 5000);
@@ -35,22 +34,6 @@ function limpiarMensajeAuth() {
   if (messageEl) {
     messageEl.style.display = 'none';
   }
-}
-
-// Enviar link por email
-function enviarLinkEmail() {
-  const emailInput = document.querySelector('#login-form input[type="email"]');
-  if (!emailInput) return;
-  
-  const email = emailInput.value;
-  
-  if (!email) {
-    mostrarMensajeAuth('Por favor ingresa tu email', 'error');
-    return;
-  }
-  
-  // Simular envío
-  mostrarMensajeAuth(`Se envió un link de inicio de sesión a ${email}`, 'success');
 }
 
 // Validar email
@@ -66,7 +49,9 @@ function validarPassword(password) {
 
 // Inicializar sistema de cuenta
 function inicializarCuenta() {
-  // Manejar login
+  console.log('🔐 Inicializando sistema de cuenta...');
+
+  // Manejar login con BASE DE DATOS
   const loginForm = document.getElementById('login-form');
   if (loginForm) {
     loginForm.addEventListener('submit', function(e) {
@@ -75,7 +60,6 @@ function inicializarCuenta() {
       const email = this.querySelector('input[type="email"]').value;
       const password = this.querySelector('input[type="password"]').value;
       
-      // Validaciones básicas
       if (!email || !password) {
         mostrarMensajeAuth('Por favor completa todos los campos', 'error');
         return;
@@ -86,46 +70,61 @@ function inicializarCuenta() {
         return;
       }
       
-      // Simular login (aquí harías la petición real al servidor)
       const btnSubmit = this.querySelector('.btn-primary');
       const textoOriginal = btnSubmit.textContent;
       btnSubmit.textContent = 'Iniciando sesión...';
       btnSubmit.disabled = true;
       
-      setTimeout(() => {
-        usuarioActual = { email, nombre: email.split('@')[0] };
-        mostrarMensajeAuth(`¡Bienvenido de vuelta, ${usuarioActual.nombre}!`, 'success');
-        
+      // CONEXIÓN CON BASE DE DATOS
+      fetch('api/auth.php?action=login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          usuarioActual = data.user;
+          mostrarMensajeAuth(`¡Bienvenido de vuelta, ${data.user.nombre}!`, 'success');
+          
+          setTimeout(() => {
+            actualizarHeaderUsuario(usuarioActual);
+            if (window.navegacion) {
+              window.navegacion.volverAInicio();
+            }
+          }, 1500);
+        } else {
+          mostrarMensajeAuth(data.error || 'Error al iniciar sesión', 'error');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        mostrarMensajeAuth('Error de conexión. Verifica que el servidor esté funcionando.', 'error');
+      })
+      .finally(() => {
         btnSubmit.textContent = textoOriginal;
         btnSubmit.disabled = false;
-        
-        // Aquí podrías redirigir o actualizar el header
-        setTimeout(() => {
-          console.log('Usuario logueado:', usuarioActual);
-          
-          // Volver al inicio
-          if (window.navegacion) {
-            window.navegacion.volverAInicio();
-          }
-        }, 1500);
-      }, 1000);
+      });
     });
   }
 
-  // Manejar registro
+  // Manejar registro con BASE DE DATOS
   const registerForm = document.getElementById('register-form');
   if (registerForm) {
     registerForm.addEventListener('submit', function(e) {
       e.preventDefault();
       
-      const nombre = this.querySelector('input[placeholder="Nombre completo"]').value;
       const email = this.querySelector('input[type="email"]').value;
       const password = this.querySelector('input[placeholder="Contraseña"]').value;
       const confirmPassword = this.querySelector('input[placeholder="Confirmar contraseña"]').value;
       const terms = this.querySelector('#terms').checked;
       
+      const nombre = email.split('@')[0]; // Usar parte del email como nombre
+      
       // Validaciones
-      if (!nombre || !email || !password || !confirmPassword) {
+      if (!email || !password || !confirmPassword) {
         mostrarMensajeAuth('Por favor completa todos los campos', 'error');
         return;
       }
@@ -150,27 +149,43 @@ function inicializarCuenta() {
         return;
       }
       
-      // Simular registro
       const btnSubmit = this.querySelector('.btn-primary');
       const textoOriginal = btnSubmit.textContent;
       btnSubmit.textContent = 'Creando cuenta...';
       btnSubmit.disabled = true;
       
-      setTimeout(() => {
-        usuarioActual = { email, nombre };
-        mostrarMensajeAuth(`¡Cuenta creada exitosamente! Bienvenido, ${nombre}`, 'success');
-        
+      // CONEXIÓN CON BASE DE DATOS
+      fetch('api/auth.php?action=register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nombre, email, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          usuarioActual = data.user;
+          mostrarMensajeAuth(`¡Cuenta creada exitosamente! Bienvenido, ${data.user.nombre}`, 'success');
+          
+          setTimeout(() => {
+            actualizarHeaderUsuario(usuarioActual);
+            if (window.navegacion) {
+              window.navegacion.volverAInicio();
+            }
+          }, 1500);
+        } else {
+          mostrarMensajeAuth(data.error || 'Error al crear la cuenta', 'error');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        mostrarMensajeAuth('Error de conexión. Verifica que el servidor esté funcionando.', 'error');
+      })
+      .finally(() => {
         btnSubmit.textContent = textoOriginal;
         btnSubmit.disabled = false;
-        
-        setTimeout(() => {
-          console.log('Usuario registrado:', usuarioActual);
-          // Volver al inicio
-          if (window.navegacion) {
-            window.navegacion.volverAInicio();
-          }
-        }, 1500);
-      }, 1000);
+      });
     });
   }
 
@@ -192,102 +207,69 @@ function inicializarCuenta() {
         return;
       }
       
-      // Simular envío
       const btnSubmit = this.querySelector('.btn-primary');
       const textoOriginal = btnSubmit.textContent;
       btnSubmit.textContent = 'Enviando...';
       btnSubmit.disabled = true;
       
-      setTimeout(() => {
-        mostrarMensajeAuth(`Se envió un enlace de recuperación a ${email}`, 'success');
+      // CONEXIÓN CON BASE DE DATOS
+      fetch('api/auth.php?action=recovery', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          mostrarMensajeAuth(data.message, 'success');
+          setTimeout(() => {
+            cambiarFormulario('login');
+          }, 2000);
+        } else {
+          mostrarMensajeAuth(data.error || 'Error al enviar el enlace', 'error');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        mostrarMensajeAuth('Error de conexión. Verifica que el servidor esté funcionando.', 'error');
+      })
+      .finally(() => {
         btnSubmit.textContent = textoOriginal;
         btnSubmit.disabled = false;
-        
-        setTimeout(() => {
-          cambiarFormulario('login');
-        }, 2000);
-      }, 1000);
+      });
     });
   }
 
-  // Manejar botones sociales
+  // Manejar botones sociales (simulado)
   document.querySelectorAll('.btn-social').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
-      const provider = this.textContent.trim().split(' ').pop();
-      mostrarMensajeAuth(`Conectando con ${provider}...`, 'success');
-      
-      // Aquí implementarías la integración real con OAuth
-      setTimeout(() => {
-        // Simular login exitoso
-        usuarioActual = { email: `usuario@${provider.toLowerCase()}.com`, nombre: 'Usuario', provider };
-        mostrarMensajeAuth(`Login con ${provider} exitoso`, 'success');
-        
-        setTimeout(() => {
-          actualizarHeaderUsuario(usuarioActual);
-          if (window.navegacion) {
-            window.navegacion.volverAInicio();
-          }
-        }, 1500);
-      }, 2000);
+      const provider = this.textContent.trim().includes('Google') ? 'Google' : 'Apple';
+      mostrarMensajeAuth(`Función de ${provider} no implementada aún`, 'error');
     });
   });
 
-  // Agregar link de recuperación al formulario de login
+  // Agregar link de recuperación
   agregarLinkRecuperacion();
   
-  console.log('Sistema de cuenta inicializado correctamente');
+  console.log('✅ Sistema de cuenta inicializado con base de datos');
 }
 
-
-
-// Función para logout (para usar desde otros scripts)
-function cerrarSesion() {
-  usuarioActual = null;
+// Actualizar header cuando usuario se loguea
+function actualizarHeaderUsuario(usuario) {
   const userIcon = document.querySelector('.header-icons a[href="#cuenta"] i');
-  if (userIcon) {
-    userIcon.classList.remove('ph-fill', 'ph-user-circle');
-    userIcon.classList.add('ph-bold', 'ph-user');
+  if (userIcon && usuario) {
+    userIcon.classList.remove('ph-bold', 'ph-user');
+    userIcon.classList.add('ph-fill', 'ph-user-circle');
     
     const userLink = userIcon.parentElement;
-    userLink.title = '';
+    userLink.title = `${usuario.nombre} (${usuario.email})`;
   }
-  
-  // Limpiar formularios
-  document.querySelectorAll('.auth-form').forEach(form => {
-    if (form.tagName === 'FORM') {
-      form.reset();
-    }
-  });
-  
-  // Mostrar formulario de login
-  cambiarFormulario('login');
-  
-  console.log('Sesión cerrada');
 }
 
-// Obtener usuario actual
-function obtenerUsuarioActual() {
-  return usuarioActual;
-}
-
-// Verificar si hay usuario logueado
-function usuarioLogueado() {
-  return usuarioActual !== null;
-}
-
-// Exportar funciones para uso global
-window.cuenta = {
-  cambiarFormulario,
-  cerrarSesion,
-  obtenerUsuarioActual,
-  usuarioLogueado,
-  enviarLinkEmail
-};
-
-
-
-// Agregar link de recuperación al formulario de login
+// Agregar link de recuperación
 function agregarLinkRecuperacion() {
   const loginForm = document.getElementById('login-form');
   if (loginForm) {
@@ -306,19 +288,57 @@ function agregarLinkRecuperacion() {
   }
 }
 
-// Funciones para mostrar políticas
-function mostrarPoliticas() {
-  document.getElementById('modal-politicas').style.display = 'flex';
+// Funciones para políticas como sección
+function mostrarPoliticasPrivacidad() {
+  if (window.navegacion) {
+    window.navegacion.mostrarSeccion('politicas');
+  }
 }
 
-function mostrarPrivacidad() {
-  document.getElementById('modal-privacidad').style.display = 'flex';
+// Event listeners para políticas
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('a[href="#"]').forEach(link => {
+    const texto = link.textContent.toLowerCase();
+    
+    if (texto.includes('privacidad')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        mostrarPoliticasPrivacidad();
+      });
+    }
+  });
+});
+
+// Función para logout
+function cerrarSesion() {
+  usuarioActual = null;
+  const userIcon = document.querySelector('.header-icons a[href="#cuenta"] i');
+  if (userIcon) {
+    userIcon.classList.remove('ph-fill', 'ph-user-circle');
+    userIcon.classList.add('ph-bold', 'ph-user');
+    
+    const userLink = userIcon.parentElement;
+    userLink.title = '';
+  }
+  
+  document.querySelectorAll('.auth-form').forEach(form => {
+    if (form.tagName === 'FORM') {
+      form.reset();
+    }
+  });
+  
+  cambiarFormulario('login');
+  console.log('Sesión cerrada');
 }
 
-// Exportar las funciones
-window.mostrarPoliticas = mostrarPoliticas;
-window.mostrarPrivacidad = mostrarPrivacidad;
+// Funciones para usar desde otros archivos
+function obtenerUsuarioActual() {
+  return usuarioActual;
+}
 
+function usuarioLogueado() {
+  return usuarioActual !== null;
+}
 
 function irAContacto() {
   if (window.navegacion) {
@@ -326,4 +346,13 @@ function irAContacto() {
   }
 }
 
+// Exportar funciones
+window.cuenta = {
+  cambiarFormulario,
+  cerrarSesion,
+  obtenerUsuarioActual,
+  usuarioLogueado
+};
+
+window.mostrarPoliticasPrivacidad = mostrarPoliticasPrivacidad;
 window.irAContacto = irAContacto;

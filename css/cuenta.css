@@ -72,24 +72,11 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.input-with-icon {
-  position: relative;
-  width: 100%;
-}
 
-.input-with-icon i {
-  position: absolute;
-  left: 1.2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-  font-size: 1.1rem;
-  z-index: 1;
-}
 
 .form-input {
   width: 100%;
-  padding: 0.85rem 1rem 0.85rem 3.2rem;
+  padding: 0.85rem 1rem; /* CAMBIADO: eliminé el padding-left de 3.2rem */
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
