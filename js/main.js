@@ -3,6 +3,7 @@
 // Función principal de inicialización
 function inicializarAplicacion() {
   console.log('🚀 Inicializando aplicación Wayku...');
+
   
   // Inicializar navegación
   inicializarNavegacion();
@@ -32,6 +33,11 @@ function inicializarAplicacion() {
   // Inicializar contacto
   inicializarContacto();
   console.log('✅ Contacto inicializado');
+
+  
+  // Inicializar sistema de cuenta
+  inicializarCuenta();
+  console.log('✅ Sistema de cuenta inicializado');
   
   // Formatear campos de teléfono
   const telefonos = document.querySelectorAll('input[name="telefono"], input[type="tel"]');

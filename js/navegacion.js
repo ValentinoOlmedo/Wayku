@@ -26,7 +26,7 @@ function mostrarInicio() {
   // Ocultar todas las secciones especiales
   const seccionesAOcultar = [
     'catalogo', 'contacto', 'preguntas-frecuentes', 
-    'sobre-nosotros', 'carrito', 'favoritos', 'pago', 'pago2'
+    'sobre-nosotros', 'carrito', 'favoritos', 'pago', 'pago2', 'cuenta'
   ];
   
   sections.forEach(section => {
