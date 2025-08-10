@@ -102,7 +102,7 @@ function inicializarCuenta() {
         // Aquí podrías redirigir o actualizar el header
         setTimeout(() => {
           console.log('Usuario logueado:', usuarioActual);
-          actualizarHeaderUsuario(usuarioActual);
+          
           // Volver al inicio
           if (window.navegacion) {
             window.navegacion.volverAInicio();
@@ -165,7 +165,6 @@ function inicializarCuenta() {
         
         setTimeout(() => {
           console.log('Usuario registrado:', usuarioActual);
-          actualizarHeaderUsuario(usuarioActual);
           // Volver al inicio
           if (window.navegacion) {
             window.navegacion.volverAInicio();
@@ -242,20 +241,6 @@ function inicializarCuenta() {
 
 
 
-// Actualizar header cuando usuario se loguea
-function actualizarHeaderUsuario(usuario) {
-  const userIcon = document.querySelector('.header-icons a[href="#cuenta"] i');
-  if (userIcon && usuario) {
-    // Cambiar ícono a "usuario logueado" o mostrar inicial
-    userIcon.classList.remove('ph-bold', 'ph-user');
-    userIcon.classList.add('ph-fill', 'ph-user-circle');
-    
-    // Opcional: agregar tooltip o cambiar comportamiento
-    const userLink = userIcon.parentElement;
-    userLink.title = `Logueado como: ${usuario.nombre}`;
-  }
-}
-
 // Función para logout (para usar desde otros scripts)
 function cerrarSesion() {
   usuarioActual = null;
@@ -321,3 +306,24 @@ function agregarLinkRecuperacion() {
   }
 }
 
+// Funciones para mostrar políticas
+function mostrarPoliticas() {
+  document.getElementById('modal-politicas').style.display = 'flex';
+}
+
+function mostrarPrivacidad() {
+  document.getElementById('modal-privacidad').style.display = 'flex';
+}
+
+// Exportar las funciones
+window.mostrarPoliticas = mostrarPoliticas;
+window.mostrarPrivacidad = mostrarPrivacidad;
+
+
+function irAContacto() {
+  if (window.navegacion) {
+    window.navegacion.mostrarSeccion('contacto');
+  }
+}
+
+window.irAContacto = irAContacto;
