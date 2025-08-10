@@ -26,7 +26,7 @@ function mostrarInicio() {
   // Ocultar todas las secciones especiales
   const seccionesAOcultar = [
     'catalogo', 'contacto', 'preguntas-frecuentes', 
-    'sobre-nosotros', 'carrito', 'favoritos', 'pago', 'pago2'
+    'sobre-nosotros', 'carrito', 'favoritos', 'pago', 'pago2', 'cuenta'
   ];
   
   sections.forEach(section => {
@@ -43,16 +43,20 @@ function mostrarInicio() {
 
 // Función para mostrar una sección específica
 function mostrarSeccion(seccionId) {
+  // Encontrar la sección primero; si no existe, no cambiar el layout
+  const seccionObjetivo = document.getElementById(seccionId);
+  if (!seccionObjetivo) {
+    console.warn('Sección no encontrada:', seccionId);
+    return;
+  }
+
   // Ocultar todas las secciones primero
   sections.forEach(section => {
     section.style.display = 'none';
   });
   
   // Mostrar la sección solicitada
-  const seccionObjetivo = document.getElementById(seccionId);
-  if (seccionObjetivo) {
-    seccionObjetivo.style.display = 'block';
-  }
+  seccionObjetivo.style.display = 'block';
   
   // Casos especiales
   if (seccionId === 'contacto') {
@@ -82,10 +86,16 @@ function actualizarNavegacionActiva(href) {
 
 // Event listeners para navegación
 links.forEach(link => {
+  const href = link.getAttribute('href');
+  // Ignorar enlaces vacíos o '#', y enlaces dentro de la sección de cuenta
+  if (!href || href === '#' || link.closest('#cuenta')) {
+    return;
+  }
+
   link.addEventListener('click', (e) => {
     e.preventDefault();
     
-    const target = link.getAttribute('href'); 
+    const target = href; 
     const id = target.replace('#', '');
     
     if (id === 'inicio') {
