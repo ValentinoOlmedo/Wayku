@@ -799,6 +799,7 @@
   </div>
 </div>
 
+<!-- SECCIÓN CUENTA - CORREGIDA Y ÚNICA -->
 <section id="cuenta" class="cuenta-section" data-section style="display: none;">
   <div class="auth-container">
     <div class="auth-logo">WAYKÚ</div>
@@ -825,7 +826,7 @@
 
       <button type="submit" class="btn-primary">Iniciar sesión</button>
       
-      <button type="button" class="btn-secondary" onclick="enviarLinkEmail()">
+      <button type="button" class="btn-secondary" onclick="window.cuenta && window.cuenta.enviarLinkEmail ? window.cuenta.enviarLinkEmail() : console.log('Función no disponible')">
         Enviar link de inicio de sesión por email
       </button>
 
@@ -856,37 +857,21 @@
 
       <div class="form-switch">
         ¿No tienes una cuenta?
-        <a href="#" onclick="cambiarFormulario('register')">Crear cuenta</a>
+        <a href="javascript:void(0)" onclick="window.cuenta && window.cuenta.cambiarFormulario ? window.cuenta.cambiarFormulario('register') : console.log('Función no disponible')">Crear cuenta</a>
       </div>
     </form>
 
     <!-- FORMULARIO DE REGISTRO -->
     <form id="register-form" class="auth-form">
-      <!-- ... resto del contenido del registro ... -->
-    </form>
-
-    <!-- FORMULARIO DE RECUPERACIÓN -->
-    <form id="recovery-form" class="auth-form">
-      <!-- ... resto del contenido de recuperación ... -->
-    </form>
-
-    <div class="footer-links">
-      <a href="#">Política de Privacidad</a>
-      <a href="#">¿Necesitas ayuda?</a>
-    </div>
-  </div>
-</section>
-
-<section id="cuenta" class="cuenta-section" data-section style="display: none;">
-  <div class="auth-container">
-    <div class="auth-logo">WAYKÚ</div>
-    
-    <div id="auth-message" class="auth-message"></div>
-
-    <!-- FORMULARIO DE LOGIN -->
-    <form id="login-form" class="auth-form active">
-      <h2 class="auth-title">Iniciar sesión</h2>
+      <h2 class="auth-title">Crear cuenta</h2>
       
+      <div class="form-group">
+        <div class="input-with-icon">
+          <i class="ph ph-user"></i>
+          <input type="text" class="form-input" placeholder="Nombre completo" required>
+        </div>
+      </div>
+
       <div class="form-group">
         <div class="input-with-icon">
           <i class="ph ph-envelope"></i>
@@ -901,19 +886,25 @@
         </div>
       </div>
 
-      <button type="submit" class="btn-primary">Iniciar sesión</button>
-      
-      <button type="button" class="btn-secondary" onclick="enviarLinkEmail()">
-        Enviar link de inicio de sesión por email
-      </button>
+      <div class="form-group">
+        <div class="input-with-icon">
+          <i class="ph ph-lock"></i>
+          <input type="password" class="form-input" placeholder="Confirmar contraseña" required>
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="terms" required>
+        <label for="terms">
+          Acepto los <a href="#">términos y condiciones</a> y la <a href="#">política de privacidad</a>
+        </label>
+      </div>
+
+      <button type="submit" class="btn-primary">Crear cuenta</button>
 
       <div class="divider">
         <span>o</span>
       </div>
-
-      <p class="auth-info">
-        Para conectarte usando uno de estos métodos, el email debe coincidir con el de tu cuenta Wayku.
-      </p>
 
       <div class="social-buttons">
         <a href="#" class="btn-social btn-google">
@@ -933,19 +924,32 @@
       </div>
 
       <div class="form-switch">
-        ¿No tienes una cuenta?
-        <a href="#" onclick="cambiarFormulario('register')">Crear cuenta</a>
+        ¿Ya tienes una cuenta?
+        <a href="javascript:void(0)" onclick="window.cuenta && window.cuenta.cambiarFormulario ? window.cuenta.cambiarFormulario('login') : console.log('Función no disponible')">Iniciar sesión</a>
       </div>
-    </form>
-
-    <!-- FORMULARIO DE REGISTRO -->
-    <form id="register-form" class="auth-form">
-      <!-- ... resto del contenido del registro ... -->
     </form>
 
     <!-- FORMULARIO DE RECUPERACIÓN -->
     <form id="recovery-form" class="auth-form">
-      <!-- ... resto del contenido de recuperación ... -->
+      <h2 class="auth-title">Recuperar contraseña</h2>
+      
+      <p class="auth-info">
+        Te enviaremos un enlace para restablecer tu contraseña.
+      </p>
+
+      <div class="form-group">
+        <div class="input-with-icon">
+          <i class="ph ph-envelope"></i>
+          <input type="email" class="form-input" placeholder="Email" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary">Enviar enlace</button>
+
+      <div class="form-switch">
+        ¿Recordaste tu contraseña?
+        <a href="javascript:void(0) " onclick="window.cuenta && window.cuenta.cambiarFormulario ? window.cuenta.cambiarFormulario('login') : console.log('Función no disponible')">Iniciar sesión</a>
+      </div>
     </form>
 
     <div class="footer-links">

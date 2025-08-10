@@ -240,24 +240,7 @@ function inicializarCuenta() {
   console.log('Sistema de cuenta inicializado correctamente');
 }
 
-// Agregar link de "¿Olvidaste tu contraseña?"
-function agregarLinkRecuperacion() {
-  const loginForm = document.getElementById('login-form');
-  if (loginForm) {
-    const existingLink = loginForm.querySelector('.forgot-password-link');
-    if (!existingLink) {
-      const forgotLink = document.createElement('div');
-      forgotLink.className = 'form-switch forgot-password-link';
-      forgotLink.style.marginTop = '1rem';
-      forgotLink.innerHTML = '<a href="#" onclick="cambiarFormulario(\'recovery\')">¿Olvidaste tu contraseña?</a>';
-      
-      const divider = loginForm.querySelector('.divider');
-      if (divider) {
-        loginForm.insertBefore(forgotLink, divider);
-      }
-    }
-  }
-}
+
 
 // Actualizar header cuando usuario se loguea
 function actualizarHeaderUsuario(usuario) {
@@ -316,3 +299,25 @@ window.cuenta = {
   usuarioLogueado,
   enviarLinkEmail
 };
+
+
+
+// Agregar link de recuperación al formulario de login
+function agregarLinkRecuperacion() {
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    const existingLink = loginForm.querySelector('.forgot-password-link');
+    if (!existingLink) {
+      const forgotLink = document.createElement('div');
+      forgotLink.className = 'form-switch forgot-password-link';
+      forgotLink.style.marginTop = '1rem';
+      forgotLink.innerHTML = '<a href="#" onclick="cambiarFormulario(\'recovery\')">¿Olvidaste tu contraseña?</a>';
+      
+      const divider = loginForm.querySelector('.divider');
+      if (divider) {
+        loginForm.insertBefore(forgotLink, divider);
+      }
+    }
+  }
+}
+
