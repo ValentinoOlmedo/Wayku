@@ -44,6 +44,12 @@ function inicializarAplicacion() {
     console.log('✅ Animaciones inicializadas');
   }
   
+  // Inicializar cuenta
+  if (typeof inicializarCuenta === 'function') {
+    inicializarCuenta();
+    console.log('✅ Cuenta inicializada');
+  }
+  
   console.log('🎉 Aplicación Wayku inicializada correctamente');
 }
 
