@@ -39,6 +39,10 @@ function inicializarAplicacion() {
   inicializarCuenta();
   console.log('✅ Sistema de cuenta inicializado');
   
+  // Inicializar producto detalle
+  inicializarProductoDetalle();
+  console.log('✅ Producto detalle inicializado');
+
   // Formatear campos de teléfono
   const telefonos = document.querySelectorAll('input[name="telefono"], input[type="tel"]');
   telefonos.forEach(formatearTelefono);
