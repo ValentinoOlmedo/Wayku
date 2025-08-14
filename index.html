@@ -309,7 +309,6 @@
     </div>
   </div>
 </section> 
-
 <!-- SECCIÓN PRODUCTO DETALLADO -->
 <section id="producto-detalle" data-section style="display: none;">
   <div class="producto-detalle-grid">
@@ -331,47 +330,60 @@
     <div class="producto-info-detalle">
       <nav class="breadcrumb">Inicio / Catálogo / <span id="breadcrumb-producto">Producto</span></nav>
       
-      <h1 id="producto-titulo">KONOHA</h1>
+      <h1 id="producto-titulo">AMAÍ</h1>
       
+      <!-- OPCIONES DE MATERIAL Y DIMENSIONES -->
       <div class="producto-opciones">
+        <!-- Material -->
         <div class="opcion-grupo">
-          <label>Dimensiones</label>
-          <div class="dimensiones-opciones">
-            <input type="radio" id="dim-1m" name="dimensiones" value="1m" checked>
-            <label for="dim-1m" class="dimension-option">1m</label>
-            
-            <input type="radio" id="dim-1-2m" name="dimensiones" value="1.2m">
-            <label for="dim-1-2m" class="dimension-option">1.2m</label>
-            
-            <input type="radio" id="dim-2m" name="dimensiones" value="2m">
-            <label for="dim-2m" class="dimension-option">2m</label>
+          <label class="opcion-label">Material</label>
+          <div class="radio-opciones">
+            <div class="radio-option">
+              <input type="radio" id="petiribi-detalle" name="material" value="petiribi" checked>
+              <label for="petiribi-detalle">Petíribi</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="guayubira-detalle" name="material" value="guayubira">
+              <label for="guayubira-detalle">Guayubira</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="palo-blanco-detalle" name="material" value="palo-blanco">
+              <label for="palo-blanco-detalle">Palo blanco</label>
+            </div>
           </div>
         </div>
 
+        <!-- Dimensiones -->
         <div class="opcion-grupo">
-          <label>Material</label>
-          <div class="material-opciones">
-            <input type="radio" id="petiribi" name="material" value="petiribi" checked>
-            <label for="petiribi" class="material-option">Petíribi</label>
-            
-            <input type="radio" id="guayubira" name="material" value="guayubira">
-            <label for="guayubira" class="material-option">Guayubira</label>
-            
-            <input type="radio" id="palo-blanco" name="material" value="palo-blanco">
-            <label for="palo-blanco" class="material-option">Palo blanco</label>
+          <label class="opcion-label">Dimensiones</label>
+          <div class="radio-opciones">
+            <div class="radio-option">
+              <input type="radio" id="dim-1m-detalle" name="dimensiones" value="1m" checked>
+              <label for="dim-1m-detalle">1m</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="dim-1-2m-detalle" name="dimensiones" value="1.2m">
+              <label for="dim-1-2m-detalle">1.2m</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="dim-2m-detalle" name="dimensiones" value="2m">
+              <label for="dim-2m-detalle">2m</label>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- DESCRIPCIÓN -->
       <p id="producto-descripcion" class="descripcion">
-        Lámpara colgante de diseño contemporáneo con acabados metálicos, permitiendo luz en su máxima intensidad. El objetivo de esta lámpara es crear un ambiente elegante ya que presenta líneas que crean un acabado limpio.
+        Lámpara de mesa artesanal elaborada con madera de petíribi del norte argentino. Su diseño minimalista y cálido aporta una luz suave y acogedora, perfecta para espacios de lectura y relajación.
       </p>
 
+      <!-- PRECIO Y ACCIONES -->
       <div class="precio-y-acciones">
         <div class="precio-info">
           <span class="precio-cantidad">1</span>
           <span class="precio-signo">x</span>
-          <span id="producto-precio" class="precio-valor">835 $</span>
+          <span id="producto-precio" class="precio-valor">200.000 $</span>
         </div>
 
         <div class="producto-acciones">
@@ -383,38 +395,68 @@
           </button>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Productos relacionados -->
-      <div class="productos-relacionados">
-        <h3>You may also like</h3>
-        <div class="relacionados-grid">
-          <div class="producto-relacionado">
-            <img src="img/bob-floor.jpg" alt="BOB FLOOR">
-            <div class="relacionado-info">
-              <span>BOB FLOOR</span>
-              <span>1445 $</span>
-            </div>
+  <!-- PRODUCTOS RELACIONADOS / TAMBIÉN TE PUEDE GUSTAR - SECCIÓN COMPLETA -->
+  <div class="productos-relacionados-seccion">
+    <div class="contenedor-centrado">
+      <h3>You may also like</h3>
+      <div class="relacionados-grid">
+        <!-- Producto relacionado 1 - Kirú -->
+        <div class="producto-relacionado-card" data-producto="kiru">
+          <div class="card-imagen">
+            <img src="img/kiru.png" alt="Kirú">
           </div>
-          <div class="producto-relacionado">
-            <img src="img/top-pedant.jpg" alt="TOP PEDANT">
-            <div class="relacionado-info">
-              <span>TOP PEDANT</span>
-              <span>650 $</span>
+          <div class="card-info">
+            <div class="card-info-header">
+              <h4>Kirú</h4>
+              <div class="card-icons">
+                <a href="javascript:void(0)" class="btn-agregar-favorito"><i class="ph-bold ph-heart"></i></a>
+                <a href="javascript:void(0)" class="btn-agregar-carrito"><i class="ph-bold ph-shopping-cart"></i></a>
+              </div>
             </div>
+            <p class="card-precio">350.000 $</p>
           </div>
-          <div class="producto-relacionado">
-            <img src="img/blocca.jpg" alt="BLOCCA">
-            <div class="relacionado-info">
-              <span>BLOCCA</span>
-              <span>320 $</span>
+        </div>
+
+        <!-- Producto relacionado 2 - Tani -->
+        <div class="producto-relacionado-card" data-producto="tani">
+          <div class="card-imagen">
+            <img src="img/tani.png" alt="Tani">
+          </div>
+          <div class="card-info">
+            <div class="card-info-header">
+              <h4>Tani</h4>
+              <div class="card-icons">
+                <a href="javascript:void(0)" class="btn-agregar-favorito"><i class="ph-bold ph-heart"></i></a>
+                <a href="javascript:void(0)" class="btn-agregar-carrito"><i class="ph-bold ph-shopping-cart"></i></a>
+              </div>
             </div>
+            <p class="card-precio">150.000 $</p>
+          </div>
+        </div>
+
+        <!-- Producto relacionado 3 - Unui -->
+        <div class="producto-relacionado-card" data-producto="unui">
+          <div class="card-imagen">
+            <img src="img/unui.jpg" alt="Unui">
+          </div>
+          <div class="card-info">
+            <div class="card-info-header">
+              <h4>Unui</h4>
+              <div class="card-icons">
+                <a href="javascript:void(0)" class="btn-agregar-favorito"><i class="ph-bold ph-heart"></i></a>
+                <a href="javascript:void(0)" class="btn-agregar-carrito"><i class="ph-bold ph-shopping-cart"></i></a>
+              </div>
+            </div>
+            <p class="card-precio">450.000 $</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 
 <section id="contacto" class="contacto" data-section>
   <div class="contacto-grid">
