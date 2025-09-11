@@ -13,7 +13,7 @@ const carritoSection = document.getElementById('carrito');
 const favoritosSection = document.getElementById('favoritos');
 const pagoSection = document.getElementById('pago');
 const pago2Section = document.getElementById('pago2');
-
+const youmaySection = document.getElementById('youmay');
 // Toggle de búsqueda
 if (searchToggle && searchBar) {
   searchToggle.addEventListener('click', () => {
@@ -26,7 +26,7 @@ function mostrarInicio() {
   // Ocultar todas las secciones especiales
   const seccionesAOcultar = [
     'catalogo', 'contacto', 'preguntas-frecuentes', 
-    'sobre-nosotros', 'carrito', 'favoritos', 'pago', 'pago2', 'cuenta', 'politicas', 'producto-detalle'
+    'sobre-nosotros', 'youmay', 'carrito', 'favoritos', 'pago', 'pago2', 'cuenta', 'politicas', 'producto-detalle'
   ];
   
   sections.forEach(section => {
@@ -61,6 +61,14 @@ function mostrarSeccion(seccionId) {
       preguntasfrecuentesSection.style.display = 'block';
     }
   }
+
+  // ✅ Nuevo: mostrar "youmay" cuando se abre producto-detalle
+  if (seccionId === 'producto-detalle') {
+    if (youmaySection) {
+      youmaySection.style.display = 'block';
+    }
+  }
+  
   
   // Actualizar navegación activa
   actualizarNavegacionActiva(`#${seccionId}`);

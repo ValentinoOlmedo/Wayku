@@ -967,3 +967,50 @@
   letter-spacing: normal; /* antes tenía 0.5px */
   font-family: 'Poppins', sans-serif;
 }
+
+/* Sección You may also like */
+#youmay {
+  background-color: #ffffff;
+  padding: 100px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.youmay-container {
+  max-width: 1400px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+/* Texto a la izquierda */
+.youmay-left {
+  flex: 1;
+  max-width: 360px;
+}
+
+.youmay-left .section-title {
+  font-size: 1.8rem;
+  color: #3e3e3e;
+  margin-bottom: 130px;
+  font-weight: 60;
+}
+
+.youmay-description {
+  font-size: 1rem;
+  color: #5a5a5a;
+  line-height: 1.6;
+  margin-bottom: 70px;
+  font-weight: 60;
+}
+
+/* Productos a la derecha */
+.youmay-grid {
+  display: flex;
+  flex: 2;
+  gap: 30px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
