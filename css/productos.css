@@ -399,6 +399,7 @@
 }
 
 /* === VISTA DETALLADA DEL PRODUCTO === */
+/* GRID PRINCIPAL */
 .producto-detalle-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -407,20 +408,25 @@
   margin: 0 auto;
   padding: 8rem 2rem 4rem;
   font-family: 'Poppins', sans-serif;
+  align-items: start; /* importante: alinear ambas columnas arriba */
 }
 
-/* COLUMNA IZQUIERDA: IMÁGENES */
+/* COLUMNA IZQUIERDA: IMÁGENES - IGUAL QUE PLUSH */
 .producto-imagenes {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
 }
 
 .imagen-principal {
   width: 100%;
-  height: 500px;
+  height: 600px; /* Más alto como en Plush */
   overflow: hidden;
   border-radius: 0;
+  margin-bottom: 1rem;
 }
 
 .imagen-principal img {
@@ -431,14 +437,15 @@
 }
 
 .imagenes-thumbnails {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 0;
 }
 
 .thumbnail {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  height: 100px; /* Más cuadradas como en Plush */
   object-fit: cover;
   border-radius: 0;
   cursor: pointer;
@@ -449,166 +456,264 @@
 .thumbnail:hover,
 .thumbnail.active {
   border-color: #5d725b;
-  transform: scale(1.05);
+  transform: none; /* Sin escala para mantener grid */
 }
 
-/* COLUMNA DERECHA: INFORMACIÓN */
+/* COLUMNA DERECHA: INFORMACIÓN - COMO PLUSH */
 .producto-info-detalle {
-  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.breadcrumb {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 2rem;
-  font-weight: 400;
-}
 
 #producto-titulo {
-  font-size: 2.5rem;
-  font-weight: 600;
+  margin-top: 4rem;
+  font-size: 2rem;
+  font-weight: 400;
   color: #2d2d2d;
   margin-bottom: 2rem;
   letter-spacing: 1px;
+  line-height: 1.2;
 }
 
-/* OPCIONES DEL PRODUCTO - RADIO BUTTONS COMO EN PLUSH */
+/* Contenedor de opciones */
 .producto-opciones {
+  display: flex;             /* en fila */
+  gap: 2rem;                 /* espacio entre Material y Dimensiones */
   margin: 2rem 0;
 }
 
+/* Cada grupo (Material, Dimensiones) */
 .opcion-grupo {
-  margin-bottom: 1.5rem;
+  flex: 1;
+  margin-bottom: 0;          /* quitamos separación vertical */
 }
 
+/* Label (Material, Dimensiones) */
 .opcion-label {
   display: block;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #2d2d2d;
-  margin-bottom: 0.8rem;
-}
-
-/* RADIO OPTIONS CONTAINER */
-.radio-opciones {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.radio-option {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.radio-option input[type="radio"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #2d2d2d;
-  cursor: pointer;
-}
-
-.radio-option label {
-  font-size: 0.9rem;
-  color: #666;
-  cursor: pointer;
+  font-size: 0.85rem;
   font-weight: 400;
+  color: #555;
+  margin-bottom: 0.4rem;
+  text-transform: none;       /* antes estaba uppercase */
+  letter-spacing: normal;
+  font-family: 'Poppins', sans-serif;
 }
 
-.radio-option input[type="radio"]:checked + label {
-  color: #2d2d2d;
+/* Dropdown minimalista */
+.opciones-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+/* Caja seleccionada */
+.dropdown-selected {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  background: transparent;    /* sin fondo beige */
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dropdown-selected:hover {
+  border-color: #666;
+}
+
+.dropdown-selected.active {
+  border-color: #5d725b;
+}
+
+/* Flecha */
+.dropdown-arrow {
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+
+.producto-opciones {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+/* Opciones */
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  z-index: 100;
+}
+
+.dropdown-options.show {
+  max-height: 200px;
+}
+
+.dropdown-option {
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #444;
+  transition: background 0.2s;
+}
+
+.dropdown-option:hover {
+  background: #f7f7f7;
+}
+
+.dropdown-option.selected {
+  background: #eef5ef;
+  color: #5d725b;
   font-weight: 500;
+}
+
+
+/* Dropdowns dentro de detalle de producto */
+.producto-opciones .dropdown-toggle {
+  min-width: 220px;          /* más anchos */
+  font-size: 1rem;           /* texto más grande */
+  padding: 0.9rem 1.2rem;    /* más espacio */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.producto-opciones .dropdown-menu {
+  min-width: 220px;          /* menú ancho igual al toggle */
+  font-size: 1rem;           /* mismo tamaño de letra */
+}
+
+.producto-opciones .dropdown-menu li {
+  padding: 10px 14px;        /* más cómodos al clickear */
 }
 
 /* DESCRIPCIÓN */
 .descripcion {
   color: #666;
   line-height: 1.6;
-  font-size: 1rem;
-  margin: 2rem 0;
+  font-size: 0.95rem;
+  margin: 1.5rem 0 2rem 0;
   font-weight: 400;
+  margin-top: 5.5rem;
 }
 
-/* PRECIO Y ACCIONES */
-.precio-y-acciones {
-  margin: 3rem 0;
+/* CANTIDAD Y PRECIO - LAYOUT HORIZONTAL COMO PLUSH */
+.cantidad-precio-seccion {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  margin-top: 5.7rem;
+  padding: 0;
+}
+
+.cantidad-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cantidad-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-right: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.cantidad-input {
+  border-radius: 4px;
+  width: 80px;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 1rem;
+  margin-right: 11.3rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .precio-info {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.5rem;
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-
-.precio-cantidad,
-.precio-signo {
-  color: #666;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #2d2d2d;
 }
 
 .precio-valor {
-  color: #2d2d2d;
-  font-weight: 600;
+  font-weight: 60;
 }
 
+/* BOTONES DE ACCIÓN - LAYOUT COMO PLUSH */
 .producto-acciones {
   display: flex;
   gap: 1rem;
   align-items: center;
+  margin: 2rem 0;
+  margin-top: 0rem;
+  align-self: flex-start;
 }
 
 .btn-agregar-carrito-detalle {
   background-color: #5d725b;
   color: white;
   border: none;
-  padding: 0.9rem 2rem;
-  border-radius: 4px;
+  padding: 1rem 2.5rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.3s ease;
   flex: 1;
+  width: 400px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 60;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
 }
 
 .btn-agregar-carrito-detalle:hover {
   background-color: #475943;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-/* BOTÓN DE FAVORITOS IGUAL AL CATÁLOGO */
 .btn-favorito-detalle {
-  background: rgba(255,255,255,0.9);
+  background: white;
   border: 1px solid #ddd;
-  padding: 0.9rem;
-  border-radius: 50%;
+  padding: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px);
+  border-radius: 4px;
 }
 
 .btn-favorito-detalle:hover {
-  background: rgba(255,255,255,1);
-  border-color: #999;
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-color: #5d725b;
+  transform: scale(1.05);
 }
 
 .btn-favorito-detalle i {
-  font-size: 18px;
+  font-size: 20px;
   color: #777;
   transition: color 0.3s ease;
 }
 
 .btn-favorito-detalle:hover i {
-  color: #3e3e3e;
+  color: #5d725b;
 }
 
 .btn-favorito-detalle i.ph-fill {
@@ -765,6 +870,8 @@
   color: #3e3e3e; 
 }
 
+
+
 /* RESPONSIVO PARA RELACIONADOS - RESTAURADO */
 @media (max-width: 1024px) {
   .relacionados-grid {
@@ -849,4 +956,14 @@
   .product-cardd::before {
     opacity: 0.3;
   }
+}
+
+.breadcrumb {
+  font-size: 0.9rem;
+  color: gray;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  text-transform: none; /* antes estaba uppercase */
+  letter-spacing: normal; /* antes tenía 0.5px */
+  font-family: 'Poppins', sans-serif;
 }

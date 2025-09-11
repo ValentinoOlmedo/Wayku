@@ -200,6 +200,7 @@ function inicializarCarrito() {
         // Cambiar ícono a relleno
         icono.classList.remove("ph-bold");
         icono.classList.add("ph-fill");
+        
       }
     });
   });

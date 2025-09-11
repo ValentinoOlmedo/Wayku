@@ -309,12 +309,15 @@
     </div>
   </div>
 </section> 
+
+
 <!-- SECCIÓN PRODUCTO DETALLADO -->
 <section id="producto-detalle" data-section style="display: none;">
   <div class="producto-detalle-grid">
     
     <!-- Columna izquierda: Imágenes -->
     <div class="producto-imagenes">
+      <nav class="breadcrumb">Inicio / Catálogo / <span id="breadcrumb-producto">Producto</span></nav>
       <div class="imagen-principal">
         <img id="imagen-principal" src="" alt="">
       </div>
@@ -328,82 +331,79 @@
 
     <!-- Columna derecha: Información del producto -->
     <div class="producto-info-detalle">
-      <nav class="breadcrumb">Inicio / Catálogo / <span id="breadcrumb-producto">Producto</span></nav>
+      
       
       <h1 id="producto-titulo">AMAÍ</h1>
       
-      <!-- OPCIONES DE MATERIAL Y DIMENSIONES -->
+    
+
+      <!-- OPCIONES CON DROPDOWNS -->
       <div class="producto-opciones">
         <!-- Material -->
-        <div class="opcion-grupo">
-          <label class="opcion-label">Material</label>
-          <div class="radio-opciones">
-            <div class="radio-option">
-              <input type="radio" id="petiribi-detalle" name="material" value="petiribi" checked>
-              <label for="petiribi-detalle">Petíribi</label>
-            </div>
-            <div class="radio-option">
-              <input type="radio" id="guayubira-detalle" name="material" value="guayubira">
-              <label for="guayubira-detalle">Guayubira</label>
-            </div>
-            <div class="radio-option">
-              <input type="radio" id="palo-blanco-detalle" name="material" value="palo-blanco">
-              <label for="palo-blanco-detalle">Palo blanco</label>
-            </div>
-          </div>
+        <div class="dropdown">
+          <button class="dropdown-toggle" id="dropdownMaterial">
+            <span class="ordenar-completo">Material: <span class="selected-option">Petíribi</span></span>
+            <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 10l5 5 5-5" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="dropdown-menu" id="dropdownMenuMaterial">
+            <li data-value="petiribi">Petíribi</li>
+            <li data-value="guayubira">Guayubira</li>
+            <li data-value="palo-blanco">Palo blanco</li>
+          </ul>
         </div>
 
         <!-- Dimensiones -->
-        <div class="opcion-grupo">
-          <label class="opcion-label">Dimensiones</label>
-          <div class="radio-opciones">
-            <div class="radio-option">
-              <input type="radio" id="dim-1m-detalle" name="dimensiones" value="1m" checked>
-              <label for="dim-1m-detalle">1m</label>
-            </div>
-            <div class="radio-option">
-              <input type="radio" id="dim-1-2m-detalle" name="dimensiones" value="1.2m">
-              <label for="dim-1-2m-detalle">1.2m</label>
-            </div>
-            <div class="radio-option">
-              <input type="radio" id="dim-2m-detalle" name="dimensiones" value="2m">
-              <label for="dim-2m-detalle">2m</label>
-            </div>
-          </div>
+        <div class="dropdown">
+          <button class="dropdown-toggle" id="dropdownDimensiones">
+            <span class="ordenar-completo">Dimensiones: <span class="selected-option">1m</span></span>
+            <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 10l5 5 5-5" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="dropdown-menu" id="dropdownMenuDimensiones">
+            <li data-value="1m">1m</li>
+            <li data-value="1.2m">1.2m</li>
+            <li data-value="2m">2m</li>
+          </ul>
         </div>
       </div>
 
-      <!-- DESCRIPCIÓN -->
+         <!-- DESCRIPCIÓN -->
       <p id="producto-descripcion" class="descripcion">
         Lámpara de mesa artesanal elaborada con madera de petíribi del norte argentino. Su diseño minimalista y cálido aporta una luz suave y acogedora, perfecta para espacios de lectura y relajación.
       </p>
+     
 
-      <!-- PRECIO Y ACCIONES -->
-      <div class="precio-y-acciones">
+      <!-- CANTIDAD Y PRECIO -->
+      <div class="cantidad-precio-seccion">
+        <div class="cantidad-selector">
+          <input type="number" class="cantidad-input" value="1" min="1" max="10">
+        </div>
         <div class="precio-info">
-          <span class="precio-cantidad">1</span>
-          <span class="precio-signo">x</span>
           <span id="producto-precio" class="precio-valor">200.000 $</span>
         </div>
+      </div>
 
-        <div class="producto-acciones">
-          <button id="btn-agregar-carrito-detalle" class="btn-agregar-carrito-detalle">
-            Add to cart
-          </button>
-          <button id="btn-favorito-detalle" class="btn-favorito-detalle">
-            <i class="ph-bold ph-heart"></i>
-          </button>
-        </div>
+      <!-- BOTONES DE ACCIÓN -->
+      <div class="producto-acciones">
+        <button id="btn-agregar-carrito-detalle" class="btn-agregar-carrito-detalle">
+          Agregar al carrito
+        </button>
+        <button id="btn-favorito-detalle" class="btn-favorito-detalle">
+          <i class="ph-bold ph-heart"></i>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- PRODUCTOS RELACIONADOS / TAMBIÉN TE PUEDE GUSTAR - SECCIÓN COMPLETA -->
+  <!-- PRODUCTOS RELACIONADOS - IDÉNTICO A PLUSH -->
   <div class="productos-relacionados-seccion">
     <div class="contenedor-centrado">
       <h3>You may also like</h3>
       <div class="relacionados-grid">
-        <!-- Producto relacionado 1 - Kirú -->
+        <!-- Los productos relacionados se mantienen igual -->
         <div class="producto-relacionado-card" data-producto="kiru">
           <div class="card-imagen">
             <img src="img/kiru.png" alt="Kirú">
@@ -420,7 +420,6 @@
           </div>
         </div>
 
-        <!-- Producto relacionado 2 - Tani -->
         <div class="producto-relacionado-card" data-producto="tani">
           <div class="card-imagen">
             <img src="img/tani.png" alt="Tani">
@@ -437,7 +436,6 @@
           </div>
         </div>
 
-        <!-- Producto relacionado 3 - Unui -->
         <div class="producto-relacionado-card" data-producto="unui">
           <div class="card-imagen">
             <img src="img/unui.jpg" alt="Unui">
