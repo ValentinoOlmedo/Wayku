@@ -69,7 +69,6 @@ function mostrarSeccion(seccionId) {
     }
   }
   
-  
   // Actualizar navegación activa
   actualizarNavegacionActiva(`#${seccionId}`);
   

@@ -18,9 +18,11 @@
   <link rel="stylesheet" href="css/footer.css" />
   <link rel="stylesheet" href="css/cuenta.css" />
   
+  
   <!-- EXTERNAL LIBRARIES -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.google.com/share?selection.family=Playfair+Display:ital,wght@0,400..900;1,400..900" rel="stylesheet">
 </head>
@@ -795,79 +797,41 @@
           <form class="contacto-form" id="form-pago">
             <!-- MÉTODO DE PAGO -->
             <div class="metodo-pago-opciones">
-
-              <!-- OPCIÓN 1: Mercado Pago -->
-              <label class="opcion-metodo">
-                <input type="radio" name="metodo" value="mercado-pago" required>
-                <div class="contenido-metodo">
-                  <div class="titulo-metodo">
-                    <strong>Mercado Pago</strong>
-                    <!-- Logos dentro de .logos -->
-                    <div class="logos">
-                      <img src="img/logos/mercado-pago-logo.png" alt="Mercado Pago">
-                      <img src="img/logos/visa.png" alt="Visa">
-                      <img src="img/logos/mastercard.png" alt="Mastercard">
-                      <img src="img/logos/amex.svg" alt="Amex">
-                      <span>+2</span>
-                    </div>
-                  </div>
-                  <p class="texto-explicacion">
-                    Después de hacer clic en "Confirmar pago", serás redirigido a Mercado Pago para completar tu compra de forma segura.
-                  </p>
-                </div>
-              </label>
-
-              <!-- OPCIÓN 2: Transferencia Bancaria -->
-              <label class="opcion-metodo simple">
-                <input type="radio" name="metodo" value="transferencia" required>
-                <span>Transferencia Bancaria</span>
-              </label>
-
-              <!-- OPCIÓN 3: Tarjeta -->
-              <label class="opcion-metodo simple">
-                <input type="radio" name="metodo" value="tarjeta" required>
-                <span>Tarjeta de crédito/débito</span>
+            <!-- OPCIÓN 1: Tarjeta de crédito/débito -->
+            <label class="opcion-metodo">
+              <input type="radio" name="metodo" value="mercado-pago" required>
+              <div class="contenido-metodo">
+                <div class="titulo-metodo">
+                  <strong>Tarjeta de crédito o débito</strong>
                   <div class="logos">
-                      <img src="img/logos/mercado-pago-logo.png" alt="Mercado Pago">
-                      <img src="img/logos/visa.png" alt="Visa">
-                      <img src="img/logos/mastercard.png" alt="Mastercard">
-                      <img src="img/logos/amex.svg" alt="Amex">
-                      <span>+2</span>
-                    </div>
-              </label>
-            </div>
-
-            <!-- DATOS DE TARJETA -->
-            <div id="datos-tarjeta" style="display:none; margin-top: 20px;">
-              <div class="form-row">
-                <div class="form-group">
-                  <input type="text" name="nombreTarjeta" placeholder="Nombre en la tarjeta">
+                    <img src="img/logos/mercado-pago-logo.png" alt="Mercado Pago">
+                    <img src="img/logos/visa-logo.png" alt="Visa">
+                    <img src="img/logos/mastercard-logo.png" alt="Mastercard">
+                  </div>
                 </div>
-                <div class="form-group">
-                  <input type="text" name="numeroTarjeta" placeholder="Número de tarjeta">
-                </div>
+                <p class="texto-explicacion">
+                  Después de hacer clic en "Confirmar pago", serás redirigido a Mercado Pago para completar tu compra de forma segura.
+                </p>
               </div>
+            </label>
 
-              <div class="form-row">
-                <div class="form-group col-6">
-                  <input type="text" name="vencimiento" placeholder="Vencimiento (MM/AA)">
+            <!-- OPCIÓN 2: Transferencia Bancaria -->
+            <label class="opcion-metodo">
+              <input type="radio" name="metodo" value="transferencia" required>
+              <div class="contenido-metodo">
+                <div class="titulo-metodo">
+                  <strong>Transferencia Bancaria</strong>
+                  <div class="logos">
+                    <span style="background: #5d725b; color: white; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 500;">BANCO</span>
+                    <span style="background: #007bff; color: white; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 500;">CBU</span>
+                  </div>
                 </div>
-                <div class="form-group col-6">
-                  <input type="text" name="cvv" placeholder="CVV">
-                </div>
+                <p class="texto-explicacion">
+                  Después de hacer clic en "Confirmar pago", te mostraremos los datos bancarios para realizar la transferencia.
+                </p>
               </div>
-
-              <div class="form-group">
-                <label for="cuotas">Cantidad de cuotas</label>
-                <select name="cuotas">
-                  <option value="1">1 cuota</option>
-                  <option value="3">3 cuotas</option>
-                  <option value="6">6 cuotas</option>
-                  <option value="12">12 cuotas</option>
-                </select>
-              </div>
-            </div>
-
+            </label>
+          </div>
           </form>
         </div>
       </div>
@@ -897,7 +861,8 @@
         </div>
 
         <!-- Botón para confirmar pago -->
-        <button type="submit" form="form-pago" class="boton-catalogo">Confirmar pago</button>
+        <button id="checkout-btn" class="boton-catalogo">Confirmar pago</button>
+         
       </div>
 
     </div>

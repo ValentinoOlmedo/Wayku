@@ -1,196 +1,255 @@
 // --------------------- Pago ---------------------
 function inicializarPago() {
-  // Formulario de envío
+  console.log('Inicializando módulo de pago...');
+
+  // Formulario de envío (primera parte)
   const formEnvio = document.getElementById("form-envio");
   if (formEnvio) {
-    formEnvio.addEventListener("submit", function(e) {
+    formEnvio.addEventListener("submit", function (e) {
       e.preventDefault();
 
       // Validar campos requeridos
-      const camposRequeridos = formEnvio.querySelectorAll('[required]');
+      const camposRequeridos = formEnvio.querySelectorAll("[required]");
       let formValido = true;
-      
-      camposRequeridos.forEach(campo => {
+
+      camposRequeridos.forEach((campo) => {
         if (!campo.value.trim()) {
           formValido = false;
-          campo.style.borderColor = '#e74c3c';
+          campo.style.borderColor = "#e74c3c";
         } else {
-          campo.style.borderColor = '#ccc';
+          campo.style.borderColor = "#ccc";
         }
       });
 
       if (!formValido) {
-        alert('Por favor, completa todos los campos requeridos.');
+        alert("Por favor, completa todos los campos requeridos.");
         return;
       }
-      // Usar navegación centralizada
-      if (window.navegacion) {
-        window.navegacion.mostrarSeccion('pago2');
-      }
-      // Ocultar la sección actual y mostrar pago2
-      const pagoSection = document.getElementById("pago");
-      const pago2Section = document.getElementById("pago2");
-      
-      if (pagoSection) pagoSection.style.display = "none";
-      if (pago2Section) {
-        pago2Section.style.display = "block";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+
+      // Navegar a la segunda parte del pago
+      navegarAPago2();
     });
   }
 
-  // Método de pago - mostrar/ocultar datos de tarjeta
-  document.querySelectorAll('input[name="metodo"]').forEach((radio) => {
-    radio.addEventListener('change', function () {
-      const datosTarjeta = document.getElementById('datos-tarjeta');
-      if (this.value === 'tarjeta' && datosTarjeta) {
-        datosTarjeta.style.display = 'block';
-        datosTarjeta.querySelectorAll('input, select').forEach(input => {
-          input.required = true;
-        });
-      } else if (datosTarjeta) {
-        datosTarjeta.style.display = 'none';
-        datosTarjeta.querySelectorAll('input, select').forEach(input => {
-          input.required = false;
-        });
-      }
-    });
+  // Manejar selección de método de pago
+  const metodosPago = document.querySelectorAll('input[name="metodo"]');
+  metodosPago.forEach(metodo => {
+    metodo.addEventListener('change', manejarCambioMetodo);
   });
 
-  // Formulario de pago final
-  const formPago = document.getElementById("form-pago");
-  if (formPago) {
-    formPago.addEventListener("submit", function(e) {
-      e.preventDefault();
-      
-      // Validar método de pago seleccionado
-      const metodoSeleccionado = document.querySelector('input[name="metodo"]:checked');
-      if (!metodoSeleccionado) {
-        alert('Por favor, selecciona un método de pago.');
-        return;
-      }
-
-      // Si es tarjeta, validar campos adicionales
-      if (metodoSeleccionado.value === 'tarjeta') {
-        const camposTarjeta = document.querySelectorAll('#datos-tarjeta [required]');
-        let tarjetaValida = true;
-        
-        camposTarjeta.forEach(campo => {
-          if (!campo.value.trim()) {
-            tarjetaValida = false;
-            campo.style.borderColor = '#e74c3c';
-          } else {
-            campo.style.borderColor = '#ccc';
-          }
-        });
-
-        if (!tarjetaValida) {
-          alert('Por favor, completa todos los datos de la tarjeta.');
-          return;
-        }
-      }
-
-      // Procesar pago según método
-      procesarPago(metodoSeleccionado.value);
-    });
+  // Botón de confirmar pago
+  const checkoutBtn = document.getElementById("checkout-btn");
+  if (checkoutBtn) {
+    // Remover event listeners anteriores
+    const nuevoBtn = checkoutBtn.cloneNode(true);
+    checkoutBtn.parentNode.replaceChild(nuevoBtn, checkoutBtn);
+    
+    // Agregar nuevo event listener
+    nuevoBtn.addEventListener("click", confirmarPago);
   }
 
-  // Formateo de campos
-  inicializarFormateoTarjeta();
+  // Actualizar resumen
+  actualizarResumen();
 }
 
-function procesarPago(metodo) {
+function navegarAPago2() {
+  // Usar navegación centralizada si existe
+  if (window.navegacion) {
+    window.navegacion.mostrarSeccion("pago2");
+  }
+
+  // Ocultar sección actual y mostrar pago2
+  const pagoSection = document.getElementById("pago");
+  const pago2Section = document.getElementById("pago2");
+
+  if (pagoSection) pagoSection.style.display = "none";
+  if (pago2Section) {
+    pago2Section.style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function manejarCambioMetodo(e) {
+  const metodo = e.target.value;
+  const datosTargeta = document.getElementById('datos-tarjeta');
+  
+  // Mostrar/ocultar campos de tarjeta
+  if (metodo === 'tarjeta' && datosTargeta) {
+    datosTargeta.style.display = 'block';
+  } else if (datosTargeta) {
+    datosTargeta.style.display = 'none';
+  }
+  
+  console.log('Método de pago seleccionado:', metodo);
+}
+
+async function confirmarPago() {
+  const metodoSeleccionado = document.querySelector('input[name="metodo"]:checked');
+  
+  if (!metodoSeleccionado) {
+    alert("Por favor, selecciona un método de pago.");
+    return;
+  }
+
+  const boton = document.getElementById("checkout-btn");
+  const textoOriginal = boton.textContent;
+  
+  // Deshabilitar botón y mostrar loading
+  boton.disabled = true;
+  boton.textContent = "Procesando...";
+
+  try {
+    await procesarPago(metodoSeleccionado.value);
+  } catch (error) {
+    console.error('Error al procesar pago:', error);
+    alert('Error al procesar el pago. Por favor intenta nuevamente.');
+  } finally {
+    // Restaurar botón
+    boton.disabled = false;
+    boton.textContent = textoOriginal;
+  }
+}
+
+async function procesarPago(metodo) {
+  console.log('Procesando pago con método:', metodo);
+
   switch (metodo) {
-    case 'mercado-pago':
-      // Simular redirección a Mercado Pago
-      alert('Redirigiendo a Mercado Pago para completar el pago...');
-      // window.location.href = 'https://mercadopago.com/...';
+    case "mercado-pago":
+      await procesarMercadoPago();
       break;
-      
-    case 'transferencia':
-      // Mostrar datos para transferencia
+
+    case "transferencia":
       mostrarDatosTransferencia();
       break;
-      
-    case 'tarjeta':
-      // Procesar tarjeta
-      procesarTarjeta();
+
+    case "tarjeta":
+      await procesarMercadoPago(); // Usar Mercado Pago para tarjetas también
       break;
+
+    default:
+      throw new Error('Método de pago no válido');
   }
+}
+
+async function procesarMercadoPago() {
+  try {
+    console.log('Iniciando proceso de Mercado Pago...');
+
+    // Obtener items del carrito (puedes modificar esto según tu carrito)
+    const items = obtenerItemsCarrito();
+    
+    if (items.length === 0) {
+      alert('No hay productos en el carrito');
+      return;
+    }
+
+    console.log('Items a procesar:', items);
+
+    // Llamar al backend para crear la preferencia
+    const response = await fetch("http://localhost:3000/api/pago/crear-preferencia", {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ items })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || `Error HTTP: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Preferencia creada:', data);
+
+    // Redirigir al checkout de Mercado Pago
+    if (data.init_point) {
+      console.log('Redirigiendo a:', data.init_point);
+      window.location.href = data.init_point;
+    } else {
+      throw new Error('No se recibió el init_point de Mercado Pago');
+    }
+
+  } catch (error) {
+    console.error("Error en procesarMercadoPago:", error);
+    throw error;
+  }
+}
+
+function obtenerItemsCarrito() {
+  // Por ahora retornamos datos de ejemplo
+  // Puedes modificar esto para obtener datos reales de tu carrito
+  
+  // Intentar obtener del carrito global si existe
+  if (window.carrito && window.carrito.length > 0) {
+    return window.carrito.map(item => ({
+      id: item.id || '1',
+      title: item.nombre || item.title || 'Producto',
+      quantity: item.cantidad || item.quantity || 1,
+      unit_price: parseFloat(item.precio || item.unit_price || 0)
+    }));
+  }
+  
+  // Si no hay carrito, usar datos de ejemplo
+  return [
+    {
+      id: '1',
+      title: "Lámpara Waykú",
+      quantity: 1,
+      unit_price: 50000
+    }
+  ];
 }
 
 function mostrarDatosTransferencia() {
-  alert(`
-    Datos para transferencia:
-    
-    Banco: Banco Galicia
-    CBU: 0070055030004055550015
-    Alias: WAYKU.LAMPARAS
-    Titular: Wayku S.A.
-    CUIT: 30-12345678-9
-    
-    Por favor, envía el comprobante por WhatsApp al +54 351 384 4333
-  `);
-}
+  const mensaje = `
+🏦 DATOS PARA TRANSFERENCIA BANCARIA
 
-function procesarTarjeta() {
-  // Simular procesamiento de tarjeta
-  const loadingOverlay = document.createElement('div');
-  loadingOverlay.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 1.2rem;
-    z-index: 10000;
+Banco: Banco Galicia
+CBU: 0070055030004055550015
+Alias: WAYKU.LAMPARAS
+Titular: Wayku S.A.
+CUIT: 30-12345678-9
+
+💬 Enviá el comprobante por WhatsApp:
++54 351 384 4333
+
+✅ Una vez confirmado el pago, procesaremos tu pedido.
   `;
-  loadingOverlay.textContent = 'Procesando pago...';
-  document.body.appendChild(loadingOverlay);
-
-  setTimeout(() => {
-    document.body.removeChild(loadingOverlay);
-    alert('¡Pago procesado exitosamente! Recibirás un email de confirmación.');
-    // Limpiar carrito y redirigir
-    Object.keys(carrito).forEach(key => delete carrito[key]);
-    actualizarTotales();
-    // Redirigir a página de confirmación o inicio
-  }, 3000);
+  
+  alert(mensaje);
+  
+  // También podrías mostrar un modal más elegante
+  console.log('Datos de transferencia mostrados');
 }
 
-function inicializarFormateoTarjeta() {
-  // Formatear número de tarjeta
-  const numeroTarjeta = document.querySelector('input[name="numeroTarjeta"]');
-  if (numeroTarjeta) {
-    numeroTarjeta.addEventListener('input', function(e) {
-      let value = e.target.value.replace(/\D/g, '');
-      value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-      e.target.value = value;
-    });
-  }
-
-  // Formatear vencimiento
-  const vencimiento = document.querySelector('input[name="vencimiento"]');
-  if (vencimiento) {
-    vencimiento.addEventListener('input', function(e) {
-      let value = e.target.value.replace(/\D/g, '');
-      if (value.length >= 2) {
-        value = value.substring(0, 2) + '/' + value.substring(2, 4);
-      }
-      e.target.value = value;
-    });
-  }
-
-  // Limitar CVV
-  const cvv = document.querySelector('input[name="cvv"]');
-  if (cvv) {
-    cvv.addEventListener('input', function(e) {
-      e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
-    });
-  }
+function actualizarResumen() {
+  // Actualizar resumen de compra
+  const resumenProductos = document.getElementById('resumen-productos');
+  const resumenEnvio = document.getElementById('resumen-envio');
+  const resumenTotal = document.getElementById('resumen-total-final');
+  
+  const items = obtenerItemsCarrito();
+  const subtotal = items.reduce((sum, item) => sum + (item.unit_price * item.quantity), 0);
+  const envio = 5000; // Costo de envío fijo
+  const total = subtotal + envio;
+  
+  if (resumenProductos) resumenProductos.textContent = `$ ${subtotal.toLocaleString()}`;
+  if (resumenEnvio) resumenEnvio.textContent = `$ ${envio.toLocaleString()}`;
+  if (resumenTotal) resumenTotal.textContent = `$ ${total.toLocaleString()}`;
 }
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', inicializarPago);
+} else {
+  inicializarPago();
+}
+
+// Export para usar en otros módulos si es necesario
+window.pagoModule = {
+  inicializarPago,
+  procesarPago,
+  actualizarResumen
+};

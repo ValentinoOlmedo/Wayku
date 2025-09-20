@@ -157,12 +157,21 @@ textarea {
   color: #444;
 }
 
-.opcion-metodo.simple {
-  padding: 0.7rem 1rem;
-  background-color: #fafafa;
-}
+
 
 #datos-tarjeta .form-group input,
 #datos-tarjeta .form-group select {
   width: 100%;
+}
+
+#checkout-btn {
+  /* Hereda los estilos de .boton-catalogo que ya tienes */
+  /* Si necesitas estilos específicos adicionales: */
+  width: 100%;
+  margin-top: 1rem;
+}
+
+#checkout-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
