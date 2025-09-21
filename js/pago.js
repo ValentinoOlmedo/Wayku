@@ -201,12 +201,17 @@ function obtenerItemsCarrito() {
     }
   ];
 }
-
 function mostrarDatosTransferencia() {
-  const mensaje = `
+  // Mostrar modal en lugar de alert
+  const modal = document.getElementById('modal-transferencia');
+  if (modal) {
+    modal.style.display = 'flex';
+  } else {
+    // Fallback si no existe el modal
+    alert(`
 🏦 DATOS PARA TRANSFERENCIA BANCARIA
 
-Banco: Banco Galicia
+Banco: Banco Galicia  
 CBU: 0070055030004055550015
 Alias: WAYKU.LAMPARAS
 Titular: Wayku S.A.
@@ -214,14 +219,8 @@ CUIT: 30-12345678-9
 
 💬 Enviá el comprobante por WhatsApp:
 +54 351 384 4333
-
-✅ Una vez confirmado el pago, procesaremos tu pedido.
-  `;
-  
-  alert(mensaje);
-  
-  // También podrías mostrar un modal más elegante
-  console.log('Datos de transferencia mostrados');
+    `);
+  }
 }
 
 function actualizarResumen() {
@@ -253,3 +252,58 @@ window.pagoModule = {
   procesarPago,
   actualizarResumen
 };
+
+// Funciones para el modal de transferencia
+function mostrarModalTransferencia() {
+  const modal = document.getElementById('modal-transferencia');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+}
+
+function cerrarModalTransferencia() {
+  const modal = document.getElementById('modal-transferencia');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function copiarDato(texto) {
+  navigator.clipboard.writeText(texto).then(function() {
+    // Encontrar el botón que fue clickeado
+    const botones = document.querySelectorAll('.btn-copiar');
+    botones.forEach(btn => {
+      if (btn.textContent === 'Copiar' && btn.onclick.toString().includes(texto)) {
+        btn.textContent = '¡Copiado!';
+        btn.classList.add('copiado');
+        
+        setTimeout(() => {
+          btn.textContent = 'Copiar';
+          btn.classList.remove('copiado');
+        }, 2000);
+      }
+    });
+  }).catch(function(err) {
+    console.error('Error al copiar: ', err);
+    alert('Dato copiado: ' + texto);
+  });
+}
+
+// Event listeners para el modal de transferencia
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('modal-transferencia');
+  const cerrarBtn = document.getElementById('cerrar-modal-transferencia');
+  
+  if (cerrarBtn) {
+    cerrarBtn.addEventListener('click', cerrarModalTransferencia);
+  }
+  
+  // Cerrar al hacer clic fuera del modal
+  if (modal) {
+    window.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        cerrarModalTransferencia();
+      }
+    });
+  }
+});

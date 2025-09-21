@@ -621,12 +621,12 @@
     <!-- Columna izquierda: Productos -->
     <div class="carrito-productos">
 
-      <nav style="font-size: 0.9rem; margin-bottom: 2rem; color: gray; font-weight: 400; font-family: 'Poppins', sans-serif; ">
+      <nav style="font-size: 0.9rem; margin-top: 2rem; margin-bottom: 2rem; color: gray; font-weight: 400; font-family: 'Poppins', sans-serif; ">
         Inicio / Carrito
       </nav>
 
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; ">
-        <h2 id="titulo-carrito" style="font-size: 2rem; color: #4e4e4e; font-family: 'Poppins', sans-serif; font-weight: 60; margin-bottom: 4rem;" >
+        <h2 id="titulo-carrito" style="font-size: 2rem; color: #4e4e4e; font-family: 'Poppins', sans-serif; font-weight: 60; margin-bottom: 2.7rem;" >
           Tu pedido /
         </h2>
       </div>
@@ -686,10 +686,12 @@
           Inicio / Carrito / Pago
         </nav>
 
-        <h2 style="font-size: 2rem; color: #4e4e4e; font-family: 'Poppins', sans-serif; font-weight: 60; margin-bottom: 2rem;">
-          Datos de envío
-        </h2>
-
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; ">
+          <h2 id="titulo-pago" style="font-size: 2rem; color: #4e4e4e; font-family: 'Poppins', sans-serif; font-weight: 60; margin-bottom: 4rem;" >
+            Datos de envío /
+          </h2>
+        </div>
+    
         <!-- Contenedor del formulario -->
         <div class="contacto-wrapper">
           <form class="contacto-form" id="form-envio">
@@ -789,7 +791,7 @@
           Inicio / Carrito / Pago / Confirmar
         </nav>
 
-        <h2 style="font-size: 2rem; color: #4e4e4e; font-family: 'Poppins', sans-serif; font-weight: 60; margin-bottom: 2rem;">
+        <h2 style="font-size: 2rem; color: #4e4e4e; font-family: 'Poppins', sans-serif; font-weight: 60; margin-bottom: 5.3rem;">
           Pago
         </h2>
 
@@ -821,10 +823,6 @@
               <div class="contenido-metodo">
                 <div class="titulo-metodo">
                   <strong>Transferencia Bancaria</strong>
-                  <div class="logos">
-                    <span style="background: #5d725b; color: white; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 500;">BANCO</span>
-                    <span style="background: #007bff; color: white; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 500;">CBU</span>
-                  </div>
                 </div>
                 <p class="texto-explicacion">
                   Después de hacer clic en "Confirmar pago", te mostraremos los datos bancarios para realizar la transferencia.
@@ -898,6 +896,55 @@
       <button>Agregar cupón</button>
     </div>
     <p class="mensaje-error">Revisa que esté bien escrito</p>
+  </div>
+</div>
+
+
+<!-- Modal de Transferencia -->
+<div id="modal-transferencia" class="modal-transferencia" style="display: none;">
+  <div class="modal-contenido-transferencia">
+    <span class="cerrar-modal-transferencia" id="cerrar-modal-transferencia">&times;</span>
+    <h2>Transferencia Bancaria</h2>
+    
+    <div class="datos-bancarios">
+      <div class="dato-item no-copiar">
+        <strong>Banco:</strong> Banco Galicia
+      </div>
+      
+      <div class="dato-item">
+        <strong>CBU:</strong> 0070055030004055550015
+        <button class="btn-copiar" onclick="copiarDato('0070055030004055550015')">Copiar</button>
+      </div>
+      
+      <div class="dato-item">
+        <strong>Alias:</strong> WAYKU.LAMPARAS
+        <button class="btn-copiar" onclick="copiarDato('WAYKU.LAMPARAS')">Copiar</button>
+      </div>
+      
+      <div class="dato-item no-copiar">
+        <strong>Titular:</strong> Wayku S.A.
+      </div>
+      
+      <div class="dato-item no-copiar">
+        <strong>CUIT:</strong> 30-12345678-9
+      </div>
+    </div>
+
+    <div class="instrucciones-transferencia">
+      <p><strong>Instrucciones:</strong></p>
+      <ol>
+        <li>Realiza la transferencia por el monto total</li>
+        <li>Envía el comprobante por WhatsApp: <strong>+54 351 384 4333</strong></li>
+        <li>Procesaremos tu pedido una vez confirmado el pago</li>
+      </ol>
+    </div>
+
+    <div class="whatsapp-link">
+      <a href="https://wa.me/5493513844333?text=Hola%20Wayku!%20Te%20envío%20el%20comprobante%20de%20mi%20transferencia" 
+         target="_blank" class="btn-whatsapp">
+        Enviar comprobante por WhatsApp
+      </a>
+    </div>
   </div>
 </div>
 
