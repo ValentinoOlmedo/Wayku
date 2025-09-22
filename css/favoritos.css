@@ -3,13 +3,16 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  padding: 2rem;
+  padding: 4rem;
   padding-top: 8rem;
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
   max-width: 1400px;
   margin: 0 auto;
+  margin-top: 2rem;
 }
+
+
 
 /* LISTADO DE FAVORITOS */
 .favoritos-listado nav {

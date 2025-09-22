@@ -109,6 +109,8 @@
   right: 0;
   opacity: 0;
   visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
   background: #E9E9E9;
   padding: 0 2rem;
   border-top: 1px solid #ddd;
@@ -116,13 +118,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: all 0.3s ease;
   z-index: 99;
 }
 
 .search-bar.visible {
   opacity: 1;
   visibility: visible;
+  max-height: 80px;
   padding: 1rem 2rem;
 }
 
@@ -134,4 +137,10 @@
   border-radius: 8px;
   font-size: 1rem;
   background: #fff;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #5d725b;
+  box-shadow: 0 0 0 2px rgba(93, 114, 91, 0.2);
 }
