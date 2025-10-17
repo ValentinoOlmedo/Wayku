@@ -2,7 +2,7 @@
 // config/database.php - VERSIÓN CORREGIDA
 class Database {
     // AJUSTA ESTOS DATOS SEGÚN TU MYSQL WORKBENCH
-    private $host = 'localhost';
+    private $host = '10.255.255.254';
     private $db_name = 'wayku_db';
     private $username = 'root';        // ¿Es root tu usuario?
     private $password = 'Valen.0509'; // PON AQUÍ tu contraseña de MySQL
